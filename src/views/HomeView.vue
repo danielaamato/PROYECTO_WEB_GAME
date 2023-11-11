@@ -1,5 +1,8 @@
-<script setup>
-import Menu from '../components/Menu.vue'
+<script>
+import "../assets/home.css";
+export default {
+  name: "HomeView",
+};
 </script>
 
 <template>
@@ -8,12 +11,4 @@ import Menu from '../components/Menu.vue'
   </div>
 </template>
 
-<style>
-@media (min-width: 1024px) {
-  .about {
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-  }
-}
-</style>
+
