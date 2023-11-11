@@ -1,4 +1,7 @@
 /* color palette from <https://github.com/vuejs/theme> */
+/*@import "./forms.css";*/
+/* variables estaticas donde pondremos los colores que usaremos */
+
 :root {
   --vt-c-white: #ffffff;
   --vt-c-white-soft: #f8f8f8;
