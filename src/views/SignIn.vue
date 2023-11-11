@@ -1,6 +1,13 @@
 <script>
 import "../assets/signin.css";
 export default {
-  name: "HomeView",
+  name: "SignIn",
 };
 </script>
+
+<template>
+  <div class="text-container">
+    <h1>BATTLE ARENA</h1>
+  </div>
+
+</template>
