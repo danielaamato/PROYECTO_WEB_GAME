@@ -1,0 +1,29 @@
+<script>
+import "../assets/infoplayer.css";
+export default {
+  name: "SignIn",
+};
+</script>
+
+<template>
+    <div class="imgbackg" alt="Background">
+      <div id="perfil-container">
+        <h1 class="perfil-titulo">Perfil del Jugador</h1>
+        <img id="imagen-perfil" src="public/InfoPlayerImages/Proyectos WEB I.png" alt="Imagen de perfil">
+        <h2 class="nombre-perfil">Nombre del Jugador</h2>
+        <p id="nivel-perfil">Nivel: 10</p>
+        <p id="xp">XP: X</p>
+        <p id="monedas">Monedas: X</p>
+        <img id="imagen-ajustes" src="public/InfoPlayerImages/ícone-dos-ajustes-45258063.webp" alt="Imagen de ajustes">
+      </div>
+
+      <div id="backpack-at">Ataques Backpack
+
+      </div>
+      <div id="next-attacks">Proximos Ataques
+
+      </div>
+    </div>
+</template>
+
+<style scoped></style>

@@ -1,73 +1,32 @@
 .imgbackg {
-
-    /* Usamos esta propiedad para tomar todo el fondo */
     background-image: url("public/HomeImages/DALLE_2023-11-10_23.59.59_-_A_text-free_8-bit_style_video_game_background_showcasing_a_vibrant_fantastical_forest_and_mountains_landscape._The_scene_includes_a_prominent_cave_e.png");
-
-    /* Cubrimos todo el fondo */
+    background-size: cover;
+    background-position: center;
     width: 100%;
     height: 100vh;
-
     background-repeat: no-repeat;
-
-    /* Mantiene la imagen fija mientras se desplaza la página */
     background-attachment: fixed;
-
-    /* Añade relleno para mejorar la legibilidad del contenido */
-    padding: 50px;
-
-    /* Centra el contenido */
+    padding: 20px;
     text-align: center;
-
-    margin: 0;
-    position: relative;
+    margin: 0; /* Agregado margen cero */
+    position: relative; /* Agregada posición relativa */
 }
 
-.column1,
-.column2 {
+.column1 {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
     box-sizing: border-box;
-    width: 70%;
-    height: 100%;
-    margin: 0 auto;
+    width: 100%;
+    max-width: 400px; /* Establecido un ancho máximo para evitar que se extienda demasiado en pantallas grandes */
+    margin: 0 auto; /* Centra el contenedor en la pantalla */
 }
 
 .row {
-    height: 100vh;
-}
-
-.row:after {
-    content: "";
-    height: 100%;
-    display: table;
-    clear: both;
-}
-
-@media only screen and (hover: none) and (pointer: coarse) {
-    .column2 {
-        display: none;
-    }
-    .signIn {
-        position: absolute;
-        width: 90% !important;
-        top: 50% !important;
-        left: 50% !important;
-        transform: translate(-50%, -50%);
-    }
-}
-
-@media screen and (max-width: 1200px) {
-    .column2 {
-        display: none;
-    }
-    .signIn {
-        position: absolute;
-        width: 90% !important;
-        top: 50% !important;
-        left: 50% !important;
-        transform: translate(-50%, -50%);
-    }
+    height: 100vh; /* Ajustado la altura para ocupar el 100% de la altura de la ventana */
+    display: flex;
+    justify-content: center; /* Centra los elementos horizontalmente */
+    align-items: center; /* Centra los elementos verticalmente */
 }
 
 .openEvents-button {
@@ -80,32 +39,31 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    width: 35%; /* Ajusta el ancho según tus necesidades */
-    height: 60%; /* Ajusta la altura según tus necesidades */
+    width: 90%;
+    height: 50%;
     background: #2980b9;
-    border-radius: 30px;
+    border-radius: 15px;
     z-index: 0;
-    position: absolute;
-    top: 45%;
-    left: 48%;
-    transform: translate(-50%, -50%);
+    position: relative;
+    top: -50px;
+    right: 50px;
+    transform: none;
 }
 
-
 .signinButtonTwo {
-    top: 50px;
+    top: 10px;
     display: inline !important;
     font-family: Asimov, serif;
-    font-size: 25px;
+    font-size: 20px;
     color: #282828;
 }
 
 form {
-    top: 200%;
+    top: 0;
 }
 
 h2 {
-    font-size: 70px;
+    font-size: 40px;
     color: #FFDB58;
     font-family: Asimov, serif;
 }
@@ -115,11 +73,46 @@ h2 {
 }
 
 body {
-    overflow: hidden;
+    overflow: auto;
+    margin: 0; /* Agregado margen cero */
 }
 
 .playerid-input,
 .password-input {
-    width: 80%; /* Ajusta el ancho de los campos de entrada según tus necesidades */
-    margin-bottom: 30px; /* Ajusta el margen inferior según tus necesidades */
+    width: 90%;
+    margin-bottom: 15px;
+}
+
+@media only screen and (max-width: 768px) {
+    .imgbackg {
+        background-size: cover;
+        background-position: center;
+        padding: 10px;
+    }
+
+    .column2 {
+        display: none;
+    }
+
+    .signIn {
+        width: 90%;
+        top: 10%; /* Ajustado el porcentaje para elevar el contenido */
+        left: 50%;
+        transform: translate(-50%, 0);
+    }
+
+    h2 {
+        font-size: 30px;
+    }
+
+    .playerid-input,
+    .password-input {
+        width: 100%;
+        margin-bottom: 10px;
+    }
+
+    .signinButtonTwo {
+        font-size: 16px;
+        top: 0; /* Ajustado el espacio superior */
+    }
 }
