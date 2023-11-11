@@ -1,0 +1,94 @@
+.grid-container {
+    display: grid;
+    grid-template-areas:
+            'game-name space options'
+            'space grid-create-arena space'
+            'space space space';
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: 1fr 5fr 2fr;
+    grid-gap: 10px;
+    padding: 10px;
+}
+
+.space {
+    padding: 10px;
+    font-size: 150%;
+    text-align: center;
+}
+
+.game-name {
+    padding: 10px;
+    font-size: 150%;
+    text-align: center;
+    background-color: #999999;
+}
+
+.options {
+    padding: 10px;
+    font-size: 150%;
+    text-align: center;
+    background-color: #999999;
+}
+
+.grid-create-arena {
+    display: grid;
+    grid-template-areas:
+            'space'
+            'grid-inputs';
+            'space'
+    grid-template-rows: 1fr 5fr 1fr;
+    grid-gap: 10px;
+    padding: 10px;
+    background-color: #999999;
+}
+
+.grid-inputs {
+    display: grid;
+    grid-template-areas:
+            'size-text size-input'
+            'hp-text hp-input';
+    grid-template-columns: 1fr 1.5fr;
+    grid-template-rows: 1fr 1fr;
+    grid-gap: 10px;
+    padding: 10px;
+}
+
+.size-text {
+    padding: 10px;
+    font-size: 150%;
+    text-align: right;
+}
+
+.size-input {
+    padding: 10px;
+    font-size: 150%;
+    text-align: left;
+}
+
+.hp-text {
+    padding: 10px;
+    font-size: 150%;
+    text-align: right;
+}
+
+.hp-input {
+    padding: 10px;
+    font-size: 150%;
+    text-align: left;
+}
+
+.grid-start-button {
+    display: grid;
+    grid-template-areas:
+            'space start-button space';
+    grid-template-columns: 1fr 0.5fr 1fr;
+    grid-gap: 10px;
+    padding: 10px;
+}
+
+.start-button {
+    padding: 10px;
+    font-size: 150%;
+    text-align: center;
+}
+

@@ -1,0 +1,121 @@
+.grid-container {
+    display: grid;
+    height: 100vh;
+    grid-template-columns: 1fr 3fr 1fr;
+    grid-template-rows: 1fr 5fr 1fr;
+    grid-template-areas:
+        "game-name space space"
+        "space grid-map space"
+        "space grid-atacks space";
+    grid-gap: 10px;
+    padding: 10px;
+}
+
+.space {
+    padding: 10px;
+    font-size: 150%;
+    text-align: center;
+}
+
+.game-name {
+    background-color: #999999;
+    padding: 10px;
+    font-size: 150%;
+    text-align: center;
+}
+
+.grid-map {
+    display: grid;
+    grid-template-areas:
+        "grid-hp-bar-player2"
+        "map"
+        "grid-hp-bar-player1";
+    grid-template-rows: 1fr 6fr 1fr;
+    grid-gap: 10px;
+    padding: 10px;
+}
+
+.grid-hp-bar-player2 {
+    display: grid;
+    grid-template-areas:
+        "space player2-text player2-hp-bar";
+    grid-template-columns: 0.5fr 1fr 2fr;
+    grid-gap: 10px;
+    padding: 10px;
+}
+
+.grid-hp-bar-player1 {
+    display: grid;
+    grid-template-areas:
+        "player1-text player1-hp-bar space";
+    grid-template-columns: 1fr 2fr 0.5fr;
+    grid-gap: 10px;
+    padding: 10px;
+}
+
+.map {
+    background-color: #a0a0a0;
+    padding: 10px;
+    font-size: 150%;
+    text-align: center;
+}
+
+.player1-text {
+    background-color: #a0a0a0;
+    padding: 10px;
+    font-size: 150%;
+    text-align: center;
+}
+
+.player1-hp-bar {
+    background-color: #a0a0a0;
+    padding: 10px;
+    font-size: 150%;
+    text-align: center;
+}
+
+.player2-text {
+    background-color: #a0a0a0;
+    padding: 10px;
+    font-size: 150%;
+    text-align: center;
+}
+
+.player2-hp-bar {
+    background-color: #a0a0a0;
+    padding: 10px;
+    font-size: 150%;
+    text-align: center;
+}
+
+.grid-atacks {
+    display: grid;
+    grid-template-areas:
+        "atack1 atack2 atack3";
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 10px;
+    padding: 10px;
+    font-size: 150%;
+    text-align: center;
+}
+
+.atack1 {
+    padding: 10px;
+    font-size: 150%;
+    text-align: center;
+    background-color: #a0a0a0;
+}
+
+.atack2 {
+    padding: 10px;
+    font-size: 150%;
+    text-align: center;
+    background-color: #a0a0a0;
+}
+
+.atack3 {
+    padding: 10px;
+    font-size: 150%;
+    text-align: center;
+    background-color: #a0a0a0;
+}
