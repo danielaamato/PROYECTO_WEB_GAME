@@ -36,7 +36,7 @@
 .imgbackg {
 
     /* Usamos esta propiedad para tomar todo el fondo */
-    background-image: url("public/HomeImages/DALLE_2023-11-10_23.59.59_-_A_text-free_8-bit_style_video_game_background_showcasing_a_vibrant_fantastical_forest_and_mountains_landscape._The_scene_includes_a_prominent_cave_e.png");
+    background-image: url("../../public/HomeImages/fondo-de-pagina.png");
 
     /* Cubrimos todo el fondo */
     width: 100%;

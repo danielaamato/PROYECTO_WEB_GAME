@@ -1,0 +1,171 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.top-bar {
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.game-title {
+    text-decoration: none;
+    color: #FFDB58;
+    font-family: Asimov, serif;
+    font-size: 20px;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.user-info > span, .user-info > div {
+    padding: 5px 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.coins-icon {
+    width: 20px;
+    height: 20px;
+    background-image: url('../../public/MainMenuImages/coins-icon.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.nav-button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+}
+
+.main-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    padding: 10px;
+}
+
+.store-column, .backpack-column {
+    background-color: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.store-button {
+    background-color: #FFDB58; /* Color anaranjado */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px; /* Bordes redondeados */
+    cursor: pointer;
+    font-weight: bold;
+    margin-bottom: 20px; /* Espacio debajo del botón */
+    display: block;
+    width: 100%; /* Hace que el botón se expanda al ancho del contenedor */
+    box-sizing: border-box; /* Asegura que el padding no afecte el ancho total */
+}
+
+.under-construction {
+    background-color: rgba(128, 128, 128, 0.5); /* Gris translúcido */
+    text-align: left; /* Alinea el texto a la izquierda */
+}
+
+.arena-column {
+    position: relative; /* Establece como contenedor relativo */
+}
+
+.arena-image {
+    width: 100%;
+    display: block;
+}
+.create-arena-button, .join-arena-button {
+    position: absolute;
+    top: 50%; /* Posición desde la parte superior del contenedor */
+    transform: translateY(-50%); /* Ajusta la posiciómn vertical al centro de la imagen */
+    padding: 8px 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    background-color: rgba(255, 165, 0, 0.7); /* Color translúcido */
+}
+
+.create-arena-button {
+    left: 50px;
+    background-color: #FFA500;
+}
+
+.join-arena-button {
+    right: 50px;
+    background-color: #FFA500;
+}
+
+.backpack-button {
+    background-color: #D2B48C; /* Color marón pastel */
+    border: none;
+    padding: 10px 20px;
+    border-radius: 10px; /* Bordes más redondeados */
+    cursor: pointer;
+    font-weight: bold;
+    display: block;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+.current-attacks {
+    border: 1px solid #ccc; /* Borde para la división visible */
+    padding: 10px;
+}
+
+.countdown, .attacks-title {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+}
+
+.attacks span {
+    display: block;
+    margin-top: 10px;
+    border-bottom: 1px solid #ccc; /* Lineas entre los ataques */
+    padding-bottom: 5px;
+}
+
+.exp-bar {
+    width: 100px;
+    height: 10px;
+    background-color: lightgray;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.exp-progress {
+    height: 100%;
+    background-color: blue;
+    /* El ancho se ajustara dinamicamente con Vue :)*/
+}

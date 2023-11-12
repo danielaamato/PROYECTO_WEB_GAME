@@ -9,7 +9,7 @@ export default {
   <div class="imgbackg" alt="Background">
     <div class="grid-container">
       <div class="space">
-        <router-link to="/" class="style-button">Home</router-link>
+        <router-link to="/MenuPrincipal" class="style-button">Home</router-link>
       </div>
       <div class="space"></div>
       <div class="space">

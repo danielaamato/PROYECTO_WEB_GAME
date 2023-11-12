@@ -19,7 +19,7 @@ export default {
           <div>
             <input class="password-input" type="password" placeholder="Password" name="psw" required />
           </div>
-          <router-link to="/Menu" class="signinButtonTwo">Complete</router-link>
+          <router-link to="/MenuPrincipal" class="signinButtonTwo">Complete</router-link>
           <router-link to="/" class="signinButtonTwo">Back</router-link>
         </form>
       </section>

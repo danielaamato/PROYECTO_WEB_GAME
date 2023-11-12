@@ -11,6 +11,7 @@ import  EliminarPlayer from "../views/EliminarPlayer.vue";
 import CreateArenaView from "../views/CreateArenaView.vue";
 import GameView from "../views/GameView.vue";
 import WinLossView from "../views/WinLossView.vue";
+import MenuPrincipal from "@/views/MenuPrincipal.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -54,6 +55,11 @@ const router = createRouter({
       path: '/WinLossView',
       name: 'WinLossView',
       component: WinLossView
+    },
+    {
+      path: '/MenuPrincipal',
+      name: 'MenuPrincipal',
+      component: MenuPrincipal
     }
   ]
 });
