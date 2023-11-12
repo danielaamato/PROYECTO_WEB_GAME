@@ -14,7 +14,9 @@ export default {
         <p id="nivel-perfil">Nivel: 10</p>
         <p id="xp">XP: X</p>
         <p id="monedas">Monedas: X</p>
-        <img id="imagen-ajustes" src="public/InfoPlayerImages/ícone-dos-ajustes-45258063.webp" alt="Imagen de ajustes">
+        <router-link to="/EliminarPlayer">
+          <img id="imagen-ajustes" src="public/InfoPlayerImages/ícone-dos-ajustes-45258063.webp" alt="Imagen de ajustes">
+        </router-link>
       </div>
 
       <div id="backpack-at">Ataques Backpack
