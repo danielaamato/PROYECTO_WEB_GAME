@@ -1,0 +1,57 @@
+.popup-delete {
+    border: 2px solid #ccc;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #2980b9;
+    width: 38%;
+    margin-top: 130px;
+    max-width: 700px;
+    margin-left: 418px;
+    height: 300px;
+}
+
+#deleteplayer {
+    font-size: 40px;
+    color: #ffffff;
+    text-align: center;
+    font-family: Asimov;
+}
+
+#imagen-check {
+    max-width: 70%;
+    max-height: 70%;
+    margin: 90px;
+    margin-top: -30px;
+    left: 50px;
+    margin-left: 0px;
+}
+
+#imagen-exmark {
+    max-width: 70%;
+    max-height: 70%;
+    margin-left: -100px;
+    margin-bottom: 90px;
+}
+
+.imgbackg {
+
+    /* Usamos esta propiedad para tomar todo el fondo */
+    background-image: url("public/HomeImages/DALLE_2023-11-10_23.59.59_-_A_text-free_8-bit_style_video_game_background_showcasing_a_vibrant_fantastical_forest_and_mountains_landscape._The_scene_includes_a_prominent_cave_e.png");
+
+    /* Cubrimos todo el fondo */
+    width: 100%;
+    height: 100vh;
+
+    background-repeat: no-repeat;
+
+    /* Mantiene la imagen fija mientras se desplaza la página */
+    background-attachment: fixed;
+
+    /* Añade relleno para mejorar la legibilidad del contenido */
+    padding: 50px;
+
+    /* Centra el contenido */
+    text-align: center;
+
+    position: relative;
+}
