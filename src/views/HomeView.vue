@@ -14,7 +14,6 @@ export default {
     <!-- Usamos router link para pasar a otra vista -->
       <router-link to="/SignUp" class="signupButton">Sign Up</router-link>
       <router-link to="/SignIn" class="signinButton">Sign In</router-link>
-      <router-link to="/CreateArenaView" class="signinButton">Create Arena</router-link>
     </div>
   </div>
 
