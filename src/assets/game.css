@@ -4,7 +4,7 @@
     grid-template-columns: 1fr 3fr 1fr;
     grid-template-rows: 1fr 5fr 1fr;
     grid-template-areas:
-        "game-name space space"
+        "space space space"
         "space grid-map space"
         "space grid-atacks space";
     grid-gap: 10px;
@@ -18,10 +18,11 @@
 }
 
 .game-name {
-    background-color: #999999;
     padding: 10px;
     font-size: 150%;
     text-align: center;
+    background-color: rgba(0, 0, 0, 0.68);
+    border-radius: 50px;
 }
 
 .grid-map {
@@ -33,6 +34,8 @@
     grid-template-rows: 1fr 6fr 1fr;
     grid-gap: 10px;
     padding: 10px;
+    background-color: rgba(0, 0, 0, 0.68);
+    border-radius: 50px;
 }
 
 .grid-hp-bar-player2 {
@@ -54,38 +57,48 @@
 }
 
 .map {
-    background-color: #a0a0a0;
     padding: 10px;
     font-size: 150%;
     text-align: center;
+    background-color: rgba(41, 128, 185, 0.78);
+    border-radius: 25px;
+    color: #f2f2f2;
 }
 
 .player1-text {
-    background-color: #a0a0a0;
     padding: 10px;
     font-size: 150%;
     text-align: center;
+    background-color: rgba(41, 128, 185, 0.78);
+    border-radius: 25px;
+    color: #f2f2f2;
 }
 
 .player1-hp-bar {
-    background-color: #a0a0a0;
     padding: 10px;
     font-size: 150%;
     text-align: center;
+    background-color: rgba(41, 128, 185, 0.78);
+    border-radius: 25px;
+    color: #f2f2f2;
 }
 
 .player2-text {
-    background-color: #a0a0a0;
     padding: 10px;
     font-size: 150%;
     text-align: center;
+    background-color: rgba(41, 128, 185, 0.78);
+    border-radius: 25px;
+    color: #f2f2f2;
 }
 
 .player2-hp-bar {
-    background-color: #a0a0a0;
     padding: 10px;
     font-size: 150%;
     text-align: center;
+    background-color: rgba(41, 128, 185, 0.78);
+    border-radius: 25px;
+    color: #f2f2f2;
 }
 
 .grid-atacks {
@@ -97,25 +110,49 @@
     padding: 10px;
     font-size: 150%;
     text-align: center;
+    background-color: rgba(0, 0, 0, 0.68);
+    border-radius: 50px;
 }
 
 .atack1 {
     padding: 10px;
     font-size: 150%;
     text-align: center;
-    background-color: #a0a0a0;
+    background-color: rgba(41, 128, 185, 0.78);
+    border-radius: 25px;
+    color: #f2f2f2;
 }
 
 .atack2 {
     padding: 10px;
     font-size: 150%;
     text-align: center;
-    background-color: #a0a0a0;
+    background-color: rgba(41, 128, 185, 0.78);
+    border-radius: 25px;
+    color: #f2f2f2;
 }
 
 .atack3 {
     padding: 10px;
     font-size: 150%;
     text-align: center;
-    background-color: #a0a0a0;
+    background-color: rgba(41, 128, 185, 0.78);
+    border-radius: 25px;
+    color: #f2f2f2;
+}
+
+.style-button {
+    display: block; /* Hacemos que los enlaces sean bloques para que estén uno debajo del otro */
+    margin-bottom: 10px; /* Ajustamos el espacio entre los enlaces según tus preferencias */
+    background-color: #FFA500;
+    color: #fff;
+    padding: 10px 20px;
+    font-family: Asimov, serif;
+    font-size: 30px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    text-decoration: none; /* Quitamos la subrayado del enlace */
+    text-align: center;
 }
