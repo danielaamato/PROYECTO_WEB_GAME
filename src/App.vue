@@ -9,7 +9,7 @@ import HomeView from "@/views/HomeView.vue";
   <Menu />
 
   <!-- Resto de Contenido -->
-  <router-view />
+  <router-view/>
 </template>
 
 <style scoped></style>

@@ -9,21 +9,25 @@ export default {
     <div class="imgbackg" alt="Background">
       <div id="perfil-container">
         <h1 class="perfil-titulo">Perfil del Jugador</h1>
-        <img id="imagen-perfil" src="../../public/InfoPlayerImages/foto-usuario.png" alt="Imagen de perfil">
-        <h2 class="nombre-perfil">Nombre del Jugador</h2>
-        <p id="nivel-perfil">Nivel: 10</p>
-        <p id="xp">XP: X</p>
-        <p id="monedas">Monedas: X</p>
+        <div id="idperfil">
+          <img id="imagen-perfil" src="../../public/InfoPlayerImages/foto-usuario.png" alt="Imagen de perfil">
+          <h2 class="nombre-perfil">Nombre del Jugador</h2>
+        </div>
+        <div id="idinfo">
+          <p id="nivel-perfil">Nivel: 10</p>
+          <p id="xp">XP: X</p>
+          <p id="monedas">Monedas: X</p>
+        </div>
         <router-link to="/EliminarPlayer">
           <img id="imagen-ajustes" src="../../public/InfoPlayerImages/icono-ajustes.webp" alt="Imagen de ajustes">
         </router-link>
       </div>
 
-      <div id="backpack-at">Ataques Backpack
-
-      </div>
-      <div id="next-attacks">Proximos Ataques
-
+      <div id="ataques">
+        <div id="backpack-at">Ataques Backpack
+        </div>
+        <div id="next-attacks">Proximos Ataques
+        </div>
       </div>
     </div>
 </template>

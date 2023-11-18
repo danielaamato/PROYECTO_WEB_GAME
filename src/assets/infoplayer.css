@@ -1,16 +1,8 @@
 .imgbackg {
     /* Usamos esta propiedad para tomar todo el fondo */
     background-image: url("../../public/HomeImages/fondo-de-pagina.png");
-    background-size: cover;
-    background-position: center;
     width: 100%;
     height: 100vh;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    padding: 20px;
-    text-align: center;
-    margin: 0; /* Agregado margen cero */
-    position: relative; /* Agregada posición relativa */
 }
 
 #perfil-container {
@@ -20,14 +12,12 @@
     border-radius: 8px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     width: 80%;
-    height: 30%;
-    position: absolute;
+    position: relative;
+    top: 0px;
     border-radius: 3%;
-    top: 0;
-    left: 0;
-    right: 0;
     bottom: 55%;
     margin: auto;
+    margin-bottom: 10px;
 }
 
 #backpack-at {
@@ -36,7 +26,7 @@
     width: 42%;
     height: 50%;
     border-radius: 3%;
-    position: fixed; /* Utilizamos position: fixed para que el elemento sea fijo en la pantalla */
+     /* Utilizamos position: fixed para que el elemento sea fijo en la pantalla */
     left: 9%; /* Coloca el elemento a la izquierda */
     bottom: 5%; /* Coloca el elemento en la parte inferior */
     font-family: Asimov;
@@ -49,7 +39,6 @@
     width: 42%;
     height: 50%;
     border-radius: 3%;
-    position: fixed; /* Utilizamos position: fixed para que el elemento sea fijo en la pantalla */
     right: 6.2%; /* Coloca el elemento a la izquierda */
     bottom: 5%; /* Coloca el elemento en la parte inferior */
     font-family: Asimov;
@@ -60,47 +49,39 @@
     width: 150px;
     height: 150px;
     border-radius: 50%;
-    margin-right: 1140px;
 }
 
 #imagen-ajustes {
-    width: 90px;
-    margin-top: -1000px;
-    margin-bottom: 23px;
-    height: 90px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
-    margin-right: -850px;
+    position: absolute;
+    top: 10px;
+    right: 5px;
 }
 
 .nombre-perfil {
-    margin-top: -120px;
     font-size: 1.5em;
     margin-right: 400px;
     color: #282828;
 }
 
 #nivel-perfil {
-    margin-top: 5px;
     font-size: 1.2em;
     color: #ffffff;
     font-family: Asimov;
-    margin-right: 535px;
 }
 
 #xp {
-    margin-top: -40px;
     font-size: 1.2em;
     color: #ffffff;
     font-family: Asimov;
-    margin-right: 250px;
 }
 
 #monedas {
-    margin-top: -40px;
     font-size: 1.2em;
     color: #ffffff;
     font-family: Asimov;
-    margin-right: -20px;
 }
 
 .perfil-titulo {
@@ -130,4 +111,21 @@
     }
 
     /* Otros estilos específicos para dispositivos móviles según sea necesario */
+}
+
+#ataques{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: row;
+}
+
+#idperfil{
+    display: flex;
+    align-items: center;
+}
+
+#idinfo{
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
