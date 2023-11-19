@@ -1,32 +1,9 @@
-.imgbackg {
+#imgbackg2 {
     background-image: url("../../public/HomeImages/fondo-de-pagina.png");
-    background-size: cover;
-    background-position: center;
     width: 100%;
     height: 100vh;
-    background-repeat: no-repeat;
-    background-attachment: fixed;
-    padding: 20px;
-    text-align: center;
-    margin: 0; /* Agregado margen cero */
-    position: relative; /* Agregada posición relativa */
-}
-
-.column1 {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    box-sizing: border-box;
-    width: 100%;
-    max-width: 400px; /* Establecido un ancho máximo para evitar que se extienda demasiado en pantallas grandes */
-    margin: 0 auto; /* Centra el contenedor en la pantalla */
-}
-
-.row {
-    height: 100vh; /* Ajustado la altura para ocupar el 100% de la altura de la ventana */
-    display: flex;
-    justify-content: center; /* Centra los elementos horizontalmente */
-    align-items: center; /* Centra los elementos verticalmente */
+    background-size: cover;
+    background-position: center;
 }
 
 .openEvents-button {
@@ -39,23 +16,20 @@
     justify-content: center;
     align-items: center;
     text-align: center;
-    width: 90%;
+    width: 400px;
     height: 50%;
     background: #2980b9;
     border-radius: 15px;
     z-index: 0;
-    position: relative;
-    top: -50px;
-    right: 50px;
-    transform: none;
 }
 
 .signinButtonTwo {
-    top: 10px;
     display: inline !important;
     font-family: Asimov, serif;
     font-size: 20px;
     color: #282828;
+    margin-bottom: 10px;
+    margin-top: -10px;
 }
 
 form {
@@ -83,36 +57,4 @@ body {
     margin-bottom: 15px;
 }
 
-@media only screen and (max-width: 768px) {
-    .imgbackg {
-        background-size: cover;
-        background-position: center;
-        padding: 10px;
-    }
 
-    .column2 {
-        display: none;
-    }
-
-    .signIn {
-        width: 90%;
-        top: 10%; /* Ajustado el porcentaje para elevar el contenido */
-        left: 50%;
-        transform: translate(-50%, 0);
-    }
-
-    h2 {
-        font-size: 30px;
-    }
-
-    .playerid-input,
-    .password-input {
-        width: 100%;
-        margin-bottom: 10px;
-    }
-
-    .signinButtonTwo {
-        font-size: 16px;
-        top: 0; /* Ajustado el espacio superior */
-    }
-}

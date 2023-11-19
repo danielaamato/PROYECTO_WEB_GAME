@@ -6,8 +6,7 @@ export default {
 </script>
 
 <template>
-  <div class="imgbackg" alt="Background">
-    <div class="row">
+  <div id="imgbackg2" alt="Background">
       <section class="column1">
         <form class="signIn">
           <div>
@@ -23,7 +22,6 @@ export default {
           <router-link to="/" class="signinButtonTwo">Back</router-link>
         </form>
       </section>
-    </div>
   </div>
 </template>
 
