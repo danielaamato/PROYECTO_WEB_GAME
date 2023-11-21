@@ -9,10 +9,10 @@ export default {
   <div class="imgbackg" alt="Background">
     <div class="popup-delete">
         <p id="deleteplayer">¿Desea eliminar a este jugador?</p>
-        <router-link to="HomeView">
+        <router-link id="routcheck" to="HomeView">
           <img id="imagen-check" src="public/InfoPlayerImages/checkmark.png" alt="Imagen CheckMark">
         </router-link>
-        <router-link to="InfoPlayer">
+        <router-link id="routex" to="InfoPlayer">
           <img id="imagen-exmark" src="public/InfoPlayerImages/exmark.png" alt="Imagen ExMark">
         </router-link>
     </div>

@@ -4,10 +4,24 @@
     border-radius: 8px;
     background-color: #2980b9;
     width: 38%;
-    margin-top: 130px;
-    max-width: 700px;
-    margin-left: 418px;
     height: 300px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    top: 18%;
+    left: 25%;
+}
+
+#routcheck{
+    position: relative;
+    bottom: 1%;
+    right: 20%;
+}
+
+#routex{
+    bottom: 60%;
+    position: relative;
+    left: 20%;
 }
 
 #deleteplayer {
@@ -20,17 +34,11 @@
 #imagen-check {
     max-width: 70%;
     max-height: 70%;
-    margin: 90px;
-    margin-top: -30px;
-    left: 50px;
-    margin-left: 0px;
 }
 
 #imagen-exmark {
     max-width: 70%;
     max-height: 70%;
-    margin-left: -100px;
-    margin-bottom: 90px;
 }
 
 .imgbackg {
@@ -47,11 +55,6 @@
     /* Mantiene la imagen fija mientras se desplaza la página */
     background-attachment: fixed;
 
-    /* Añade relleno para mejorar la legibilidad del contenido */
-    padding: 50px;
-
     /* Centra el contenido */
     text-align: center;
-
-    position: relative;
 }
