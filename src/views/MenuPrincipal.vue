@@ -33,7 +33,6 @@ export default {
       <span class="experience">Nivel: 1</span>
       <div class="exp-bar">
         <!--Aqui hara falta implementar un script para añadir el progreso en la barra-->
-        <div class="exp-progress" :style="{ width: progressWidth }"></div>
         <!--procrastinar es un arte-->
       </div>
 

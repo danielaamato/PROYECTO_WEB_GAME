@@ -8,7 +8,7 @@ export default {
 <template>
     <div class="imgbackg4" alt="Background">
       <div id="perfil-container">
-        <h3 class="perfil-titulo">Perfil del Jugador</h3>
+        <h3 class="perfil-jugador">Perfil del Jugador</h3>
         <div id="idperfil">
           <img id="imagen-perfil" src="../../public/InfoPlayerImages/foto-usuario.png" alt="Imagen de perfil">
           <h2 class="nombre-perfil">Nombre del Jugador</h2>

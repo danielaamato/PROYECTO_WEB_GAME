@@ -85,6 +85,16 @@
     margin-left: 5%;
 }
 
+.perfil-jugador {
+    font-size: 2em; /* Ajusta el tamaño del título según tus necesidades */
+    text-align: left;
+    font-family: Asimov, serif;
+    color: #FFDB58;
+    margin-left: 5%;
+    margin-bottom: 0;
+    margin-top: 20px;
+}
+
 @media only screen and (max-width: 767px) {
     .imgbackg {
         padding: 10px; /* Ajusta el relleno para dispositivos móviles */
@@ -118,8 +128,6 @@
 #idperfil{
     display: flex;
     align-items: center;
-    margin-top: -15%;
-    margin-bottom: -10%;
 }
 
 #idinfo{
