@@ -61,6 +61,7 @@ export default {
       <img src="public/MainMenuImages/arena-image.png" alt="Imagen Arena" class="arena-image">
       <router-link to="/CreateArenaView" class="create-arena-button">Create Arena</router-link>
       <router-link to="/GameView" class="join-arena-button">Join Arena</router-link>
+      <router-link to="/ListadoJugadores" id="listplayers-button">Listado de Jugadores</router-link>
 
     </div>
 
@@ -83,6 +84,4 @@ export default {
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
