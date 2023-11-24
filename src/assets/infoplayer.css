@@ -18,28 +18,32 @@
     width: 85%;
 }
 
-#backpack-at {
+
+#backpack-at
+{
     text-align: center;
     background-color: #87CEEB;
     width: 42%;
-    height: 50%;
+    height: 350px;
     border-radius: 3%;
-    left: 9%; /* Coloca el elemento a la izquierda */
-    bottom: 5%; /* Coloca el elemento en la parte inferior */
+    left: 0%;
+    top: 45px;
+    position: relative;
     font-family: Asimov;
     font-size: 1.2em;
 }
 
-#next-attacks {
+#next-attacks, backpack-at
+{
     text-align: center;
     background-color: #87CEEB;
-    width: 42%;
-    height: 50%;
+    right: -1%;
+    top: 45px;
     border-radius: 3%;
-    right: 6.2%; /* Coloca el elemento a la izquierda */
-    bottom: 5%; /* Coloca el elemento en la parte inferior */
+    width: 42%;
     font-family: Asimov;
     font-size: 1.2em;
+    position: relative;
 }
 
 #imagen-perfil {
@@ -97,7 +101,7 @@
 
 @media only screen and (max-width: 767px) {
     .imgbackg {
-        padding: 10px; /* Ajusta el relleno para dispositivos móviles */
+        padding: 10px;
     }
 
     #perfil-container {
@@ -109,20 +113,22 @@
 
     #backpack-at,
     #next-attacks {
-        width: 90%; /* Ajusta el ancho para dispositivos móviles */
-        height: auto; /* Ajusta la altura automáticamente para dispositivos móviles */
-        left: 5%; /* Ajusta la posición a la izquierda para dispositivos móviles */
-        right: 5%; /* Ajusta la posición a la derecha para dispositivos móviles */
-        font-size: 1em; /* Ajusta el tamaño de fuente para dispositivos móviles */
+        width: 45%;
+        left: 0%;
+        font-size: 1em;
+        position: relative;
+        top: 45px;
+        border-radius: 5%;
+        height: 250px;
     }
-
-    /* Otros estilos específicos para dispositivos móviles según sea necesario */
 }
 
 #ataques{
     display: flex;
     justify-content: space-around;
     flex-direction: row;
+    flex-wrap: wrap;
+    align-content: space-around;
 }
 
 #idperfil{
