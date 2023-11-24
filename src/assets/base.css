@@ -23,6 +23,22 @@
   --vt-c-text-dark-2: rgba(235, 235, 235, 0.64);
 }
 
+h2 {
+  font-size: 40px;
+  color: #FFDB58;
+  font-family: Asimov, serif;
+}
+
+.imgbackg {
+  background-image: url("../../public/HomeImages/fondo-de-pagina.png");
+  width: 100%;
+  height: 100vh;
+
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  text-align: center;
+}
+
 /* semantic color variables for this project */
 :root {
   --color-background: var(--vt-c-white);
