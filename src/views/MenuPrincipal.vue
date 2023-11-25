@@ -63,7 +63,7 @@ export default {
       <router-link to="/GameView" class="join-arena-button">Join Arena</router-link>
       <router-link to="/ListadoJugadores" id="listplayers-button">Listado de Jugadores</router-link>
       <router-link to="/HistorialJugadores" id="historialplayers-button">Historial de Jugadores</router-link>
-
+      <router-link to="/GestionDeAtaquesYCambios" id="gestiondeataques-button">Gestion de Ataques</router-link>
     </div>
 
     <!--COLUMNA 3 PARA LA MOCHILA-->

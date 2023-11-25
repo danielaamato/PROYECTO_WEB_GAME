@@ -14,6 +14,7 @@ import WinLossView from "../views/WinLossView.vue";
 import MenuPrincipal from "@/views/MenuPrincipal.vue";
 import ListadoJugadores from "@/views/ListadoJugadores.vue";
 import HistorialJugadores from "@/views/HistorialJugadores.vue";
+import GestionDeAtaquesYCambios from "@/views/GestionDeAtaquesYCambios.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -72,6 +73,11 @@ const router = createRouter({
       path: '/HistorialJugadores',
       name: 'HistorialJugadores',
       component: HistorialJugadores
+    },
+    {
+      path: '/GestionDeAtaquesYCambios',
+      name: 'GestionDeAtaquesYCambios',
+      component: GestionDeAtaquesYCambios
     }
   ]
 });
