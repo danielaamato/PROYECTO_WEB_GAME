@@ -183,3 +183,9 @@ body {
     position: relative;
     left: 23%;
 }
+
+#gestiondeataques-button
+{
+    position: relative;
+    bottom: -10%;
+}
