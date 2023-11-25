@@ -173,6 +173,13 @@ body {
     /* El ancho se ajustara dinamicamente con Vue :)*/
 }
 
-#listplayers-button{
+#listplayers-button
+{
     position: relative;
+}
+
+#historialplayers-button
+{
+    position: relative;
+    left: 23%;
 }
