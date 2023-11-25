@@ -13,6 +13,7 @@ import GameView from "../views/GameView.vue";
 import WinLossView from "../views/WinLossView.vue";
 import MenuPrincipal from "@/views/MenuPrincipal.vue";
 import ListadoJugadores from "@/views/ListadoJugadores.vue";
+import HistorialJugadores from "@/views/HistorialJugadores.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -66,6 +67,11 @@ const router = createRouter({
       path: '/ListadoJugadores',
       name: 'ListadoJugadores',
       component: ListadoJugadores
+    },
+    {
+      path: '/HistorialJugadores',
+      name: 'HistorialJugadores',
+      component: HistorialJugadores
     }
   ]
 });

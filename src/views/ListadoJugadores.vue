@@ -15,8 +15,7 @@ export default {
 
   <section class="listadoPlayers">
     <input type="text" placeholder="Buscar Jugador...">
-
-      <table>
+    <table class="tableListing">
         <tr>
           <td>Nombre</td>
           <td>XP</td>
@@ -24,7 +23,7 @@ export default {
           <td>Monedas</td>
           <td>Imagen</td>
         </tr>
-      </table>
+    </table>
   </section>
 
 </template>

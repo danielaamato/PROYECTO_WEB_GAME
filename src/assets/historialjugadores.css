@@ -1,12 +1,4 @@
-input
-{
-    padding: 0.5%;
-    position: relative;
-    width: 90%;
-    margin-bottom: 2%;
-}
-
-.tableListing
+.tableHistoring
 {
     position: relative;
     left: 0%;
@@ -14,14 +6,7 @@ input
     background-color: darkkhaki;
 }
 
-th, td
-{
-    padding: 7px;
-    text-align: center;
-    border: 4px solid #000;
-}
-
-.listadoPlayers
+.historialPlayers
 {
     display: flex;
     flex-direction: column;
@@ -29,4 +14,3 @@ th, td
     align-content: space-around;
     align-items: center;
 }
-
