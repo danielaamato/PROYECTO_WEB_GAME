@@ -24,11 +24,11 @@
     text-align: center;
     background-color: #87CEEB;
     width: 42%;
-    height: 350px;
+    height: 47%;
     border-radius: 3%;
-    left: 0%;
-    top: 45px;
-    position: relative;
+    left: 5%;
+    top: 49%;
+    position: absolute;
     font-family: Asimov;
     font-size: 1.2em;
 }
@@ -37,13 +37,14 @@
 {
     text-align: center;
     background-color: #87CEEB;
-    right: -1%;
-    top: 45px;
+    right: 4%;
+    top: 49%;
+    height: 47%;
     border-radius: 3%;
     width: 42%;
     font-family: Asimov;
     font-size: 1.2em;
-    position: relative;
+    position: absolute;
 }
 
 #imagen-perfil {
@@ -121,6 +122,8 @@
         border-radius: 5%;
         height: 250px;
     }
+
+
 }
 
 #ataques{
