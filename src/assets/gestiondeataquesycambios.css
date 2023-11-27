@@ -22,8 +22,9 @@
     flex-wrap: wrap;
     align-content: space-around;
     align-items: center;
-    position: relative;
-    top: 400px;
+    position: absolute;
+    top: 85%;
+    left: 45%;
 }
 
 #crearataque-button
@@ -47,7 +48,13 @@
         flex-wrap: wrap;
         align-content: space-around;
         align-items: center;
-        position: relative;
-        top: 200px;
+        position: absolute;
+        top: 85%;
+        left: 34%;
+    }
+
+    h2
+    {
+        font-size: xxx-large;
     }
 }
