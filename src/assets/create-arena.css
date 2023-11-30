@@ -1,104 +1,30 @@
-.grid-container {
-    display: grid;
-    grid-template-areas:
-            'space space options'
-            'space grid-create-arena space'
-            'space space space';
-    grid-template-columns: 1fr 3fr 1fr;
-    grid-template-rows: 1fr 5fr 2fr;
-    grid-gap: 10px;
+.arena-section-create-arena {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #FFDB58;
+    border-radius: 25px;
+    width: 300px;
     padding: 10px;
 }
 
-.space {
-    padding: 10px;
-    font-size: 150%;
+.arena-input-create-arena {
+    width: 200px;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px #FFDB58;
+    margin: 10px;
+    font-size: 20px;
     text-align: center;
 }
 
-.game-name {
-    padding: 10px;
-    font-size: 150%;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.68);
-    border-radius: 50px;
+.main-space-create-arena {
+    height: 150px;
 }
 
-.options {
-    padding: 10px;
-    font-size: 150%;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.68);
-    border-radius: 50px;
-}
-
-.grid-create-arena {
-    display: grid;
-    grid-template-areas:
-            'space space space'
-            'space grid-inputs space'
-            'space space space';
-    grid-template-rows: 1fr 0.7fr 1fr;
-    grid-template-columns: 1fr 1.5fr 1fr;
-    grid-gap: 10px;
-    padding: 10px;
-    background-color: rgba(0, 0, 0, 0.68);
-    border-radius: 50px;
-}
-
-.grid-inputs {
-    display: grid;
-    grid-template-areas:
-            'size-text size-input'
-            'hp-text hp-input';
-    grid-template-columns: 1fr 1.5fr;
-    grid-template-rows: 1fr 1fr;
-    grid-gap: 10px;
-    padding: 10px;
-    background-color: rgba(41, 128, 185, 0.78);
-    border-radius: 50px;
-    color: #f2f2f2;
-}
-
-.size-text {
-    padding: 10px;
-    font-size: 150%;
-    text-align: right;
-
-}
-
-.size-input {
-    padding: 10px;
-    font-size: 150%;
-    text-align: left;
-}
-
-.hp-text {
-    padding: 10px;
-    font-size: 150%;
-    text-align: right;
-}
-
-.hp-input {
-    padding: 10px;
-    font-size: 150%;
-    text-align: left;
-}
-
-.style-button {
-    display: block; /* Hacemos que los enlaces sean bloques para que estén uno debajo del otro */
-    margin-bottom: 10px; /* Ajustamos el espacio entre los enlaces según tus preferencias */
-    background-color: #FFA500;
-    color: #fff;
-    padding: 10px 20px;
-    font-family: Asimov, serif;
-    font-size: 30px;
-    margin-right: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none; /* Quitamos la subrayado del enlace */
-    text-align: center;
-
+.main-container-create-arena {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 

@@ -1,158 +1,86 @@
-.grid-container {
-    display: grid;
-    height: 100vh;
-    grid-template-columns: 1fr 3fr 1fr;
-    grid-template-rows: 1fr 5fr 1fr;
-    grid-template-areas:
-        "space space space"
-        "space grid-map space"
-        "space grid-atacks space";
-    grid-gap: 10px;
-    padding: 10px;
+#hp-bar-player2 {
+    height: 50px;
+    width: 150px;
+
 }
 
-.space {
-    padding: 10px;
-    font-size: 150%;
-    text-align: center;
+#hp-bar-player1 {
+    height: 50px;
+    width: 150px;
+
 }
 
-.game-name {
+#arena-image {
+    height: 300px;
+    width: 500px;
+}
+
+#attack1-image {
+    height: 50px;
+    width: 50px;
+}
+
+#attack2-image {
+    height: 50px;
+    width: 50px;
+}
+
+#attack3-image {
+    height: 50px;
+    width: 50px;
+}
+
+.main-section-game {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px;
     padding: 10px;
-    font-size: 150%;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.68);
     border-radius: 50px;
+    background: #FFDB58;
 }
 
-.grid-map {
-    display: grid;
-    grid-template-areas:
-        "grid-hp-bar-player2"
-        "map"
-        "grid-hp-bar-player1";
-    grid-template-rows: 1fr 6fr 1fr;
-    grid-gap: 10px;
+.main-container-game {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+.player2-section-game{
+    display:  flex;
+}
+
+.player1-section-game{
+    display:  flex;
+}
+
+.skill-bars-game {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 100px;
+}
+
+.attack1-game {
+    margin: 10px;
     padding: 10px;
-    background-color: rgba(0, 0, 0, 0.68);
-    border-radius: 50px;
+    border-radius: 10px;
+    background: #FFDB58;
 }
 
-.grid-hp-bar-player2 {
-    display: grid;
-    grid-template-areas:
-        "space player2-text player2-hp-bar";
-    grid-template-columns: 0.5fr 1fr 2fr;
-    grid-gap: 10px;
+.attack2-game {
+    margin: 10px;
     padding: 10px;
+    border-radius: 10px;
+    background: #FFDB58;
 }
 
-.grid-hp-bar-player1 {
-    display: grid;
-    grid-template-areas:
-        "player1-text player1-hp-bar space";
-    grid-template-columns: 1fr 2fr 0.5fr;
-    grid-gap: 10px;
+.attack3-game {
+    margin: 10px;
     padding: 10px;
+    border-radius: 10px;
+    background: #FFDB58;
 }
 
-.map {
-    padding: 10px;
-    font-size: 150%;
-    text-align: center;
-    background-color: rgba(41, 128, 185, 0.78);
-    border-radius: 25px;
-    color: #f2f2f2;
-}
-
-.player1-text {
-    padding: 10px;
-    font-size: 150%;
-    text-align: center;
-    background-color: rgba(41, 128, 185, 0.78);
-    border-radius: 25px;
-    color: #f2f2f2;
-}
-
-.player1-hp-bar {
-    padding: 10px;
-    font-size: 150%;
-    text-align: center;
-    background-color: rgba(41, 128, 185, 0.78);
-    border-radius: 25px;
-    color: #f2f2f2;
-}
-
-.player2-text {
-    padding: 10px;
-    font-size: 150%;
-    text-align: center;
-    background-color: rgba(41, 128, 185, 0.78);
-    border-radius: 25px;
-    color: #f2f2f2;
-}
-
-.player2-hp-bar {
-    padding: 10px;
-    font-size: 150%;
-    text-align: center;
-    background-color: rgba(41, 128, 185, 0.78);
-    border-radius: 25px;
-    color: #f2f2f2;
-}
-
-.grid-atacks {
-    display: grid;
-    grid-template-areas:
-        "atack1 atack2 atack3";
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 10px;
-    padding: 10px;
-    font-size: 150%;
-    text-align: center;
-    background-color: rgba(0, 0, 0, 0.68);
-    border-radius: 50px;
-}
-
-.atack1 {
-    padding: 10px;
-    font-size: 150%;
-    text-align: center;
-    background-color: rgba(41, 128, 185, 0.78);
-    border-radius: 25px;
-    color: #f2f2f2;
-}
-
-.atack2 {
-    padding: 10px;
-    font-size: 150%;
-    text-align: center;
-    background-color: rgba(41, 128, 185, 0.78);
-    border-radius: 25px;
-    color: #f2f2f2;
-}
-
-.atack3 {
-    padding: 10px;
-    font-size: 150%;
-    text-align: center;
-    background-color: rgba(41, 128, 185, 0.78);
-    border-radius: 25px;
-    color: #f2f2f2;
-}
-
-.style-button {
-    display: block; /* Hacemos que los enlaces sean bloques para que estén uno debajo del otro */
-    margin-bottom: 10px; /* Ajustamos el espacio entre los enlaces según tus preferencias */
-    background-color: #FFA500;
-    color: #fff;
-    padding: 10px 20px;
-    font-family: Asimov, serif;
-    font-size: 30px;
-    margin-right: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    text-decoration: none; /* Quitamos la subrayado del enlace */
-    text-align: center;
-}

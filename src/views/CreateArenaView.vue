@@ -1,49 +1,55 @@
 <script>
 import "../assets/create-arena.css";
+import "../assets/header.css";
 export default {
   name: "CreateArenaView",
 };
 </script>
 
 <template>
-  <div class="imgbackg" alt="Background">
-    <div class="grid-container">
-      <div class="space">
-        <router-link to="/MenuPrincipal" class="style-button">Home</router-link>
-      </div>
-      <div class="space"></div>
-      <div class="options">options</div>
 
-      <div class="space"></div>
-      <div class="grid-create-arena">
-        <div class="space"></div>
-        <div class="space"></div>
-        <div class="space"></div>
+  <head>
+    <title>Create Arena</title>
+  </head>
 
-        <div class="space"></div>
-        <div class="grid-inputs">
-          <div class="size-text">Size</div>
-          <div class="size-input">
-            <input type="text" name="size" id="size" />
-          </div>
-          <div class="hp-text">HP</div>
-          <div class="hp-input">
-            <input type="text" name="hp" id="hp" />
-          </div>
-        </div>
-        <div class="space"></div>
+  <body>
+    <header class="header-container">
+      <nav>
+        <router-link to="/MenuPrincipal">
+          <img id="game-name" src="public/MainMenuImages/logo.png" alt="Game name image">
+        </router-link>
+      </nav>
+      <div class="header-space"></div>
+      <nav>
+        <router-link to="/">
+          <img id="settings-image" src="public/InfoPlayerImages/icono-ajustes.webp" alt="Settings image">
+        </router-link>
+      </nav>
+    </header>
 
-        <div class="space"></div>
-        <div class="space">
-          <router-link to="/GameView" class="style-button">Start</router-link>
-        </div>
-        <div class="space"></div>
+    <main class="main-container-create-arena">
+      <div class="main-space-create-arena"></div>
+      <section class="arena-section-create-arena">
+      <input type="text" id="arena-size" placeholder="Size" class="arena-input-create-arena">
+      <input type="text" id="arena-hp" placeholder="HP" class="arena-input-create-arena">
+      <router-link to="/GameView">
+        <button id="create-arena-button" class="start-button-create-arena">Start</button>
+      </router-link>
+        </section>
+    </main>
 
-      </div>
-      <div class="space"></div>
-    </div>
-  </div>
+  </body>
 
 </template>
 
-<style scoped></style>
+<style scoped>
+
+body {
+  background-image: url("public/HomeImages/fondo-de-pagina.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
+
+</style>
