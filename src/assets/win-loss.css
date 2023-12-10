@@ -64,3 +64,29 @@
 
 
 }
+
+@media only screen and (max-width: 600px) {
+    #attack-image-win-loss,
+    #coins-image-win-loss {
+        height: 50px;
+        width: 50px;
+    }
+
+    .main-section-win-loss {
+        width: 90%; /* Adjusted width for better fit on smaller screens */
+        height: auto; /* Adjusted height to fit content */
+        padding: 5px; /* Adjusted padding for better spacing on smaller screens */
+    }
+
+    .main-section3-win-loss,
+    .main-section4-win-loss,
+    .main-section5-win-loss {
+        flex-direction: column; /* Adjusted flex direction for better stacking on smaller screens */
+        align-items: center; /* Center items in each section on smaller screens */
+        height: auto; /* Adjusted height to fit content */
+    }
+
+    .continue-button-win-loss {
+        /* Add styles for the continue button on smaller screens if needed */
+    }
+}
