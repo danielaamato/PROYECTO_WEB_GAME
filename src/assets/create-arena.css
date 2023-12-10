@@ -28,3 +28,43 @@
     align-items: center;
 }
 
+@media only screen and (max-width: 600px) {
+    #attack-image-win-loss,
+    #coins-image-win-loss {
+        height: 50px;
+        width: 50px;
+    }
+
+    .main-section-win-loss {
+        width: 90%;
+        height: auto;
+        padding: 5px;
+    }
+
+    .main-section3-win-loss,
+    .main-section4-win-loss,
+    .main-section5-win-loss {
+        flex-direction: column;
+        align-items: center;
+        height: auto;
+    }
+
+    .arena-section-create-arena {
+        width: 90%;
+        border-radius: 15px;
+    }
+
+    .arena-input-create-arena {
+        width: 80%;
+        margin: 5px;
+        font-size: 16px;
+    }
+
+    .main-space-create-arena {
+        height: auto;
+    }
+
+    .main-container-create-arena {
+        align-items: center;
+    }
+}
