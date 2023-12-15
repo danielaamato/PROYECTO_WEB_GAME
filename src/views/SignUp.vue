@@ -97,16 +97,24 @@ export default {
         {
           const responseData = await response.json();
 
-          // Guardar el token y otras operaciones aquí si es necesario
-
-          // Devolver true para indicar que la operación fue exitosa
+          this.$storage.setStorageSync("token", response.accessToken);
+          this.$storage.setStorageSync("playerID", this.player_ID);
+          //this.getUserId(email);
           return true;
         }
         else
         {
-          // Manejar errores específicos aquí si es necesario
-          alert("Error while using the API");
-          return false;
+          switch (response.status)
+          {
+            case 200:
+              return response.json();
+            case 404:
+              alert("Wrong user and/or password");
+              return null;
+            default:
+              alert("Error while using the API");
+              return null;
+          }
         }
       }
       catch (error)
