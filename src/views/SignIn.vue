@@ -22,21 +22,20 @@ export default {
 
       const result = await this.postUser(player);
 
-      if (result.success)
-      {
+      if (result.success) {
         // Si la respuesta es exitosa, result.response es la respuesta del servidor como texto
-        const { accessToken } = JSON.parse(result.response);
-        localStorage.setItem("token", accessToken);
+        const { token } = JSON.parse(result.response);
+
+        localStorage.setItem("token", token);
         localStorage.setItem("player_ID", player.player_ID);
         localStorage.setItem("tokenBearer", "Bearer " + localStorage.getItem("token"));
 
         await this.$router.push({ name: "MenuPrincipal" });
-      }
-      else
-      {
+      } else {
         // Si hay un error, result.response es el mensaje de error como texto
         alert("Error: Incorrect username or password");
       }
+
     },
 
     async postUser(player) {
@@ -54,7 +53,8 @@ export default {
 
               body: JSON.stringify(player),
             }
-        );
+
+        )
 
         const responseText = await response.text();
 

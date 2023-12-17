@@ -53,6 +53,12 @@ export default {
 
             if (result)
             {
+              const { token } = JSON.parse(result.response);
+
+              localStorage.setItem("token", token);
+              localStorage.setItem("player_ID", newPlayer.player_ID);
+              localStorage.setItem("tokenBearer", "Bearer " + localStorage.getItem("token"));
+
               // Redireccionar a la siguiente página
               this.$router.push({ name: "MenuPrincipal" });
             }
