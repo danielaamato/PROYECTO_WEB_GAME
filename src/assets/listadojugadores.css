@@ -8,9 +8,10 @@ input
 
 .tableListing
 {
-    position: relative;
-    left: 0%;
+    position: absolute;
+    left: 3%;
     width: 95%;
+    height: 100%;
     background-color: darkkhaki;
 }
 
@@ -69,10 +70,11 @@ th, td
         flex-direction: column;
         flex-wrap: nowrap;
         align-items: center;
-        position: relative;
-        max-height: 400px;
+        position: absolute;
+        max-height: 62%;
         overflow-y: auto;
         width: 80%;
+        top: 35%;
     }
 
     .player-details-container
