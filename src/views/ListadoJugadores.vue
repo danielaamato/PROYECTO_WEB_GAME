@@ -12,7 +12,6 @@ export default {
 
   mounted()
   {
-    // Llama a la función getInfoPlayer cuando el componente ha sido montado
     // If user has not already logged in go to SignIn
     if (localStorage.getItem("token") == null)
     {
@@ -34,22 +33,31 @@ export default {
         },
       })
           // Check if response was correct
-          .then((res) => {
-            if (res.status === 200) {
+          .then((res) =>
+          {
+            if (res.status === 200)
+            {
               return res.json();
-            } else {
+            }
+            else
+            {
               alert("Error while calling the API");
               return null;
             }
           })
-          .then((data) => {
+          .then((data) =>
+          {
             this.chargeTable(data)
           });
     },
-    chargeTable(data) {
-      if (data) {
-        this.playersList = data;
-      } else {
+    chargeTable(data)
+    {
+      if (data)
+      {
+        this.playersList = data.sort((a, b) => b.xp - a.xp);
+      }
+      else
+      {
         console.error("Data is undefined or has unexpected structure.");
       }
     }
