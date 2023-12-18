@@ -18,7 +18,15 @@ export default
   mounted()
   {
     // Llama a la función getInfoPlayer cuando el componente ha sido montado
-    this.getInfoPlayer();
+    // If user has not already logged in go to SignIn
+    if (localStorage.getItem("token") == null)
+    {
+      this.$router.push({ name: "HomeView" });
+    }
+    else
+    {
+      this.getInfoPlayer();
+    }
   },
 
   methods: {
@@ -48,7 +56,8 @@ export default
               return null;
             }
           })
-          .then((data) => {
+          .then((data) =>
+          {
             this.chargeProfile(data)
           });
     },
@@ -72,6 +81,7 @@ export default
 </script>
 
 <template>
+  <router-link to="/MenuPrincipal" class="game-title">Battle Arena</router-link>
     <div class="imgbackg4" alt="Background">
       <div id="perfil-container">
         <h3 class="perfil-jugador">Perfil del Jugador</h3>
