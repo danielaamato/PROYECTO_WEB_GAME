@@ -18,7 +18,15 @@ export default
   mounted()
   {
     // Llama a la función getInfoPlayer cuando el componente ha sido montado
-    this.getInfoPlayer();
+    // If user has not already logged in go to SignIn
+    if (localStorage.getItem("token") == null)
+    {
+      this.$router.push({ name: "HomeView" });
+    }
+    else
+    {
+      this.getInfoPlayer();
+    }
   },
 
   methods: {
@@ -48,7 +56,8 @@ export default
               return null;
             }
           })
-          .then((data) => {
+          .then((data) =>
+          {
             this.chargeProfile(data)
           });
     },
