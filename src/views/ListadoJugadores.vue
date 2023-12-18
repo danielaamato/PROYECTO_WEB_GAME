@@ -7,6 +7,8 @@ export default {
   {
     return {
       playersList: [],
+      jugadorBuscado: "",
+      jugadoresFiltrados: [],
     }
   },
 
@@ -55,12 +57,19 @@ export default {
       if (data)
       {
         this.playersList = data.sort((a, b) => b.xp - a.xp);
+        this.jugadoresFiltrados = [...this.playersList];
       }
       else
       {
         console.error("Data is undefined or has unexpected structure.");
       }
-    }
+    },
+    searchPlayer()
+    {
+      const busqueda = this.jugadorBuscado.toLowerCase();
+      this.jugadoresFiltrados = this.playersList.filter((player) => player.player_ID.toLowerCase().includes(busqueda));
+      console.log(this.jugadoresFiltrados);
+    },
   }
 };
 </script>
@@ -74,10 +83,8 @@ export default {
       margin-left: 30px;">Listado de Jugadores</h2>
 
   <section class="listadoPlayers">
-    <input type="text" placeholder="Buscar Jugador...">
-    <!-- Renderizar tabla en pantallas más grandes -->
+    <input type="text" v-model="jugadorBuscado" @input="searchPlayer" placeholder="Buscar Jugador...">
     <div class="tableContainer">
-      <div class="tableContainer">
         <table class="tableListing">
           <thead>
           <tr>
@@ -89,7 +96,10 @@ export default {
           </tr>
           </thead>
           <tbody>
-          <tr v-for="player in playersList" :key="player.player_ID">
+          <tr v-if="jugadoresFiltrados.length === 0">
+            <td colspan="5">Jugador inexistente</td>
+          </tr>
+          <tr v-for="player in jugadoresFiltrados" :key="player.player_ID">
             <td>{{ player.player_ID }}</td>
             <td>{{ player.xp }}</td>
             <td>{{ player.level }}</td>
@@ -98,12 +108,13 @@ export default {
           </tr>
           </tbody>
         </table>
-      </div>
     </div>
 
-    <!-- Renderizar campos uno debajo del otro en pantallas más pequeñas -->
     <div class=player-details-small-screen>
-      <div v-for="player in playersList" :key="player.player_ID" class="player-details-container">
+      <div v-if="jugadoresFiltrados.length === 0">
+        <p>Jugador inexistente</p>
+      </div>
+      <div v-for="player in jugadoresFiltrados" :key="player.player_ID" class="player-details-container">
         <p><strong>Nombre:</strong> {{ player.player_ID }}</p>
         <p><strong>XP:</strong> {{ player.xp }}</p>
         <p><strong>Nivel:</strong> {{ player.level }}</p>
