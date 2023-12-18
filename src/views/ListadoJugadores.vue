@@ -76,6 +76,7 @@ export default {
 
 <template>
 
+  <div class="imgbackg4" alt="Background">
     <router-link to="/MenuPrincipal" class="game-title">Battle Arena</router-link>
     <h2 style="
       margin-top: 20px;
@@ -123,6 +124,7 @@ export default {
       </div>
     </div>
   </section>
+  </div>
 
 </template>
 

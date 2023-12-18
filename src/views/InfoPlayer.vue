@@ -81,6 +81,7 @@ export default
 </script>
 
 <template>
+  <router-link to="/MenuPrincipal" class="game-title">Battle Arena</router-link>
     <div class="imgbackg4" alt="Background">
       <div id="perfil-container">
         <h3 class="perfil-jugador">Perfil del Jugador</h3>

@@ -13,7 +13,7 @@
     display: flex;
     flex-direction: column;
     position: relative;
-    top: 5%;
+    top: 3%;
     left: 8%;
     width: 85%;
 }
@@ -24,10 +24,10 @@
     text-align: center;
     background-color: #87CEEB;
     width: 42%;
-    height: 47%;
+    height: 45%;
     border-radius: 3%;
     left: 5%;
-    top: 49%;
+    top: 53%;
     position: absolute;
     font-family: Asimov;
     font-size: 1.2em;
@@ -38,8 +38,8 @@
     text-align: center;
     background-color: #87CEEB;
     right: 4%;
-    top: 49%;
-    height: 47%;
+    top: 53%;
+    height: 45%;
     border-radius: 3%;
     width: 42%;
     font-family: Asimov;
