@@ -8,11 +8,9 @@ export default {
   <div class="imgbackg" alt="Background">
     <main class="popup-delete">
       <p id="deleteplayer">¿Desea eliminar a este jugador?</p>
-      <router-link to="HomeView">
-        <img src="public/InfoPlayerImages/checkmark.png" alt="Imagen CheckMark" id="imagen-check">
+      <router-link to="HomeView" src="public/InfoPlayerImages/checkmark.png" id="imagen-check">
       </router-link>
-      <router-link to="InfoPlayer">
-        <img src="public/InfoPlayerImages/exmark.png" alt="Imagen ExMark" id="imagen-exmark">
+      <router-link to="InfoPlayer" src="public/InfoPlayerImages/exmark.png" id="imagen-exmark">
       </router-link>
     </main>
   </div>
@@ -31,8 +29,8 @@ export default {
   display: flex;
   flex-direction: column;
   position: relative;
-  top: 18%;
-  left: 25%;
+  top: 25%;
+  left: 30%;
 }
 
 #deleteplayer {

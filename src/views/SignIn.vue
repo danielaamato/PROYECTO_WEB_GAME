@@ -120,7 +120,7 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: 400px;
+  width: 40%;
   height: 50%;
   background: #2980b9;
   border-radius: 15px;
@@ -144,11 +144,6 @@ h2 {
   font-size: 70px;
   color: #FFDB58;
   font-family: Asimov, serif;
-}
-
-body {
-  overflow: auto;
-  margin: 0;
 }
 
 .playerid-input,
