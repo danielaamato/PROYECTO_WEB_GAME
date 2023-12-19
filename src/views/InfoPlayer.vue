@@ -12,6 +12,8 @@ export default
       xp: 0,
       level: 0,
       coins: 0,
+      attackList: [],
+      equippedAttacks: [],
     }
   },
 
@@ -70,12 +72,42 @@ export default
         this.coins = data.coins;
         this.xp = data.xp;
         this.level = data.level;
+        this.chargeAttacks();
       }
       else
       {
         console.error("Data is undefined or has unexpected structure.");
       }
-    }
+    },
+
+    chargeAttacks()
+    {
+      fetch("https://balandrau.salle.url.edu/i3/players/attacks", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Bearer: localStorage.getItem("token"),
+        },
+      })
+          // Check if response was correct
+          .then((res) =>
+          {
+            if (res.status === 200)
+            {
+              return res.json();
+            }
+            else
+            {
+              alert("Error while calling the API");
+              return null;
+            }
+          })
+          .then((data) =>
+          {
+            this.attackList = data;
+            this.equippedAttacks = data.filter((ataque) => ataque.equipped);
+          });
+    },
   }
 };
 </script>
@@ -99,13 +131,39 @@ export default
         </router-link>
       </div>
 
-      <div id="ataques">
-        <div id="backpack-at">Ataques Backpack
-        </div>
-        <div id="next-attacks">Proximos Ataques
+      <div id="backpack-at"><strong><u style="
+        margin-top: 10px;
+        margin-bottom: 10px">Ataques Backpack</u></strong>
+        <section class="attackTable">
+          <div v-if="attackList.length === 0">
+            <p>Sin Ataques en el Backpack</p>
+          </div>
+          <div v-for="ataque in attackList" :key="ataque.attack_ID" class="attack-container">
+            <p><strong>Nombre:</strong> {{ ataque.attack_ID }}</p>
+            <p><strong>Posiciones:</strong> {{ ataque.positions }}</p>
+            <p><strong>Fuerza:</strong> {{ ataque.power }}</p>
+            <p><strong>¿Equipado?:</strong> {{ ataque.equipped ? 'Si' : 'No' }}</p>
+            <p><strong>¿En oferta?:</strong> {{ ataque.on_sale ? 'Si' : 'No' }}</p>
+          </div>
+        </section>
+      </div>
+        <div id="next-attacks"><strong><u style="
+        margin-top: 10px;
+        margin-bottom: 10px">Ataques Equipados</u></strong>
+          <section class="attackTable">
+            <div v-if="equippedAttacks.length === 0">
+              <p>Sin Ataques equipados para proximos juegos</p>
+            </div>
+            <div v-for="ataque in equippedAttacks" :key="ataque.attack_ID" class="attack-container">
+              <p><strong>Nombre:</strong> {{ ataque.attack_ID }}</p>
+              <p><strong>Posiciones:</strong> {{ ataque.positions }}</p>
+              <p><strong>Fuerza:</strong> {{ ataque.power }}</p>
+              <p><strong>¿Equipado?:</strong> {{ ataque.equipped ? 'Si' : 'No' }}</p>
+              <p><strong>¿En oferta?:</strong> {{ ataque.on_sale ? 'Si' : 'No' }}</p>
+            </div>
+          </section>
         </div>
       </div>
-    </div>
 </template>
 
 <style scoped></style>
