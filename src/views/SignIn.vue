@@ -1,5 +1,5 @@
 <script>
-import "../assets/signin.css";
+//import "../assets/signin.css";
 export default {
   name: "SignIn",
 
@@ -105,5 +105,58 @@ export default {
   </div>
 </template>
 
-<style scoped></style>
-*/
+<style scoped>
+#imgbackg2 {
+  background-image: url("../../public/HomeImages/fondo-de-pagina.png");
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
+.signIn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  width: 400px;
+  height: 50%;
+  background: #2980b9;
+  border-radius: 15px;
+  z-index: 0;
+}
+
+.signinButtonTwo {
+  display: inline !important;
+  font-family: Asimov, serif;
+  font-size: 20px;
+  color: #282828;
+  margin-bottom: 10px;
+  margin-top: 7px;
+}
+
+form {
+  top: 0;
+}
+
+h2 {
+  font-size: 70px;
+  color: #FFDB58;
+  font-family: Asimov, serif;
+}
+
+body {
+  overflow: auto;
+  margin: 0;
+}
+
+.playerid-input,
+.password-input {
+  width: 90%;
+  margin-bottom: 15px;
+}
+
+
+
+</style>

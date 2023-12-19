@@ -1,5 +1,4 @@
 <script>
-import "../assets/historialjugadores.css";
 export default {
   name: "HistorialJugadores",
 };
@@ -24,4 +23,23 @@ export default {
 
 </template>
 
-<style scoped></style>
+<style scoped>
+
+.tableHistoring
+{
+  position: relative;
+  left: 0%;
+  width: 95%;
+  background-color: darkkhaki;
+}
+
+.historialPlayers
+{
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  align-content: space-around;
+  align-items: center;
+}
+
+</style>

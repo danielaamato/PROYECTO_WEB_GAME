@@ -1,5 +1,4 @@
 <script>
-import "../assets/infoplayer.css";
 export default
 {
   name: "SignIn",
@@ -166,4 +165,191 @@ export default
       </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+
+.imgbackg4 {
+  background-image: url("../../public/HomeImages/fondo-de-pagina.png");
+  width: 100%;
+  height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
+#perfil-container {
+  text-align: center;
+  background-color: #2980b9;
+  border-radius: 3%;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: 3%;
+  left: 8%;
+  width: 85%;
+}
+
+
+#backpack-at
+{
+  text-align: center;
+  background-color: #87CEEB;
+  width: 46%;
+  height: 45%;
+  border-radius: 3%;
+  left: 5%;
+  top: 53%;
+  position: absolute;
+  font-family: "Calisto MT";
+  font-size: 1.2em;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  max-height: 62%;
+  overflow-y: auto;
+}
+
+#next-attacks, backpack-at
+{
+  text-align: center;
+  background-color: #87CEEB;
+  right: 4%;
+  top: 53%;
+  height: 45%;
+  border-radius: 3%;
+  width: 42%;
+  font-family: "Calisto MT";
+  font-size: 1.2em;
+  position: absolute;
+}
+
+#imagen-perfil {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+}
+
+#imagen-ajustes {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.nombre-perfil {
+  font-size: 1.5em;
+  color: #282828;
+}
+
+#nivel-perfil {
+  font-size: 1.2em;
+  color: #ffffff;
+  font-family: Asimov;
+}
+
+#xp {
+  font-size: 1.2em;
+  color: #ffffff;
+  font-family: Asimov;
+}
+
+#monedas {
+  font-size: 1.2em;
+  color: #ffffff;
+  font-family: Asimov;
+}
+
+.perfil-titulo {
+  font-size: 2em; /* Ajusta el tamaño del título según tus necesidades */
+  text-align: left;
+  font-family: Asimov, serif;
+  color: #FFDB58;
+  margin-left: 5%;
+}
+
+.perfil-jugador {
+  font-size: 2em; /* Ajusta el tamaño del título según tus necesidades */
+  text-align: left;
+  font-family: Asimov, serif;
+  color: #FFDB58;
+  margin-left: 5%;
+  margin-bottom: 0;
+  margin-top: 20px;
+}
+
+@media only screen and (max-width: 1100px) {
+  .imgbackg {
+    padding: 10px;
+  }
+
+  #perfil-container {
+    width: 90%;
+    top: 4%;
+    left: 5%;
+    position: relative;
+  }
+
+  #backpack-at,
+  #next-attacks {
+    width: 45%;
+    right: 3%;
+    font-size: 1em;
+    position: absolute;
+    top: 61%;
+    border-radius: 5%;
+    height: 37%;
+  }
+
+
+}
+
+#ataques{
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-content: space-around;
+}
+
+#idperfil{
+  display: flex;
+  align-items: center;
+}
+
+#idinfo{
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.attack-container
+{
+  position: relative;
+}
+
+
+.attack-container::after
+{
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #000;
+}
+
+.attackTable
+{
+  overflow-x: auto;
+  overflow-y: auto;
+  display: flex;
+  position: relative;
+  height: 510px;
+  width: 100%;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+}
+
+
+</style>

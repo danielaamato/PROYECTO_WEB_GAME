@@ -1,5 +1,4 @@
 <script>
-import "../assets/eliminarplayer.css";
 export default {
   name: "EliminarPlayer",
 };
@@ -20,4 +19,47 @@ export default {
 </template>
 
 
-<style scoped></style>
+<style scoped>
+
+.popup-delete {
+  border: 2px solid #ccc;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: #2980b9;
+  width: 38%;
+  height: 300px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  top: 18%;
+  left: 25%;
+}
+
+#deleteplayer {
+  font-size: 40px;
+  color: #ffffff;
+  text-align: center;
+  font-family: Asimov;
+}
+
+#imagen-check {
+  max-width: 70%;
+  max-height: 70%;
+}
+
+#imagen-exmark {
+  max-width: 70%;
+  max-height: 70%;
+}
+
+.imgbackg {
+  background-image: url("../../public/HomeImages/fondo-de-pagina.png");
+  width: 100%;
+  height: 100vh;
+
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  text-align: center;
+}
+
+</style>

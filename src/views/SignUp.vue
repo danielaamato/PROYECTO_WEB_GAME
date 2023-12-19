@@ -1,5 +1,4 @@
 <script>
-import "../assets/signup.css";
 
 export default {
   name: "SignUp",
@@ -167,125 +166,90 @@ export default {
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
 
+#imgbackg3 {
+  background-image: url("../../public/HomeImages/fondo-de-pagina.png");
+  background-size: cover;
+  background-position: center;
+  width: 100%;
+  height: 100vh;
+}
 
-<!--
-<script>
-import "../assets/signup.css";
-export default
-{
-  name: "SignUp",
+.column1,
+.column2 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  width: 70%;
+  height: 100%;
+  margin: 0 auto;
+}
 
-  data()
-  {
-    return {
-      player_ID: "",
-      password: "",
-      img: "",
-    };
-  },
-  methods: {
-    async signUp()
-    {
-      const newPlayer = {
-        player_ID: this.player_ID,
-        password: this.password,
-        img: this.img,
-      };
-
-      if (this.player_ID === "" || this.password === "" || this.img === "")
-      {
-        alert("Field all fields!");
-      }
-      else if (!this.playerIdAndPasswordValid(this.player_ID))
-      {
-        alert("The player ID must have from 1 to 20 characters!");
-      }
-      else if (!this.playerIdAndPasswordValid(this.password))
-      {
-        alert("The password must have from 1 to 20 characters!");
-      }
-      else
-      {
-        try
-        {
-          const response = await
-              fetch("https://balandrau.salle.url.edu/i3/players", {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(newPlayer),
-
-              })
-                  .then((res) => {
-                    console.log("algo");
-                  })
-                  .then((response) =>
-                  {
-                    console.log("algo2");
-                    if (response != null)
-                    {
-                      const result = this.postUser(newPlayer);
-
-                      if (result)
-                      {
-                        console.log("algo3");
-                        this.$router.replace({name: "login"});
-                      }
-                      else
-                      {
-                        alert("Failed to register because this player ID is already registered. Please try again.");
-                      }
-                    }
-                  });
-        }
-        catch (error)
-        {
-          console.error(error);
-          return false;
-        }
-      }
-    },
-    playerIdAndPasswordValid(field)
-    {
-      const emailRegex = /^.{1,20}$/;
-
-      return emailRegex.test(field);
-    },
+@media only screen and (hover: none) and (pointer: coarse) {
+  .column2 {
+    display: none;
   }
-};
-</script>
+  .signUp {
+    position: absolute;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%);
+  }
+}
 
-<template>
-  <div id="imgbackg3" alt="Background">
-      <section class="column1">
-          <form class="signUp" @submit.prevent="signUp()">
-              <h2>Sign Up</h2>
-              <input class="imgurl-input"
-                     type="text"
-                     placeholder="Image Url"
-                     name="uname" required
-              v-model="img"/>
-              <input
-                  class="playerid-input"
-                  type="text"
-                  placeholder="Player ID"
-                  name="uname" required
-              v-model="player_ID"/>
-              <input
-                  class="password-input"
-                  type="password"
-                  placeholder="Password"
-                  name="psw" required
-              v-model="password"/>
-            <button type="submit" class="signupButtonTwo">Complete</button>
-            <router-link to="/" class="signupButtonTwo">Back</router-link>
-          </form>
-      </section>
-  </div>
-</template>
+.openEvents-button {
+  display: block !important;
+}
 
-<style scoped></style>
--->
+.signUp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: #2980b9;
+  border-radius: 30px;
+  width: 330px;
+}
+
+
+.signupButtonTwo {
+  top: 50px;
+  display: inline !important;
+  font-family: Asimov, serif;
+  font-size: 25px;
+  color: #282828;
+  margin-bottom: 10px;
+}
+
+form {
+  top: 200%;
+}
+
+h2 {
+  font-size: 70px;
+  color: #FFDB58;
+  font-family: Asimov, serif;
+}
+
+body {
+  overflow: hidden;
+}
+
+.imgurl-input,
+.playerid-input,
+.password-input {
+  width: 70%; /* Ajusta el ancho de los campos de entrada según tus necesidades */
+  margin-bottom: 20px; /* Ajusta el margen inferior según tus necesidades */
+}
+
+.playerid-input {
+  margin-bottom: 20px; /* Ajusta el margen inferior según tus necesidades */
+}
+
+.password-input {
+  margin-bottom: 30px; /* Ajusta el margen inferior según tus necesidades */
+}
+
+</style>

@@ -1,5 +1,4 @@
 <script>
-import "../assets/game.css";
 import "../assets/header.css";
 export default {
   name: "GameView",
@@ -71,4 +70,113 @@ body {
   background-position: center;
   height: 100vh;
 }
+
+#hp-bar-player2,
+#hp-bar-player1 {
+  height: 50px;
+  width: 150px;
+
+}
+
+#arena-image {
+  height: 300px;
+  width: 500px;
+}
+
+#attack1-image,
+#attack2-image,
+#attack3-image {
+  height: 50px;
+  width: 50px;
+}
+
+
+.main-section-game {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  margin: 10px;
+  padding: 10px;
+  border-radius: 50px;
+  background: #FFDB58;
+}
+
+.main-container-game {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+}
+
+.player2-section-game,
+.player1-section-game {
+  display:  flex;
+}
+
+
+.skill-bars-game {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 100px;
+}
+
+.attack1-game,
+.attack2-game,
+.attack3-game {
+  margin: 10px;
+  padding: 10px;
+  border-radius: 10px;
+  background: #FFDB58;
+}
+
+@media only screen and (max-width: 600px) {
+  #hp-bar-player2,
+  #hp-bar-player1 {
+    height: 30px;
+    width: 80px;
+  }
+
+  #arena-image {
+    height: 150px;
+    width: 250px;
+  }
+
+  #attack1-image,
+  #attack2-image,
+  #attack3-image {
+    height: 25px;
+    width: 25px;
+  }
+
+  .main-section-game {
+    margin: 5px;
+    padding: 5px;
+    border-radius: 20px;
+  }
+
+  .main-container-game {
+    align-items: center;
+  }
+
+  .player2-section-game,
+  .player1-section-game {
+    flex-direction: column;
+  }
+
+  .skill-bars-game {
+    gap: 10px;
+  }
+
+  .attack1-game,
+  .attack2-game,
+  .attack3-game {
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    background: #FFDB58;
+  }
+}
+
 </style>
