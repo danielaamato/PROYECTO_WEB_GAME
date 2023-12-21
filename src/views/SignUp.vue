@@ -49,10 +49,9 @@ export default {
 
           if (response.ok) {
             const result = await this.postUser(newPlayer);
-
             if (result)
             {
-              const { token } = JSON.parse(result.response);
+              const { token } = result.response;
 
               localStorage.setItem("token", token);
               localStorage.setItem("player_ID", newPlayer.player_ID);
@@ -71,9 +70,9 @@ export default {
           else
           {
             const errorMessage = await response.text();
-            throw new Error(errorMessage);
           }
-        } catch (error)
+        }
+        catch (error)
         {
           console.error(error);
           alert(
@@ -83,36 +82,28 @@ export default {
       }
     },
 
-    async postUser(newPlayer)
-    {
-      try
-      {
-        const response = await fetch(
-            "https://balandrau.salle.url.edu/i3/players/join",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify(newPlayer),
-            }
-        );
+    async postUser(newPlayer) {
+      try {
+        const response = await fetch("https://balandrau.salle.url.edu/i3/players/join", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newPlayer),
+        });
 
-        if (response.ok)
-        {
+        if (response.ok) {
           const responseData = await response.json();
 
-          this.$storage.setStorageSync("token", response.accessToken);
-          this.$storage.setStorageSync("playerID", this.player_ID);
-          //this.getUserId(email);
-          return true;
-        }
-        else
-        {
-          switch (response.status)
-          {
-            case 200:
-              return response.json();
+          if (response.status === 200) {
+            // Return an object with response property for success
+            return { response: responseData };
+          } else {
+            // Return an object with response property for other HTTP statuses
+            return { response: response.statusText };
+          }
+        } else {
+          switch (response.status) {
             case 404:
               alert("Wrong user and/or password");
               return null;
@@ -121,13 +112,13 @@ export default {
               return null;
           }
         }
-      }
-      catch (error)
-      {
+      } catch (error) {
         console.error(error);
-        return false;
+        return { response: "Error occurred while processing the request." };
       }
     },
+
+
 
     playerIdAndPasswordValid(field) {
       const emailRegex = /^.{1,20}$/;
