@@ -108,6 +108,7 @@ export default {
               alert("Wrong user and/or password");
               return null;
             default:
+              this.$router.push({name: "HomeView"});
               alert("Error while using the API");
               return null;
           }

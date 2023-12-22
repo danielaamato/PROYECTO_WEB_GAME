@@ -1,4 +1,5 @@
 <script>
+
 export default {
   name: "EliminarPlayer",
   methods: {
@@ -11,17 +12,19 @@ export default {
           "Content-Type": "application/json",
           Bearer: localStorage.getItem("token"),
         },
-      });
-      this.$storage.clearStorageSync();
+      })
+          .then(response =>
+          {
+            if (!response.ok)
+            {
+              throw new Error(`Error deleting player. Status: ${response.status}`);
+            }
 
-      // Display a success toast
-      const toast = useToast();
-      toast.success('Player deleted!');
-
-      // Perform redirection to HomeView
-      this.$router.push ("/");
+            this.$storage.clearStorageSync();
+            this.$router.push ({name: "HomeView"});
+          });
     }
-  }
+  },
 };
 </script>
 
@@ -38,6 +41,7 @@ export default {
       <router-link to="InfoPlayer" id="imagen-exmark">
         <img src="public/InfoPlayerImages/exmark.png" alt="Exmark Image" id="imgEx"/>
       </router-link>
+      <ToastContainer />
     </main>
   </div>
 </template>

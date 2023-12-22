@@ -1,6 +1,10 @@
 <script>
 export default {
   name: "HomeView",
+
+  mounted(){
+    localStorage.setItem("token", null);
+  },
 };
 </script>
 

@@ -53,6 +53,7 @@ export default
             }
             else
             {
+              this.$router.push({name: "HomeView"});
               alert("Error while calling the API");
               return null;
             }
