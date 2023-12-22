@@ -1,4 +1,5 @@
 <script>
+import "../assets/main.css";
 export default {
   name: "HistorialJugadores",
 };
@@ -6,11 +7,13 @@ export default {
 
 <template>
 
+  <div class="imgbackg" alt="Background">
   <router-link to="/MenuPrincipal" class="game-title">Battle Arena</router-link>
   <h2 style="
       margin-top: 20px;
       margin-bottom: 20px;
-      margin-left: 30px;">Historial de Jugadores</h2>
+      margin-left: 30px;
+font-family: Asimov, serif" id="listadoTitle">Historial de Jugadores</h2>
 
   <section class="historialPlayers">
     <table class="tableHistoring">
@@ -20,6 +23,7 @@ export default {
       </tr>
     </table>
   </section>
+  </div>
 
 </template>
 
@@ -41,5 +45,4 @@ export default {
   align-content: space-around;
   align-items: center;
 }
-
 </style>

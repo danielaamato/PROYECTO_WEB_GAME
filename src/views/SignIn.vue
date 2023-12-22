@@ -124,6 +124,9 @@ export default {
   height: 50%;
   background: #2980b9;
   border-radius: 15px;
+  position: absolute;
+  top: 21%;
+  left: 30%;
   z-index: 0;
 }
 

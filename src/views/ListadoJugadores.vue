@@ -1,4 +1,5 @@
 <script>
+import "../assets/main.css";
 export default {
   name: "ListadoJugadores",
 
@@ -76,12 +77,14 @@ export default {
 
 <template>
 
-  <div class="imgbackg4" alt="Background">
+  <div class="imgbackg" alt="Background">
     <router-link to="/MenuPrincipal" class="game-title">Battle Arena</router-link>
     <h2 style="
       margin-top: 20px;
       margin-bottom: 20px;
-      margin-left: 30px;">Listado de Jugadores</h2>
+      margin-left: 30px;
+font-family: Asimov, serif;
+        ">Listado de Jugadores</h2>
 
   <section class="listadoPlayers">
     <input type="text" v-model="jugadorBuscado" @input="searchPlayer" placeholder="Buscar Jugador...">
@@ -101,7 +104,11 @@ export default {
             <td colspan="5">Jugador inexistente</td>
           </tr>
           <tr v-for="player in jugadoresFiltrados" :key="player.player_ID">
-            <td>{{ player.player_ID }}</td>
+            <td>{{ player.player_ID }}
+              <router-link :to="{ name: 'HistorialJugadores', params: { playerId: player.player_ID }}">
+                <button id="details">Ver Detalles</button>
+              </router-link>
+            </td>
             <td>{{ player.xp }}</td>
             <td>{{ player.level }}</td>
             <td>{{ player.coins }}</td>
@@ -116,11 +123,14 @@ export default {
         <p>Jugador inexistente</p>
       </div>
       <div v-for="player in jugadoresFiltrados" :key="player.player_ID" class="player-details-container">
-        <p><strong>Nombre:</strong> {{ player.player_ID }}</p>
+        <p><strong>Nombre:</strong> {{ player.player_ID }}
+          <router-link :to="{ name: 'HistorialJugadores', params: { playerId: player.player_ID }}">
+            <button id="details">Ver Detalles</button>
+          </router-link></p>
         <p><strong>XP:</strong> {{ player.xp }}</p>
         <p><strong>Nivel:</strong> {{ player.level }}</p>
         <p><strong>Monedas:</strong> {{ player.coins }}</p>
-        <p><strong>Imagen:</strong> <img :src="player.img" alt="Imagen del jugador" class="player-image"></p>
+        <img :src="player.img" alt="Imagen del jugador" class="player-image">
       </div>
     </div>
   </section>
@@ -169,6 +179,11 @@ th, td
   align-items: center;
 }
 
+#details
+{
+  background-color: sandybrown;
+}
+
 .player-image {
   width: 50px;
   height: 50px;
@@ -206,7 +221,7 @@ th, td
     max-height: 62%;
     overflow-y: auto;
     width: 80%;
-    top: 35%;
+    top: 32%;
   }
 
   .player-details-container
@@ -223,15 +238,18 @@ th, td
     width: 100%;
     height: 3px;
     background-color: #000;
+    margin-bottom: -6%;
   }
-}
 
-.imgbackg4 {
-  background-image: url("../../public/HomeImages/fondo-de-pagina.png");
-  width: 100%;
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
+  .game-title {
+    text-decoration: none;
+    color: #FFDB58;
+    font-family: Asimov, serif;
+    font-size: 250%;
+    position: relative;
+    top: 2%;
+    right: 13%;
+  }
 }
 
 </style>
