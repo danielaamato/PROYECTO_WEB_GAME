@@ -1,5 +1,4 @@
 <script>
-//import "../assets/signin.css";
 export default {
   name: "SignIn",
 
@@ -120,13 +119,13 @@ export default {
   justify-content: center;
   align-items: center;
   text-align: center;
-  width: 40%;
+  width: 30%;
   height: 50%;
   background: #2980b9;
   border-radius: 15px;
   position: absolute;
-  top: 21%;
-  left: 30%;
+  top: 19%;
+  left: 35%;
   z-index: 0;
 }
 

@@ -9,6 +9,7 @@ export default {
       playersList: [],
       jugadorBuscado: "",
       jugadoresFiltrados: [],
+      isMobileView: window.innerWidth <= 503,
     }
   },
 
@@ -23,9 +24,17 @@ export default {
     {
       this.getPlayersList();
     }
+
+    // Escuchar cambios en el tamaño de la ventana para actualizar isMobileView
+    window.addEventListener("resize", this.handleWindowSizeChange);
   },
 
   methods: {
+    // Método para manejar cambios en el tamaño de la ventana
+    handleWindowSizeChange() {
+      this.isMobileView = window.innerWidth <= 503;
+    },
+
     getPlayersList() {
       fetch("https://balandrau.salle.url.edu/i3/players/", {
         method: "GET",
@@ -71,6 +80,10 @@ export default {
       this.jugadoresFiltrados = this.playersList.filter((player) => player.player_ID.toLowerCase().includes(busqueda));
       console.log(this.jugadoresFiltrados);
     },
+    redirectToHistorial(playerId)
+    {
+      this.$router.push({ name: 'HistorialJugadores', query: { playerId: playerId } });
+    },
   }
 };
 </script>
@@ -105,9 +118,7 @@ font-family: Asimov, serif;
           </tr>
           <tr v-for="player in jugadoresFiltrados" :key="player.player_ID">
             <td>{{ player.player_ID }}
-              <router-link :to="{ name: 'HistorialJugadores', params: { playerId: player.player_ID }}">
-                <button id="details">Ver Detalles</button>
-              </router-link>
+              <button id="details" @click="redirectToHistorial(player.player_ID)">Ver Detalles</button>
             </td>
             <td>{{ player.xp }}</td>
             <td>{{ player.level }}</td>
@@ -118,15 +129,14 @@ font-family: Asimov, serif;
         </table>
     </div>
 
-    <div class=player-details-small-screen>
+
+    <div class=player-details-small-screen v-if="isMobileView">
       <div v-if="jugadoresFiltrados.length === 0">
         <p>Jugador inexistente</p>
       </div>
       <div v-for="player in jugadoresFiltrados" :key="player.player_ID" class="player-details-container">
         <p><strong>Nombre:</strong> {{ player.player_ID }}
-          <router-link :to="{ name: 'HistorialJugadores', params: { playerId: player.player_ID }}">
-            <button id="details">Ver Detalles</button>
-          </router-link></p>
+          <button id="details" @click="redirectToHistorial(player.player_ID)">Ver Detalles</button></p>
         <p><strong>XP:</strong> {{ player.xp }}</p>
         <p><strong>Nivel:</strong> {{ player.level }}</p>
         <p><strong>Monedas:</strong> {{ player.coins }}</p>
@@ -158,7 +168,7 @@ input
 }
 
 .tableListing th {
-  background-color: lightblue; /* Color de fondo para la fila de encabezado */
+  background-color: lightblue;
   position: sticky;
   top: 0;
 }
@@ -236,19 +246,9 @@ th, td
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 3px;
+    height: 2px;
     background-color: #000;
-    margin-bottom: -6%;
-  }
-
-  .game-title {
-    text-decoration: none;
-    color: #FFDB58;
-    font-family: Asimov, serif;
-    font-size: 250%;
-    position: relative;
-    top: 2%;
-    right: 13%;
+    margin-bottom: -3%;
   }
 }
 

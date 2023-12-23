@@ -1,7 +1,91 @@
 <script>
 import "../assets/main.css";
+
 export default {
   name: "HistorialJugadores",
+
+  data() {
+    return {
+      games_played: 0,
+      games_won: 0,
+      gamesHistorial: [],
+      games_player: [],
+    }
+  },
+
+  methods:{
+    getPlayerHistorial()
+    {
+      fetch("https://balandrau.salle.url.edu/i3/players/" + this.$route.query.playerId + "/games/finished", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Bearer: localStorage.getItem("token"),
+        },
+      })
+          .then((res) =>
+          {
+            if (res.status === 200)
+            {
+              return res.json();
+            }
+            else
+            {
+              this.$router.push({name: "HomeView"});
+              alert("Error while calling the API");
+              return null;
+            }
+          })
+          .then((data) =>
+          {
+            this.gamesHistorial = data;
+            console.log(this.gamesHistorial);
+          });
+    },
+
+    getPlayerStats()
+    {
+      fetch("https://balandrau.salle.url.edu/i3/players/" + this.$route.query.playerId + "/statistics", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Bearer: localStorage.getItem("token"),
+        },
+      })
+          .then((res) =>
+          {
+            if (res.status === 200)
+            {
+              return res.json();
+            }
+            else
+            {
+              this.$router.push({name: "HomeView"});
+              alert("Error while calling the API");
+              return null;
+            }
+          })
+          .then((data) =>
+          {
+            this.games_won = data.games_won;
+            this.games_played = data.games_played;
+          });
+    }
+  },
+
+  computed: {
+    // Calcula el porcentaje de juegos ganados
+    winPercentage()
+    {
+      return this.games_played === 0 ? 0 : (this.games_won / this.games_played) * 100;
+    },
+  },
+
+  created()
+  {
+    this.getPlayerStats();
+    this.getPlayerHistorial();
+  },
 };
 </script>
 
@@ -9,17 +93,37 @@ export default {
 
   <div class="imgbackg" alt="Background">
   <router-link to="/MenuPrincipal" class="game-title">Battle Arena</router-link>
-  <h2 style="
-      margin-top: 20px;
-      margin-bottom: 20px;
-      margin-left: 30px;
-font-family: Asimov, serif" id="listadoTitle">Historial de Jugadores</h2>
+  <h2 id="historialTitle">Historial de {{$route.query.playerId}}
+    </h2>
+    <router-link :to="{ name: 'ListadoJugadores' }">
+      <button id="buttonBackToList">Volver al Listado</button>
+    </router-link>
 
   <section class="historialPlayers">
     <table class="tableHistoring">
       <tr>
-        <td>Juegos Finalizados</td>
-        <td>Porcentaje de Juegos Ganados</td>
+        <th>Juegos Finalizados</th>
+        <th>Porcentaje de Juegos Ganados</th>
+      </tr>
+      <tr>
+        <tr v-if="gamesHistorial.length === 0">
+          <td colspan="5">No ha participado en ningun juego</td>
+        </tr>
+        <tr v-for="game in gamesHistorial" :key="game.game_ID" class="player-historial-container">
+          <td>Game ID: {{ game.game_ID }}</td>
+          <td>Game Size: {{ game.size }}</td>
+          <td>Game Creation Date: {{ game.creation_date }}</td>
+          <td>Max HP: {{game.HP_max}}</td>
+          <td>
+            <ul>
+              <li v-for="playerGame in game.players_games" :key="playerGame.player_ID">
+                Player ID: {{ playerGame.player_ID }}, Game ID: {{ playerGame.game_ID }},
+                Winner: {{ playerGame.winner }}, XP Won: {{ playerGame.xp_win}}, Coins Won: {{ playerGame.coins_win}}
+              </li>
+            </ul>
+          </td>
+        </tr>
+        <td>{{ winPercentage.toFixed(2) }}%</td>
       </tr>
     </table>
   </section>
@@ -45,4 +149,66 @@ font-family: Asimov, serif" id="listadoTitle">Historial de Jugadores</h2>
   align-content: space-around;
   align-items: center;
 }
+
+#buttonBackToList
+{
+  position: relative;
+  right: 41%;
+  bottom: 6%;
+  font-family: Asimov, serif;
+  font-size: 100%;
+  background-color: darkorange;
+}
+
+.player-historial-container
+{
+  position: relative;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  align-items: center;
+  max-height: 62%;
+  overflow-y: auto;
+  top: 32%;
+}
+
+.tableHistoring th,
+.tableHistoring td {
+  padding: 4px;
+  border: 1px solid #000; /* Añade borde a las celdas de la tabla */
+  text-align: center;
+}
+
+.tableHistoring th {
+  background-color: lightblue; /* Color de fondo para la fila de encabezado */
+}
+
+#historialTitle
+{
+  margin-top: 20px;
+  margin-bottom: 0px;
+  margin-left: 30px;
+  font-family: Asimov, serif;
+  font-size: 200%;
+}
+
+@media (max-width: 500px)
+{
+ #historialTitle{
+   font-size: 192%;
+   margin-top: 42px;
+ }
+
+  #buttonBackToList
+  {
+    position: relative;
+    right: 30%;
+    bottom: 9%;
+    font-family: Asimov, serif;
+    font-size: 98%;
+    background-color: darkorange;
+  }
+}
+
 </style>
