@@ -1,4 +1,5 @@
 <script>
+import "../assets/main.css";
 export default {
   name: "ListadoJugadores",
 
@@ -8,6 +9,7 @@ export default {
       playersList: [],
       jugadorBuscado: "",
       jugadoresFiltrados: [],
+      isMobileView: window.innerWidth <= 503,
     }
   },
 
@@ -22,9 +24,17 @@ export default {
     {
       this.getPlayersList();
     }
+
+    // Escuchar cambios en el tamaño de la ventana para actualizar isMobileView
+    window.addEventListener("resize", this.handleWindowSizeChange);
   },
 
   methods: {
+    // Método para manejar cambios en el tamaño de la ventana
+    handleWindowSizeChange() {
+      this.isMobileView = window.innerWidth <= 503;
+    },
+
     getPlayersList() {
       fetch("https://balandrau.salle.url.edu/i3/players/", {
         method: "GET",
@@ -70,18 +80,24 @@ export default {
       this.jugadoresFiltrados = this.playersList.filter((player) => player.player_ID.toLowerCase().includes(busqueda));
       console.log(this.jugadoresFiltrados);
     },
+    redirectToHistorial(playerId)
+    {
+      this.$router.push({ name: 'HistorialJugadores', query: { playerId: playerId } });
+    },
   }
 };
 </script>
 
 <template>
 
-  <div class="imgbackg4" alt="Background">
+  <div class="imgbackg" alt="Background">
     <router-link to="/MenuPrincipal" class="game-title">Battle Arena</router-link>
     <h2 style="
       margin-top: 20px;
       margin-bottom: 20px;
-      margin-left: 30px;">Listado de Jugadores</h2>
+      margin-left: 30px;
+font-family: Asimov, serif;
+        ">Listado de Jugadores</h2>
 
   <section class="listadoPlayers">
     <input type="text" v-model="jugadorBuscado" @input="searchPlayer" placeholder="Buscar Jugador...">
@@ -101,7 +117,9 @@ export default {
             <td colspan="5">Jugador inexistente</td>
           </tr>
           <tr v-for="player in jugadoresFiltrados" :key="player.player_ID">
-            <td>{{ player.player_ID }}</td>
+            <td>{{ player.player_ID }}
+              <button id="details" @click="redirectToHistorial(player.player_ID)">Ver Detalles</button>
+            </td>
             <td>{{ player.xp }}</td>
             <td>{{ player.level }}</td>
             <td>{{ player.coins }}</td>
@@ -111,16 +129,18 @@ export default {
         </table>
     </div>
 
-    <div class=player-details-small-screen>
+
+    <div class=player-details-small-screen v-if="isMobileView">
       <div v-if="jugadoresFiltrados.length === 0">
         <p>Jugador inexistente</p>
       </div>
       <div v-for="player in jugadoresFiltrados" :key="player.player_ID" class="player-details-container">
-        <p><strong>Nombre:</strong> {{ player.player_ID }}</p>
+        <p><strong>Nombre:</strong> {{ player.player_ID }}
+          <button id="details" @click="redirectToHistorial(player.player_ID)">Ver Detalles</button></p>
         <p><strong>XP:</strong> {{ player.xp }}</p>
         <p><strong>Nivel:</strong> {{ player.level }}</p>
         <p><strong>Monedas:</strong> {{ player.coins }}</p>
-        <p><strong>Imagen:</strong> <img :src="player.img" alt="Imagen del jugador" class="player-image"></p>
+        <img :src="player.img" alt="Imagen del jugador" class="player-image">
       </div>
     </div>
   </section>
@@ -148,7 +168,7 @@ input
 }
 
 .tableListing th {
-  background-color: lightblue; /* Color de fondo para la fila de encabezado */
+  background-color: lightblue;
   position: sticky;
   top: 0;
 }
@@ -167,6 +187,11 @@ th, td
   flex-wrap: wrap;
   align-content: space-around;
   align-items: center;
+}
+
+#details
+{
+  background-color: sandybrown;
 }
 
 .player-image {
@@ -206,7 +231,7 @@ th, td
     max-height: 62%;
     overflow-y: auto;
     width: 80%;
-    top: 35%;
+    top: 32%;
   }
 
   .player-details-container
@@ -221,17 +246,10 @@ th, td
     left: 0;
     bottom: 0;
     width: 100%;
-    height: 3px;
+    height: 2px;
     background-color: #000;
+    margin-bottom: -3%;
   }
-}
-
-.imgbackg4 {
-  background-image: url("../../public/HomeImages/fondo-de-pagina.png");
-  width: 100%;
-  height: 100vh;
-  background-size: cover;
-  background-position: center;
 }
 
 </style>

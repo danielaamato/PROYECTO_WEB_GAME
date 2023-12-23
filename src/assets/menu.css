@@ -19,9 +19,8 @@ body {
     color: #FFDB58;
     font-family: Asimov, serif;
     font-size: 250%;
-    position: relative;
-    top: 10px;
-    left: 3%;
+    top: 2%;
+    right: 37%;
 }
 
 .user-info {

@@ -72,7 +72,8 @@ const router = createRouter({
     {
       path: '/HistorialJugadores',
       name: 'HistorialJugadores',
-      component: HistorialJugadores
+      component: HistorialJugadores,
+      props: true,
     },
     {
       path: '/GestionDeAtaquesYCambios',
