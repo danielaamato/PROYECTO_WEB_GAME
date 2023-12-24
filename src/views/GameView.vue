@@ -2,6 +2,20 @@
 import "../assets/header.css";
 export default {
   name: "GameView",
+  props: {
+    game_ID: {
+      type: String,
+      required: true,
+    },
+    size: {
+      type: Number,
+      required: true,
+    },
+    HP_max: {
+      type: Number,
+      required: true,
+    },
+  },
 };
 </script>
 
@@ -56,6 +70,11 @@ export default {
     </section>
   </footer>
 
+  <div class="props-info">
+    <p>Game ID: {{ game_ID }}</p>
+    <p>Size: {{ size }}</p>
+    <p>HP: {{ HP_max }}</p>
+  </div>
 
   </body>
 
