@@ -1,5 +1,4 @@
 <script>
-import "../assets/win-loss.css";
 import "../assets/header.css";
 export default {
   name: "WinLossView",
@@ -66,6 +65,99 @@ body {
   background-size: cover;
   background-position: center;
   height: 100vh;
+}
+
+
+#attack-image-win-loss {
+  height: 100px;
+  width: 100px;
+}
+
+#coins-image-win-loss {
+  height: 100px;
+  width: 100px;
+}
+
+.main-container-win-loss {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+}
+
+.main-section-win-loss {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: #FFDB58;
+  border-radius: 20px;
+  width: 80%;
+  height: 80%;
+  padding: 10px;
+}
+
+.main-section1-win-loss {
+  display: flex;
+}
+
+.main-section2-win-loss {
+  display: flex;
+}
+
+.main-section3-win-loss {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 20%;
+}
+
+.main-section4-win-loss {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+  height: 20%;
+}
+
+.main-section5-win-loss {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 20%;
+}
+
+.continue-button-win-loss {
+
+
+}
+
+@media only screen and (max-width: 600px) {
+  #attack-image-win-loss,
+  #coins-image-win-loss {
+    height: 50px;
+    width: 50px;
+  }
+
+  .main-section-win-loss {
+    width: 90%;
+    height: auto;
+    padding: 5px;
+  }
+
+  .main-section3-win-loss,
+  .main-section4-win-loss,
+  .main-section5-win-loss {
+    flex-direction: column;
+    align-items: center;
+    height: auto;
+  }
+
+  .continue-button-win-loss {
+
+  }
 }
 
 
