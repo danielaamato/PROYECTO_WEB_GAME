@@ -31,7 +31,7 @@ export default {
       } else {
         try {
           const response = await fetch(
-              "https://balandrau.salle.url.edu/i3/arenas",
+              "https://balandrau.salle.url.edu/i3/arenas/",
               {
                 method: "POST",
                 headers: {
@@ -92,7 +92,7 @@ export default {
 
   async postArena(arena) {
     try {
-      const response = await fetch("https://balandrau.salle.url.edu/i3/arenas", {
+      const response = await fetch("https://balandrau.salle.url.edu/i3/arenas/", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
