@@ -13,18 +13,21 @@ export default {
 
   methods: {
     async createArena() {
+
       const arena = {
         game_ID: this.game_ID,
         size: parseInt(this.size),
         HP_max: parseInt(this.HP_max),
       };
 
-      if (this.size === "" || this.HP_max === "") {
+      if (this.size === "" || this.HP_max === "" || this.game_ID === "") {
         alert("Field all fields!");
       } else if (!this.isSizeValid()) {
         alert("The size must be between 2 and 10!");
       } else if (!this.isHPValid()) {
         alert("The HP must be at least 15!");
+      } else if (!this.isNameValid()) {
+        alert("The game ID must have from 1 to 20 characters!");
       } else {
         try {
           const response = await fetch(
@@ -49,7 +52,7 @@ export default {
 
               this.$router.push({
                 name: "GameView",
-                params: {
+                props: {
                   game_ID: this.game_ID,
                   size: this.size,
                   HP_max: this.HP_max,
@@ -101,16 +104,14 @@ export default {
         const responseData = await response.json();
 
         if (response.status === 200) {
-          // Return an object with response property for success
           return { response: responseData };
         } else {
-          // Return an object with response property for other HTTP statuses
           return { response: response.statusText };
         }
       } else {
         switch (response.status) {
           case 404:
-            alert("Wrong size and/or HP");
+            alert("Wrong game name, size or HP");
             return null;
           default:
             this.$router.push({name: "HomeView"});
@@ -151,6 +152,7 @@ export default {
     <main class="main-container-create-arena">
       <section class="main-space-create-arena"></section>
         <form class="arena-section-create-arena" @submit.prevent="createArena()">
+          <input v-model="game_ID" type="text" id="arena-id" placeholder="Game Name" class="arena-input-create-arena">
           <input v-model="size" type="number" id="arena-size" placeholder="Size" class="arena-input-create-arena">
           <input v-model="HP_max" type="number" id="arena-hp" placeholder="HP" class="arena-input-create-arena">
           <button type="submit" id="create-arena-button" class="start-button-create-arena">Start</button>
