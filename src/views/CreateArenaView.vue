@@ -5,22 +5,18 @@ export default {
 
   data() {
     return {
-      game_ID: "",
-      size: "",
-      HP_max: "",
+      arena: {
+        game_ID: "",
+        size:  0,
+        HP_max: 0,
+      },
     };
   },
 
+
   methods: {
-    async createArena() {
-
-      const arena = {
-        game_ID: this.game_ID,
-        size: parseInt(this.size),
-        HP_max: parseInt(this.HP_max),
-      };
-
-      if (this.size === "" || this.HP_max === "" || this.game_ID === "") {
+    createArena() {
+      if (this.arena.size === "" || this.arena.HP_max === "" || this.arena.game_ID === "") {
         alert("Field all fields!");
       } else if (!this.isSizeValid()) {
         alert("The size must be between 2 and 10!");
@@ -29,102 +25,58 @@ export default {
       } else if (!this.isNameValid()) {
         alert("The game ID must have from 1 to 20 characters!");
       } else {
-        try {
-          const response = await fetch(
-              "https://balandrau.salle.url.edu/i3/arenas/",
-              {
-                method: "POST",
-                headers: {
-                  "Content-Type": "application/json",
-                },
-                body: JSON.stringify(arena),
-              }
-          );
 
-          if (response.ok) {
-            const result = await this.postArena(arena);
-            if (result) {
-              const {token} = result.response;
+        console.log(this.arena);
 
-              localStorage.setItem("token", token);
-              localStorage.setItem("game_ID", arena.game_ID);
-              localStorage.setItem("tokenBearer", "Bearer " + localStorage.getItem("token"));
 
-              this.$router.push({
-                name: "GameView",
-                props: {
-                  game_ID: this.game_ID,
-                  size: this.size,
-                  HP_max: this.HP_max,
-                },
-              });
-            } else {
-              alert(
-                  "Failed to create arena because the game ID is already in use. Please try again."
-              );
-            }
-          } else {
-            await response.text();
-          }
-        } catch (error) {
-          console.error(error);
-          alert(
-              "Failed to register because this player ID is already registered. Please try again."
-          );
+        this.postArena();
+
         }
-      }
+      },
+
+    postArena() {
+      fetch("https://balandrau.salle.url.edu/i3/arenas/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Bearer: localStorage.getItem("token"),
+        },
+        body: JSON.stringify(this.arena),
+      })
+          .then((res) => {
+            if (res.status === 200 || res.status === 201) {
+              console.log("Arena created");
+              this.$router.push({name: "GameView"});
+            }
+            else {
+              //this.$router.push({name: "HomeView"});
+              //alert("Error while calling the API");
+              //return null;
+              res.json().then(errorData => {
+                console.error("Error while calling the API:", errorData);
+                alert("Error while calling the API: " + errorData.message);
+              });
+            }
+          })
     },
 
     isNameValid() {
-      return this.game_ID.length < 21;
+      return this.arena.game_ID.length < 21;
     },
 
     isSizeValid() {
-      const size = parseInt(this.size);
+      const size = parseInt(this.arena.size);
       return size >= 2 && size <= 10;
     },
 
     isHPValid() {
-      const HP_max = parseInt(this.HP_max);
+      const HP_max = parseInt(this.arena.HP_max);
       return HP_max >= 15;
     },
-  },
 
-  async postArena(arena) {
-    try {
-      const response = await fetch("https://balandrau.salle.url.edu/i3/arenas/", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(arena),
-      });
-
-      if (response.ok) {
-        const responseData = await response.json();
-
-        if (response.status === 200) {
-          return { response: responseData };
-        } else {
-          return { response: response.statusText };
-        }
-      } else {
-        switch (response.status) {
-          case 404:
-            alert("Wrong game name, size or HP");
-            return null;
-          default:
-            this.$router.push({name: "HomeView"});
-            alert("Error while using the API");
-            return null;
-        }
-      }
-    } catch (error) {
-      console.error(error);
-      return { response: "Error occurred while processing the request." };
-    }
-  },
+    },
 };
+
 </script>
 
 
@@ -152,9 +104,9 @@ export default {
     <main class="main-container-create-arena">
       <section class="main-space-create-arena"></section>
         <form class="arena-section-create-arena" @submit.prevent="createArena()">
-          <input v-model="game_ID" type="text" id="arena-id" placeholder="Game Name" class="arena-input-create-arena">
-          <input v-model="size" type="number" id="arena-size" placeholder="Size" class="arena-input-create-arena">
-          <input v-model="HP_max" type="number" id="arena-hp" placeholder="HP" class="arena-input-create-arena">
+          <input v-model="this.arena.game_ID" type="text" id="arena-id" placeholder="Game Name" class="arena-input-create-arena">
+          <input v-model="this.arena.size" type="number" id="arena-size" placeholder="Size" class="arena-input-create-arena">
+          <input v-model="this.arena.HP_max" type="number" id="arena-hp" placeholder="HP" class="arena-input-create-arena">
           <button type="submit" id="create-arena-button" class="start-button-create-arena">Start</button>
         </form>
     </main>
