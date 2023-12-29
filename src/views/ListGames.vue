@@ -57,14 +57,15 @@ export default {
 
     chargeTable(data) {
       if (data) {
-        this.gamesList = data.sort((a, b) => b.game_ID - a.game_ID);
-        this.gamesFiltrados = [...this.gamesList];
+        this.gamesList = data;
+        //this.gamesFiltrados = [...this.gamesList];
       }
       else {
         console.error("Data is undefined or has unexpected structure.");
       }
     },
 
+    /*
     searchGame() {
       const busqueda = this.gameBuscado.toLowerCase();
       this.gamesFiltrados = this.gamesList.filter((game) => game.game_ID.toLowerCase().includes(busqueda));
@@ -74,6 +75,8 @@ export default {
     redirectToHistorial(gameId) {
       this.$router.push({ name: 'HistorialPartidas', query: { gameId: gameId } });
     },
+
+     */
   }
 };
 </script>
@@ -90,7 +93,6 @@ font-family: Asimov, serif;
         ">Listado de Jugadores</h2>
 
     <section class="listadoPlayers">
-      <input type="text" v-model="gameBuscado" @input="searchGame" placeholder="Buscar Arena...">
       <div class="tableContainer">
         <table class="tableListing">
           <thead>
@@ -103,10 +105,10 @@ font-family: Asimov, serif;
           </tr>
           </thead>
           <tbody>
-          <tr v-if="gamesFiltrados.length === 0">
+          <tr v-if="gamesList.length === 0">
             <td colspan="5">Arena inexistente</td>
           </tr>
-          <tr v-for="game in gamesFiltrados" :key="game.game_ID">
+          <tr v-for="game in gamesList" :key="game.game_ID">
             <td>{{ game.game_ID }}</td>
             <td>{{ game.size }}</td>
             <td>{{ game.HP_max }}</td>
