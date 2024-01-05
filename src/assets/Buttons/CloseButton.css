@@ -1,0 +1,39 @@
+
+.close-button {
+    position: absolute;
+    top: 10px; /* Ajusta según sea necesario */
+    right: 10px; /* Ajusta según sea necesario */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 1rem;
+    height: 1rem;
+    color: transparent;
+    font-size: 0;
+    cursor: pointer;
+    background-color: #ff5f5f80;
+    border: none;
+    --border-radius-main: 50%; /* Para hacerlo circular */
+    border-radius: var(--border-radius-main);
+    transition: .2s ease all;
+}
+
+.close-button:hover {
+    width: 1.2rem;
+    height: 1.2rem;
+    font-size: 1.2rem;
+    color: #ffffff;
+    background-color: #ff5f5fcc;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.16);
+    border-color: #ff5f5fcc; /* Cambia el color del borde en lugar de su tamaño */
+}
+
+.close-button:active {
+    width: 1.1rem;
+    height: 1.1rem;
+    font-size: 1.1rem;
+    color: #ffffffde;
+    --shadow-btn-close: 0 3px 3px 0 #00000026;
+    box-shadow: var(--shadow-btn-close);
+}
