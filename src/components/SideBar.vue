@@ -4,7 +4,23 @@ export default {
   data() {
     return {
       isMenuOpen: false, // Controla la visibilidad del menú lateral
+      player_ID: "",
+      img: "",
+      level: 0,
+      coins: 0
     };
+  },
+  mounted() {
+    // Llama a la función getInfoPlayer cuando el componente ha sido montado
+    // If user has not already logged in go to SignIn
+    if (localStorage.getItem("token") == null)
+    {
+      this.$router.push({ name: "HomeView" });
+    }
+    else
+    {
+      this.getInfoPlayer();
+    }
   },
   methods: {
     toggleMenu() {
@@ -16,6 +32,27 @@ export default {
         document.getElementById("sidebar").style.width = "0";
         document.getElementById("main").style.marginLeft = "0";
       }
+    },
+    getInfoPlayer() {
+      //Get player ID
+      let playerID = null;
+      playerID = localStorage.getItem("player_ID");
+
+      fetch("https://balandrau.salle.url.edu/i3/players/" + playerID, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Bearer: localStorage.getItem("token"),
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          this.player_ID = data.player_ID;
+          this.img = data.img;
+          this.level = data.level;
+          this.coins = data.coins;
+        })
+        .catch(error => console.error("Error:", error));
     }
   }
 };
@@ -38,15 +75,15 @@ export default {
       <!-- Sección de Información del Usuario -->
       <section class="user-info-mobile">
         <div class="user-profile">
-          <img src="public/MainMenuImages/profile-pic.jpg" alt="Foto de Perfil" class="profile-pic">
-          <span class="username">xXxCacoDemon73</span>
+          <img v-bind:src="img" alt="Foto de Perfil" class="profile-pic">
+          <span class="username">{{ player_ID }}</span>
         </div>
         <div class="user-details">
           <div class="coins user-coins">
             <img src="public/MainMenuImages/coins-icon.png" alt="Icono de monedas" class="coins-icon">
-            <span>100</span>
+            <span>{{ coins }}</span>
           </div>
-          <span class="experience user-level">Nivel: 1</span>
+          <span class="experience user-level">Nivel: {{ level }}</span>
         </div>
         <hr> <!-- Línea separadora -->
       </section>
@@ -140,16 +177,15 @@ export default {
   gap: 10px;
 }
 
+.experience {
+  margin-top: 15px;
+}
+
 /* Imagen de perfil del usuario */
 .profile-pic {
   border-radius: 50%;
   width: 30px;
   height: 30px;
-}
-
-/* Detalles adicionales del usuario como monedas y nivel */
-.user-details {
-  margin-top: 10px;
 }
 
 .coins-icon {

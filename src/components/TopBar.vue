@@ -1,3 +1,52 @@
+<script>
+export default {
+  name: "TopBar",
+  data() {
+    return {
+      player_ID: "",
+      img: "",
+      level: 0,
+      coins: 0
+    };
+  },
+  mounted() {
+    // Llama a la función getInfoPlayer cuando el componente ha sido montado
+    // If user has not already logged in go to SignIn
+    if (localStorage.getItem("token") == null)
+    {
+      this.$router.push({ name: "HomeView" });
+    }
+    else
+    {
+      this.getInfoPlayer();
+    }
+  },
+  methods: {
+    getInfoPlayer() {
+      //Get player ID
+      let playerID = null;
+      playerID = localStorage.getItem("player_ID");
+
+      fetch("https://balandrau.salle.url.edu/i3/players/" + playerID, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Bearer: localStorage.getItem("token"),
+        }
+      })
+        .then(response => response.json())
+        .then(data => {
+          this.player_ID = data.player_ID;
+          this.img = data.img;
+          this.level = data.level;
+          this.coins = data.coins;
+        })
+        .catch(error => console.error("Error:", error));
+    }
+  }
+};
+</script>
+
 <template>
   <header class="top-bar">
     <!-- Título del juego / Botón de inicio -->
@@ -5,25 +54,19 @@
 
     <!-- Información del usuario para pantallas de ordenador -->
     <nav class="user-info desktop">
-      <img src="public/MainMenuImages/profile-pic.jpg" alt="Foto de Perfil" class="profile-pic">
-      <span class="username">xXxCacoDemon73</span>
+      <img v-bind:src="img" alt="Foto de Perfil" class="profile-pic">
+      <span class="username">{{ player_ID }}</span>
       <div class="coins">
         <div class="coins-icon"></div>
-        <span>100</span>
+        <span>{{ coins }}</span>
       </div>
-      <span class="experience">Nivel: 1</span>
+      <span class="experience">Nivel: {{ level }}</span>
     </nav>
 
     <!-- Botón de Perfil para pantallas de ordenador -->
     <router-link to="/InfoPlayer" class="nav-button desktop">Perfil</router-link>
   </header>
 </template>
-
-<script>
-  export default {
-    name: "TopBar",
-  };
-</script>
 
 <style scoped>
   /* Estilos generales para la barra superior */
@@ -40,8 +83,8 @@
   .game-title {
     text-decoration: none;
     color: #FFDB58;
-    font-family: Asimov, serif;
     font-size: 2em;
+    font-weight: bold;
   }
 
   /* Estilos para la información del usuario en pantallas de ordenador */
