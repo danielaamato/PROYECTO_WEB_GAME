@@ -1,5 +1,6 @@
 <script>
 import "../assets/main.css";
+import "../assets/header.css";
 export default {
   name: "ListGames",
 
@@ -58,41 +59,76 @@ export default {
     chargeTable(data) {
       if (data) {
         this.gamesList = data;
-        //this.gamesFiltrados = [...this.gamesList];
+        this.gamesFiltrados = [...this.gamesList];
       }
       else {
         console.error("Data is undefined or has unexpected structure.");
       }
     },
 
-    /*
+
     searchGame() {
       const busqueda = this.gameBuscado.toLowerCase();
       this.gamesFiltrados = this.gamesList.filter((game) => game.game_ID.toLowerCase().includes(busqueda));
       console.log(this.gamesFiltrados);
     },
 
-    redirectToHistorial(gameId) {
-      this.$router.push({ name: 'HistorialPartidas', query: { gameId: gameId } });
+    joinArena(game) {
+      if (game.start === false && game.finished === false) {
+        this.postEnterGame(game);
+      } else {
+        alert("The game has already started or finished!");
+      }
+
     },
 
-     */
+    postEnterGame(game) {
+      fetch("https://balandrau.salle.url.edu/i3/arenas/" + game.game_ID + "/play", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          id: game.game_ID,
+          Bearer: localStorage.getItem("token"),
+        },
+      })
+          .then((res) => {
+            if (res.status === 200) {
+              console.log("Arena joined");
+              this.$router.push({name: "GameView"});
+            }
+            else if (res.status === 403){
+              alert("You are already in a game!");
+            }
+            else {
+              res.json().then(errorData => {
+                console.error("Error while calling the API:", errorData);
+                alert("Error while calling the API: " + errorData.message);
+              });
+            }
+          })
+    },
+
   }
 };
 </script>
 
 <template>
 
-  <div class="imgbackg" alt="Background">
-    <router-link to="/MenuPrincipal" class="game-title">Battle Arena</router-link>
-    <h2 style="
-      margin-top: 20px;
-      margin-bottom: 20px;
-      margin-left: 30px;
-font-family: Asimov, serif;
-        ">Listado de Jugadores</h2>
+  <head>
+    <title>Create Arena</title>
+  </head>
+
+  <body>
+  <header class="header-container">
+    <nav>
+      <router-link to="/MenuPrincipal">
+        <img id="game-name" src="public/MainMenuImages/logo.png" alt="Game name image">
+      </router-link>
+    </nav>
+  </header>
 
     <section class="listadoPlayers">
+      <input type="text" v-model="gameBuscado" @input="searchGame" placeholder="Buscar arena...">
       <div class="tableContainer">
         <table class="tableListing">
           <thead>
@@ -101,19 +137,25 @@ font-family: Asimov, serif;
             <th>Size</th>
             <th>HP</th>
             <th>Creation Date</th>
+            <th>Started</th>
             <th>Finished</th>
+            <th>Join</th>
           </tr>
           </thead>
           <tbody>
-          <tr v-if="gamesList.length === 0">
+          <tr v-if="gamesFiltrados.length === 0">
             <td colspan="5">Arena inexistente</td>
           </tr>
-          <tr v-for="game in gamesList" :key="game.game_ID">
+          <tr v-for="game in gamesFiltrados" :key="game.game_ID">
             <td>{{ game.game_ID }}</td>
             <td>{{ game.size }}</td>
             <td>{{ game.HP_max }}</td>
             <td>{{ game.creation_date }}</td>
+            <td>{{ game.start }}</td>
             <td>{{ game.finished }}</td>
+            <td>
+              <button id="details" @click="joinArena(game)">Join</button>
+            </td>
           </tr>
           </tbody>
         </table>
@@ -125,20 +167,30 @@ font-family: Asimov, serif;
           <p>Arena inexistente</p>
         </div>
         <div v-for="game in gamesFiltrados" :key="game.game_ID" class="player-details-container">
-          <p><strong>Nombre:</strong> {{ game.game_ID }}
-            <button id="details" @click="redirectToHistorial(game.game_ID)">Ver Detalles</button></p>
+          <p><strong>Nombre:</strong> {{ game.game_ID }}</p>
           <p><strong>Size:</strong> {{ game.size }}</p>
           <p><strong>HP:</strong> {{ game.HP_max }}</p>
           <p><strong>Creation Date:</strong> {{ game.creation_date }}</p>
+          <p><strong>Started:</strong> {{ game.start }}</p>
           <p><strong>Finished:</strong> {{ game.finished }}</p>
+          <p><strong><button id="details" @click="joinArena(game)">Join</button></strong></p>
         </div>
       </div>
     </section>
-  </div>
+
+  </body>
 
 </template>
 
 <style scoped>
+
+body {
+  background-image: url("public/HomeImages/fondo-de-pagina.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+}
 
 input
 {

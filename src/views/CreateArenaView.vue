@@ -93,12 +93,6 @@ export default {
           <img id="game-name" src="public/MainMenuImages/logo.png" alt="Game name image">
         </router-link>
       </nav>
-      <div class="header-space"></div>
-      <nav>
-        <router-link to="/">
-          <img id="settings-image" src="public/InfoPlayerImages/icono-ajustes.webp" alt="Settings image">
-        </router-link>
-      </nav>
     </header>
 
     <main class="main-container-create-arena">
