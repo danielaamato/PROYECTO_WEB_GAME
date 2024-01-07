@@ -31,7 +31,9 @@ export default {
 
         this.postArena();
 
-        }
+        this.$router.push({ name: 'GameView', query: { game_ID: this.arena.game_ID } });
+
+      }
       },
 
     postArena() {

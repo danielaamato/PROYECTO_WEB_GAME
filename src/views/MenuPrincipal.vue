@@ -61,6 +61,7 @@ export default {
       <img src="public/MainMenuImages/arena-image.png" alt="Imagen Arena" class="arena-image">
       <router-link to="/CreateArenaView" class="create-arena-button">Create Arena</router-link>
       <router-link to="/ListGames" class="join-arena-button">Join Arena</router-link>
+      <router-link to="/GameView" class="continue-button">Enter actual game</router-link>
       <router-link to="/ListadoJugadores" id="listplayers-button">Listado de Jugadores</router-link>
       <router-link to="/HistorialJugadores" id="historialplayers-button">Historial de Jugadores</router-link>
       <router-link to="/GestionDeAtaquesYCambios" id="gestiondeataques-button">Gestion de Ataques</router-link>

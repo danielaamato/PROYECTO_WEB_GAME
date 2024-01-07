@@ -76,6 +76,7 @@ export default {
     joinArena(game) {
       if (game.start === false && game.finished === false) {
         this.postEnterGame(game);
+        this.$router.push({ name: 'GameView', query: { game_ID: game.game_ID } });
       } else {
         alert("The game has already started or finished!");
       }
