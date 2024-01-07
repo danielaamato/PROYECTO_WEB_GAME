@@ -48,10 +48,10 @@ export default {
               console.log("Arena created");
               this.$router.push({name: "GameView"});
             }
+            else if (res.status === 403){
+              alert("You are already in a game!");
+            }
             else {
-              //this.$router.push({name: "HomeView"});
-              //alert("Error while calling the API");
-              //return null;
               res.json().then(errorData => {
                 console.error("Error while calling the API:", errorData);
                 alert("Error while calling the API: " + errorData.message);
