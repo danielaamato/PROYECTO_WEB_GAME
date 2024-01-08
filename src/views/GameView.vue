@@ -2,6 +2,68 @@
 import "../assets/header.css";
 export default {
   name: "GameView",
+
+
+  data() {
+    return {
+      arena: {
+        game_ID: null,
+        size: 0,
+        creation_date: "",
+        finished: false,
+        HP_max: 0,
+        start: false,
+        players_games: [
+          {
+            game_ID: null,
+            player_ID: "",
+            x_game: 0,
+            y_game: 0,
+            direction: "",
+            hp: 0,
+            xp_win: 0,
+            coins_win: 0
+          }
+        ],
+      },
+    };
+  },
+
+  mounted() {
+    this.game_ID = this.$route.query.game_ID;
+    this.getGame();
+  },
+
+  methods: {
+
+    getGame() {
+      fetch("https://balandrau.salle.url.edu/i3/players/arenas/current", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Bearer: localStorage.getItem("token"),
+        },
+      })
+          .then((res) => {
+            if (res.status === 200) {
+              return res.json();
+            } else {
+              res.json().then(errorData => {
+                console.error("Error while calling the API:", errorData);
+                alert("Error while calling the API: " + errorData.message);
+              });
+            }
+          })
+          .then((data) => {
+            this.arena = data;
+            console.log(data);
+            console.log(this.arena);
+          });
+
+    },
+
+  }
+
 };
 </script>
 
@@ -17,28 +79,25 @@ export default {
         <img id="game-name" src="public/MainMenuImages/logo.png" alt="Game name image">
       </router-link>
     </nav>
-    <div class="header-space"></div>
-    <nav>
-      <router-link to="/">
-        <img id="settings-image" src="public/InfoPlayerImages/icono-ajustes.webp" alt="Settings image">
-      </router-link>
-    </nav>
   </header>
 
   <main class="main-container-game">
-
     <section class="main-section-game">
-      <section class="player2-section-game">
-        <img id="hp-bar-player2" src="public/InfoPlayerImages/hp-bar.png" alt="Player 2 hp bar">
-      </section>
+      <div class="hp-bar-container">
+        <h1>Player 2</h1>
+        <div v-for="index in this.arena.HP_max" :key="index" class="map-player"></div>
+      </div>
 
-      <section class="game-grid-game">
-        <img id="arena-image" src="public/MainMenuImages/arena-image.png" alt="Arena image">
-      </section>
+      <div class="map-container" :style="{ gridTemplateColumns: `repeat(${this.arena.size}, 1fr)`, gridTemplateRows: `repeat(${this.arena.size}, 1fr)` }">
+        <div v-for="row in this.arena.size" :key="row" class="map-row">
+          <div v-for="col in this.arena.size" :key="col" class="map-square"></div>
+        </div>
+      </div>
 
-      <section class="player1-section-game">
-        <img id="hp-bar-player1" src="public/InfoPlayerImages/hp-bar.png" alt="Player 1 hp bar">
-      </section>
+      <div class="hp-bar-container">
+        <h1>Player 1</h1>
+        <div v-for="index in this.arena.HP_max" :key="index" class="map-player"></div>
+      </div>
     </section>
   </main>
 
@@ -56,7 +115,6 @@ export default {
     </section>
   </footer>
 
-
   </body>
 
 
@@ -71,16 +129,31 @@ body {
   height: 100vh;
 }
 
-#hp-bar-player2,
-#hp-bar-player1 {
-  height: 50px;
-  width: 150px;
-
+.map-container {
+  display: grid;
+  gap: 1px;
+  justify-content: center;
 }
 
-#arena-image {
-  height: 300px;
-  width: 500px;
+.map-square {
+  height: 30px;
+  width: 30px;
+  background-color: #FFDB58;
+  border: 4px solid #000;
+}
+
+.hp-bar-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.map-player {
+  height: 20px; /* Adjust the height of each square */
+  width: 10px; /* Adjust the width of each square */
+  background-color: #ff0000; /* Set the background color of each square */
+  border: 2px solid #000; /* Add border for better visibility */
 }
 
 #attack1-image,
@@ -98,8 +171,8 @@ body {
   align-items: center;
   margin: 10px;
   padding: 10px;
-  border-radius: 50px;
-  background: #FFDB58;
+  background: #4CAF50;
+  border: 4px solid #000; /* Add border for better visibility */
 }
 
 .main-container-game {
@@ -108,12 +181,6 @@ body {
   align-items: center;
 
 }
-
-.player2-section-game,
-.player1-section-game {
-  display:  flex;
-}
-
 
 .skill-bars-game {
   display: flex;
@@ -132,16 +199,7 @@ body {
 }
 
 @media only screen and (max-width: 600px) {
-  #hp-bar-player2,
-  #hp-bar-player1 {
-    height: 30px;
-    width: 80px;
-  }
 
-  #arena-image {
-    height: 150px;
-    width: 250px;
-  }
 
   #attack1-image,
   #attack2-image,
@@ -160,10 +218,6 @@ body {
     align-items: center;
   }
 
-  .player2-section-game,
-  .player1-section-game {
-    flex-direction: column;
-  }
 
   .skill-bars-game {
     gap: 10px;

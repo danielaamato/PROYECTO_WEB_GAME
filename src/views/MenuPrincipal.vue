@@ -61,10 +61,6 @@ export default {
 
       <img src = "public/MainMenuImages/leyenda-juego.png" alt="Leyenda de las teclas de movimiento y ataque" class="map-key-image">
     </section>
-
-    <!-- Tercera Columna -->
-    <section class="backpack-column card">
-      <button class="CoolButton2" @click="showBackpackPopup = true">Backpack</button>
       <div class="current-attacks">
         <div class="attack-item">
           <span>Attack 1</span>
