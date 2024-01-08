@@ -54,9 +54,9 @@ export default {
 </template>
 
 <style scoped>
-@import "../../../../WebstormProjects/pw1final/src/assets/Frames/PopUp.css";
-@import "../../../../WebstormProjects/pw1final/src/assets/Buttons/CloseButton.css";
-@import "../../../../WebstormProjects/pw1final/src/assets/Buttons/ArrowButton.css";
+@import "../assets/Frames/PopUp.css";
+@import "../assets/Buttons/CloseButton.css";
+@import "../assets/Buttons/ArrowButton.css";
 
 .popup {
   display: flex;

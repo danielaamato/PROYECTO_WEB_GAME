@@ -55,7 +55,7 @@ export default {
     <!-- Segunda Columna -->
     <section class="arena-column">
       <router-link to="/CreateArenaView" class="CoolButton1">Create Arena</router-link>
-      <router-link to="/GameView" class="CoolButton1">Join Arena</router-link>
+      <router-link to="/ListGames" class="CoolButton1">List Arenas</router-link>
       <router-link to="/ListadoJugadores" class="CoolButton1 SmallButton SmallButton1">Listado de Jugadores</router-link>
       <router-link to="/HistorialJugadores" class="CoolButton1 SmallButton">Historial de Jugadores</router-link>
 
@@ -79,15 +79,14 @@ export default {
       <div v-if="showBackpackPopup" class="popup">
         <backpack-popup @close="showBackpackPopup = false"></backpack-popup>
       </div>
-    </section>
   </main>
 </template>
 
 <style scoped>
   @import "../assets/menu.css";
-  @import "../../../../WebstormProjects/pw1final/src/assets/Buttons/CoolButton1.css";
-  @import "../../../../WebstormProjects/pw1final/src/assets/Buttons/CoolButton2.css";
-  @import "../../../../WebstormProjects/pw1final/src/assets/Columns/CoolColumn.css";
+  @import "../assets/Buttons/CoolButton1.css";
+  @import "../assets/Buttons/CoolButton2.css";
+  @import "../assets/Columns/CoolColumn.css";
 
   /*Estilos para los botones*/
   .CoolButton1 {

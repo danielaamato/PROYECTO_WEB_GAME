@@ -12,8 +12,8 @@
 </template>
 
 <style scoped>
-@import "../../../../WebstormProjects/pw1final/src/assets/Frames/PopUp.css";
-@import "../../../../WebstormProjects/pw1final/src/assets/Buttons/CloseButton.css";
+@import "../assets/Frames/PopUp.css";
+@import "../assets/Buttons/CloseButton.css";
 
 .popup {
   display: flex;
