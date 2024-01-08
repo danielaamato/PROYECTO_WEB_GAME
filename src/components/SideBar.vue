@@ -119,6 +119,7 @@ export default {
   text-decoration: none;
   color: #FFDB58;
   font-size: 2em;
+  margin-right: 5%;
 }
 
 /* Botón para abrir el menú lateral */

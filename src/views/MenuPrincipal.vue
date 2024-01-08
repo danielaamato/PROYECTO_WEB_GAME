@@ -1,21 +1,22 @@
 <script>
-import StorePopup from './StoreView.vue';
-import BackpackPopup from './BackpackView.vue';
 import TopBar from "@/components/TopBar.vue";
-import SideBar from "@/components/SideBar.vue"; // Asegúrate de que la ruta sea correcta
+import SideBar from "@/components/SideBar.vue";
+import OfertaEspecial from "@/views/OfertaEspecialView.vue";
+import StorePopup from "@/views/StoreView.vue";
 
 export default {
   name: "MenuPrincipal",
   components: {
-    TopBar,
-    SideBar,
     StorePopup,
-    BackpackPopup
+    OfertaEspecial,
+    TopBar,
+    SideBar
   },
   data() {
     return {
       showStorePopup: false,
       showBackpackPopup: false,
+      showSpecialOfferPopup: false,
       productPrice: 50, // Ejemplo de precio
       isMobile: window.innerWidth <= 700 // Inicializa según el ancho de la ventana
     };
@@ -45,10 +46,20 @@ export default {
     <!-- Primera Columna -->
     <section class="store-column card">
       <button class="CoolButton2" @click="showStorePopup = true">Store</button>
-      <img src="public/MainMenuImages/shop-image.png" alt="Descripción de la imagen" class="store-image">
+
       <!-- Popup Store -->
       <div v-if="showStorePopup" class="popup">
-        <store-popup :productPrice="productPrice" @close="showStorePopup = false"></store-popup>
+        <StorePopup :productPrice="productPrice" @close="showStorePopup = false"></StorePopup>
+      </div>
+
+      <!-- Botón para la oferta especial -->
+      <button @click="showSpecialOfferPopup = true">
+        <img src="public/MainMenuImages/shop-image.png" alt="Oferta Especial" class="store-image">
+      </button>
+
+      <!-- Popup para la oferta especial -->
+      <div v-if="showSpecialOfferPopup" class="popup">
+        <OfertaEspecial @close="showSpecialOfferPopup = false"></OfertaEspecial>
       </div>
     </section>
 
@@ -68,15 +79,15 @@ export default {
       <div class="current-attacks">
         <div class="attack-item">
           <span>Attack 1</span>
-          <img src="ruta/a/imagen-ataque1.jpg" alt="Attack 1">
+          <img src="public/StorePopupImages/attack-image-1.png" alt="Attack 1">
         </div>
         <div class="attack-item">
           <span>Attack 2</span>
-          <img src="ruta/a/imagen-ataque2.jpg" alt="Attack 2">
+          <img src="public/StorePopupImages/attack-image-2.png" alt="Attack 2">
         </div>
         <div class="attack-item">
           <span>Attack 3</span>
-          <img src="ruta/a/imagen-ataque3.jpg" alt="Attack 3">
+          <img src="public/StorePopupImages/attack-image-4.png" alt="Attack 3">
         </div>
       </div>
       <!-- Popup Backpack -->
@@ -89,9 +100,9 @@ export default {
 
 <style scoped>
   @import "../assets/menu.css";
-  @import "../../../../WebstormProjects/pw1final/src/assets/Buttons/CoolButton1.css";
-  @import "../../../../WebstormProjects/pw1final/src/assets/Buttons/CoolButton2.css";
-  @import "../../../../WebstormProjects/pw1final/src/assets/Columns/CoolColumn.css";
+  @import "../assets/Buttons/CoolButton1.css";
+  @import "../assets/Buttons/CoolButton2.css";
+  @import "../assets/Columns/CoolColumn.css";
 
   /*Estilos para los botones*/
   .CoolButton1 {
@@ -119,6 +130,10 @@ export default {
     font-size: 0.9vw;
     width: 50%;
     background-color: rgba(255, 82, 82, 0.63);
+  }
+
+  .button {
+
   }
 
   /* Estilos para los ataques actuales */
