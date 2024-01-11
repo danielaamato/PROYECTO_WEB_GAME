@@ -65,16 +65,12 @@ export default {
     <!-- Segunda Columna -->
     <section class="arena-column">
       <router-link to="/CreateArenaView" class="CoolButton1">Create Arena</router-link>
-      <router-link to="/GameView" class="CoolButton1">Join Arena</router-link>
+      <router-link to="/ListGames" class="CoolButton1">List Arenas</router-link>
       <router-link to="/ListadoJugadores" class="CoolButton1 SmallButton SmallButton1">Listado de Jugadores</router-link>
       <router-link to="/HistorialJugadores" class="CoolButton1 SmallButton">Historial de Jugadores</router-link>
 
       <img src = "/MainMenuImages/leyenda-juego.png" alt="Leyenda de las teclas de movimiento y ataque" class="map-key-image">
     </section>
-
-    <!-- Tercera Columna -->
-    <section class="backpack-column card">
-      <button class="CoolButton2" @click="showBackpackPopup = true">Backpack</button>
       <div class="current-attacks">
         <div class="attack-item">
           <span>Attack 1</span>
@@ -93,7 +89,6 @@ export default {
       <div v-if="showBackpackPopup" class="popup">
         <backpack-popup @close="showBackpackPopup = false"></backpack-popup>
       </div>
-    </section>
   </main>
 </template>
 

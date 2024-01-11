@@ -2,8 +2,85 @@
 import "../assets/header.css";
 export default {
   name: "CreateArenaView",
+
+  data() {
+    return {
+      arena: {
+        game_ID: "",
+        size:  0,
+        HP_max: 0,
+      },
+    };
+  },
+
+
+  methods: {
+    createArena() {
+      if (this.arena.size === "" || this.arena.HP_max === "" || this.arena.game_ID === "") {
+        alert("Field all fields!");
+      } else if (!this.isSizeValid()) {
+        alert("The size must be between 2 and 10!");
+      } else if (!this.isHPValid()) {
+        alert("The HP must be at least 15!");
+      } else if (!this.isNameValid()) {
+        alert("The game ID must have from 1 to 20 characters!");
+      } else {
+
+        console.log(this.arena);
+
+
+        this.postArena();
+
+        this.$router.push({ name: 'GameView', query: { game_ID: this.arena.game_ID } });
+
+      }
+      },
+
+    postArena() {
+      fetch("https://balandrau.salle.url.edu/i3/arenas/", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Bearer: localStorage.getItem("token"),
+        },
+        body: JSON.stringify(this.arena),
+      })
+          .then((res) => {
+            if (res.status === 200 || res.status === 201) {
+              console.log("Arena created");
+              this.$router.push({name: "GameView"});
+            }
+            else if (res.status === 403){
+              alert("You are already in a game!");
+            }
+            else {
+              res.json().then(errorData => {
+                console.error("Error while calling the API:", errorData);
+                alert("Error while calling the API: " + errorData.message);
+              });
+            }
+          })
+    },
+
+    isNameValid() {
+      return this.arena.game_ID.length < 21;
+    },
+
+    isSizeValid() {
+      const size = parseInt(this.arena.size);
+      return size >= 2 && size <= 10;
+    },
+
+    isHPValid() {
+      const HP_max = parseInt(this.arena.HP_max);
+      return HP_max >= 15;
+    },
+
+    },
 };
+
 </script>
+
 
 <template>
 
@@ -18,23 +95,16 @@ export default {
           <img id="game-name" src="public/MainMenuImages/logo.png" alt="Game name image">
         </router-link>
       </nav>
-      <div class="header-space"></div>
-      <nav>
-        <router-link to="/">
-          <img id="settings-image" src="public/InfoPlayerImages/icono-ajustes.webp" alt="Settings image">
-        </router-link>
-      </nav>
     </header>
 
     <main class="main-container-create-arena">
-      <div class="main-space-create-arena"></div>
-      <section class="arena-section-create-arena">
-      <input type="text" id="arena-size" placeholder="Size" class="arena-input-create-arena">
-      <input type="text" id="arena-hp" placeholder="HP" class="arena-input-create-arena">
-      <router-link to="/GameView">
-        <button id="create-arena-button" class="start-button-create-arena">Start</button>
-      </router-link>
-        </section>
+      <section class="main-space-create-arena"></section>
+        <form class="arena-section-create-arena" @submit.prevent="createArena()">
+          <input v-model="this.arena.game_ID" type="text" id="arena-id" placeholder="Game Name" class="arena-input-create-arena">
+          <input v-model="this.arena.size" type="number" id="arena-size" placeholder="Size" class="arena-input-create-arena">
+          <input v-model="this.arena.HP_max" type="number" id="arena-hp" placeholder="HP" class="arena-input-create-arena">
+          <button type="submit" id="create-arena-button" class="start-button-create-arena">Start</button>
+        </form>
     </main>
 
   </body>
@@ -51,24 +121,32 @@ body {
   height: 100vh;
 }
 
+.start-button-create-arena {
+  background-color: sandybrown;
+  border-style: solid;
+  border-width: 3px;
+}
+
 .arena-section-create-arena {
   display: flex;
   flex-direction: column;
   align-items: center;
   background: #FFDB58;
-  border-radius: 25px;
   width: 300px;
   padding: 10px;
+  border-style: solid;
+  border-width: 5px;
 }
 
 .arena-input-create-arena {
   width: 200px;
   height: 50px;
-  border-radius: 10px;
-  border: 1px #FFDB58;
   margin: 10px;
   font-size: 20px;
   text-align: center;
+  border-style: solid;
+  border-width: 5px;
+  border-color: #181818;
 }
 
 .main-space-create-arena {
@@ -82,25 +160,6 @@ body {
 }
 
 @media only screen and (max-width: 600px) {
-  #attack-image-win-loss,
-  #coins-image-win-loss {
-    height: 50px;
-    width: 50px;
-  }
-
-  .main-section-win-loss {
-    width: 90%;
-    height: auto;
-    padding: 5px;
-  }
-
-  .main-section3-win-loss,
-  .main-section4-win-loss,
-  .main-section5-win-loss {
-    flex-direction: column;
-    align-items: center;
-    height: auto;
-  }
 
   .arena-section-create-arena {
     width: 90%;
