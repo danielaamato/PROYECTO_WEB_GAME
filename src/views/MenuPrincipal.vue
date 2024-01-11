@@ -1,22 +1,22 @@
 <script>
-import StorePopup from './StoreView.vue';
-import BackpackPopup from './BackpackView.vue';
 import TopBar from "@/components/TopBar.vue";
-import SideBar from "@/components/SideBar.vue"; // Asegúrate de que la ruta sea correcta
+import SideBar from "@/components/SideBar.vue";
+import OfertaEspecial from "@/views/OfertaEspecialView.vue";
+import StorePopup from "@/views/StoreView.vue";
 
 export default {
   name: "MenuPrincipal",
   components: {
-    TopBar,
-    SideBar,
     StorePopup,
-    BackpackPopup
+    OfertaEspecial,
+    TopBar,
+    SideBar
   },
   data() {
     return {
       showStorePopup: false,
       showBackpackPopup: false,
-      productPrice: 50, // Ejemplo de precio
+      showSpecialOfferPopup: false,
       isMobile: window.innerWidth <= 700 // Inicializa según el ancho de la ventana
     };
   },
@@ -45,10 +45,20 @@ export default {
     <!-- Primera Columna -->
     <section class="store-column card">
       <button class="CoolButton2" @click="showStorePopup = true">Store</button>
-      <img src="public/MainMenuImages/shop-image.png" alt="Descripción de la imagen" class="store-image">
+
       <!-- Popup Store -->
       <div v-if="showStorePopup" class="popup">
-        <store-popup :productPrice="productPrice" @close="showStorePopup = false"></store-popup>
+        <StorePopup @close="showStorePopup = false"></StorePopup>
+      </div>
+
+      <!-- Botón para la oferta especial -->
+      <button @click="showSpecialOfferPopup = true">
+        <img src="/MainMenuImages/shop-image.png" alt="Oferta Especial" class="store-image">
+      </button>
+
+      <!-- Popup para la oferta especial -->
+      <div v-if="showSpecialOfferPopup" class="popup">
+        <OfertaEspecial @close="showSpecialOfferPopup = false"></OfertaEspecial>
       </div>
     </section>
 
@@ -59,20 +69,20 @@ export default {
       <router-link to="/ListadoJugadores" class="CoolButton1 SmallButton SmallButton1">Listado de Jugadores</router-link>
       <router-link to="/HistorialJugadores" class="CoolButton1 SmallButton">Historial de Jugadores</router-link>
 
-      <img src = "public/MainMenuImages/leyenda-juego.png" alt="Leyenda de las teclas de movimiento y ataque" class="map-key-image">
+      <img src = "/MainMenuImages/leyenda-juego.png" alt="Leyenda de las teclas de movimiento y ataque" class="map-key-image">
     </section>
       <div class="current-attacks">
         <div class="attack-item">
           <span>Attack 1</span>
-          <img src="ruta/a/imagen-ataque1.jpg" alt="Attack 1">
+          <img src="/StorePopupImages/attack-image-1.png" alt="Attack 1">
         </div>
         <div class="attack-item">
           <span>Attack 2</span>
-          <img src="ruta/a/imagen-ataque2.jpg" alt="Attack 2">
+          <img src="/StorePopupImages/attack-image-2.png" alt="Attack 2">
         </div>
         <div class="attack-item">
           <span>Attack 3</span>
-          <img src="ruta/a/imagen-ataque3.jpg" alt="Attack 3">
+          <img src="/StorePopupImages/attack-image-4.png" alt="Attack 3">
         </div>
       </div>
       <!-- Popup Backpack -->
@@ -140,6 +150,7 @@ export default {
     width: 100%;
     display: block;
     margin-top: 5%;
+    cursor: pointer;
   }
 
   .map-key-image {

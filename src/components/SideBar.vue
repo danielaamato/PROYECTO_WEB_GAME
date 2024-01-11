@@ -1,8 +1,18 @@
 <script>
+import StorePopup from "@/views/StoreView.vue";
+
 export default {
   name: "SidebarMenu",
+  components: {StorePopup},
+  props: {
+    showUserInfo: {
+      type: Boolean,
+      default: true
+    }
+  },
   data() {
     return {
+      showStorePopup: false,
       isMenuOpen: false, // Controla la visibilidad del menú lateral
       player_ID: "",
       img: "",
@@ -23,6 +33,10 @@ export default {
     }
   },
   methods: {
+    handleOpenShop() {
+      this.showStorePopup = true;
+      this.isMenuOpen = false;
+    },
     toggleMenu() {
       this.isMenuOpen = !this.isMenuOpen;
       if (this.isMenuOpen) {
@@ -63,8 +77,8 @@ export default {
   <div class="sidebar-container">
     <!-- Barra Superior con Botón y Título -->
     <header class="top-bar-mobile">
-      <button @click="toggleMenu" class="openbtn">☰</button>
-      <h1 class="game-title-mobile">Battle Arena</h1>
+      <button @click.stop="toggleMenu" class="openbtn">☰</button>
+      <router-link class="game-title" to="/MenuPrincipal">Battle Arena</router-link>
     </header>
 
     <!-- Menú Lateral Desplegable -->
@@ -90,11 +104,18 @@ export default {
 
       <!-- Navegación del Menú Lateral -->
       <nav>
-        <router-link to="/InfoPlayer" class="nav-button mobile">Perfil</router-link>
-        <router-link to="/AnotherRoute" class="nav-button mobile">Otro Botón</router-link>
-        <router-link to="/ThirdRoute" class="nav-button mobile">Tercer Botón</router-link>
+        <router-link to="/InfoPlayer" class="nav-button mobile" v-if="showUserInfo">Perfil</router-link>
+        <router-link to="/MenuPrincipal" class = "nav-button mobile" v-if="!showUserInfo">Menu</router-link>
+        <button class="nav-button mobile button-store" @click.stop="handleOpenShop">Store</button>
+        <!-- Popup Store -->
+
+        <router-link to="/BackpackView" class="nav-button mobile">Backpack</router-link>
       </nav>
     </aside>
+
+    <div v-if="showStorePopup" class="popup">
+      <StorePopup @close="showStorePopup = false"></StorePopup>
+    </div>
   </div>
 </template>
 
@@ -102,6 +123,7 @@ export default {
 /* Contenedor principal del sidebar */
 .sidebar-container {
   width: 100%;
+  z-index: 1;
 }
 
 /* Barra superior en modo móvil con botón de apertura y título */
@@ -115,10 +137,11 @@ export default {
 }
 
 /* Título del juego en la barra superior móvil */
-.game-title-mobile {
+.game-title {
   text-decoration: none;
   color: #FFDB58;
   font-size: 2em;
+  font-weight: bold;
 }
 
 /* Botón para abrir el menú lateral */
@@ -203,12 +226,24 @@ hr {
 
 /* Estilos para los botones de navegación en el menú lateral */
 .nav-button.mobile {
-  padding: 10px;
+  padding: 10px 15px; /* Ajusta el relleno según tus preferencias */
   color: white;
+  background-color: #2980b9; /* Color de fondo del botón */
   text-decoration: none;
   display: block;
   text-align: center;
-  margin-top: 10px;
+  border: none;
+  border-radius: 5px; /* Bordes redondeados */
+  font-size: 16px; /* Tamaño de la fuente */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Transición suave para el hover */
+  margin-right: 5%;
+  margin-left: 5%;
+  margin-top: 5%;
+}
+
+.button-store {
+  width: 90%;
 }
 
 /* Ajuste del ancho del sidebar cuando está abierto */
