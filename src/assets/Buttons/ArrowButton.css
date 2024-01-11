@@ -21,7 +21,8 @@
     width: 20px;
     height: 15px;
     /*   border:solid 1px;  */
-    top:-1px;
+    top:-3px;
+    left: 1px;
     border-bottom:solid 2px;
     transform:translatex(4px);
 }

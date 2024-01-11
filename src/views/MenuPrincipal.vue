@@ -17,7 +17,6 @@ export default {
       showStorePopup: false,
       showBackpackPopup: false,
       showSpecialOfferPopup: false,
-      productPrice: 50, // Ejemplo de precio
       isMobile: window.innerWidth <= 700 // Inicializa según el ancho de la ventana
     };
   },
@@ -49,12 +48,12 @@ export default {
 
       <!-- Popup Store -->
       <div v-if="showStorePopup" class="popup">
-        <StorePopup :productPrice="productPrice" @close="showStorePopup = false"></StorePopup>
+        <StorePopup @close="showStorePopup = false"></StorePopup>
       </div>
 
       <!-- Botón para la oferta especial -->
       <button @click="showSpecialOfferPopup = true">
-        <img src="public/MainMenuImages/shop-image.png" alt="Oferta Especial" class="store-image">
+        <img src="/MainMenuImages/shop-image.png" alt="Oferta Especial" class="store-image">
       </button>
 
       <!-- Popup para la oferta especial -->
@@ -70,7 +69,7 @@ export default {
       <router-link to="/ListadoJugadores" class="CoolButton1 SmallButton SmallButton1">Listado de Jugadores</router-link>
       <router-link to="/HistorialJugadores" class="CoolButton1 SmallButton">Historial de Jugadores</router-link>
 
-      <img src = "public/MainMenuImages/leyenda-juego.png" alt="Leyenda de las teclas de movimiento y ataque" class="map-key-image">
+      <img src = "/MainMenuImages/leyenda-juego.png" alt="Leyenda de las teclas de movimiento y ataque" class="map-key-image">
     </section>
 
     <!-- Tercera Columna -->
@@ -79,15 +78,15 @@ export default {
       <div class="current-attacks">
         <div class="attack-item">
           <span>Attack 1</span>
-          <img src="public/StorePopupImages/attack-image-1.png" alt="Attack 1">
+          <img src="/StorePopupImages/attack-image-1.png" alt="Attack 1">
         </div>
         <div class="attack-item">
           <span>Attack 2</span>
-          <img src="public/StorePopupImages/attack-image-2.png" alt="Attack 2">
+          <img src="/StorePopupImages/attack-image-2.png" alt="Attack 2">
         </div>
         <div class="attack-item">
           <span>Attack 3</span>
-          <img src="public/StorePopupImages/attack-image-4.png" alt="Attack 3">
+          <img src="/StorePopupImages/attack-image-4.png" alt="Attack 3">
         </div>
       </div>
       <!-- Popup Backpack -->
@@ -132,10 +131,6 @@ export default {
     background-color: rgba(255, 82, 82, 0.63);
   }
 
-  .button {
-
-  }
-
   /* Estilos para los ataques actuales */
   .current-attacks {
     border: 1px solid #ccc;
@@ -160,6 +155,7 @@ export default {
     width: 100%;
     display: block;
     margin-top: 5%;
+    cursor: pointer;
   }
 
   .map-key-image {

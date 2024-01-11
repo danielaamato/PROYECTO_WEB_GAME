@@ -1,6 +1,12 @@
 <script>
 export default {
   name: "TopBar",
+  props: {
+    showUserInfo: {
+      type: Boolean,
+      default: true
+    }
+  },
   data() {
     return {
       player_ID: "",
@@ -9,7 +15,7 @@ export default {
       coins: 0
     };
   },
-  mounted() {
+  created() {
     // Llama a la función getInfoPlayer cuando el componente ha sido montado
     // If user has not already logged in go to SignIn
     if (localStorage.getItem("token") == null)
@@ -38,8 +44,8 @@ export default {
         .then(data => {
           this.player_ID = data.player_ID;
           this.img = data.img;
-          this.level = data.level;
-          this.coins = data.coins;
+          localStorage.setItem("level", data.level);
+          localStorage.setItem("coins", data.coins);
         })
         .catch(error => console.error("Error:", error));
     }
@@ -50,10 +56,10 @@ export default {
 <template>
   <header class="top-bar">
     <!-- Título del juego / Botón de inicio -->
-    <a href="#" class="game-title">Battle Arena</a>
+    <router-link class="game-title" to="/MenuPrincipal">Battle Arena</router-link>
 
     <!-- Información del usuario para pantallas de ordenador -->
-    <nav class="user-info desktop">
+    <nav class="user-info desktop" v-if="showUserInfo">
       <img v-bind:src="img" alt="Foto de Perfil" class="profile-pic">
       <span class="username">{{ player_ID }}</span>
       <div class="coins">
@@ -64,7 +70,7 @@ export default {
     </nav>
 
     <!-- Botón de Perfil para pantallas de ordenador -->
-    <router-link to="/InfoPlayer" class="nav-button desktop">Perfil</router-link>
+    <router-link to="/InfoPlayer" class="nav-button desktop" v-if="showUserInfo">Perfil</router-link>
   </header>
 </template>
 

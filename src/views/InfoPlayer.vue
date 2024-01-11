@@ -1,7 +1,11 @@
 <script>
+import TopBar from "@/components/TopBar.vue";
+import SideBar from "@/components/SideBar.vue";
+
 export default
 {
   name: "SignIn",
+  components: {SideBar, TopBar},
 
   data()
   {
@@ -13,7 +17,15 @@ export default
       coins: 0,
       attackList: [],
       equippedAttacks: [],
+      isMobile: window.innerWidth <= 700 // Inicializa según el ancho de la ventana
     }
+  },
+  created() {
+    window.addEventListener('resize', this.handleResize);
+    this.handleResize(); // Llama al inicio para establecer el estado inicial
+  },
+  unmounted() {
+    window.removeEventListener('resize', this.handleResize);
   },
 
   mounted()
@@ -108,12 +120,19 @@ export default
             this.equippedAttacks = data.filter((ataque) => ataque.equipped);
           });
     },
+    handleResize() {
+      this.isMobile = window.innerWidth <= 700;
+    }
   }
 };
 </script>
 
 <template>
-  <router-link to="/MenuPrincipal" class="game-title">Battle Arena</router-link>
+  <!-- Muestra TopBar en pantallas no móviles -->
+  <TopBar class = "top-bar" v-if="!isMobile" :showUserInfo="false "></TopBar>
+  <!-- Muestra SideBar en pantallas móviles -->
+  <SideBar class = "side-bar" v-if="isMobile" :showUserInfo="false "></SideBar>
+
     <div class="imgbackg4" alt="Background">
       <div id="perfil-container">
         <h3 class="perfil-jugador">Perfil del Jugador</h3>
@@ -167,7 +186,6 @@ export default
 </template>
 
 <style scoped>
-
 .imgbackg4 {
   background-image: url("../../public/HomeImages/fondo-de-pagina.png");
   width: 100%;
@@ -228,6 +246,7 @@ export default
   width: 150px;
   height: 150px;
   border-radius: 50%;
+  margin: 2%;
 }
 
 #imagen-ajustes {
@@ -351,6 +370,4 @@ export default
   flex-wrap: nowrap;
   align-items: center;
 }
-
-
 </style>
