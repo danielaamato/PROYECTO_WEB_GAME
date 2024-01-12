@@ -16,6 +16,7 @@ import ListadoJugadores from "@/views/ListadoJugadores.vue";
 import HistorialJugadores from "@/views/HistorialJugadores.vue";
 import GestionDeAtaquesYCambios from "@/views/GestionDeAtaquesYCambios.vue";
 import ListGames from "@/views/ListGames.vue";
+import BackpackView from "@/views/BackpackView.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -85,6 +86,11 @@ const router = createRouter({
       path: '/ListGames',
       name: 'ListGames',
       component: ListGames
+    },
+    {
+      path: '/BackpackView',
+      name: 'BackpackView',
+      component: BackpackView
     }
   ]
 });

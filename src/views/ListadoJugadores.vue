@@ -90,7 +90,7 @@ export default {
 
 <template>
 
-  <div class="imgbackg" alt="Background">
+  <div>
     <router-link to="/MenuPrincipal" class="game-title">Battle Arena</router-link>
     <h2 style="
       margin-top: 20px;

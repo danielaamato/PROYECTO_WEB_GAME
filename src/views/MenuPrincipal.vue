@@ -1,21 +1,20 @@
 <script>
 import TopBar from "@/components/TopBar.vue";
 import SideBar from "@/components/SideBar.vue";
-import OfertaEspecial from "@/views/OfertaEspecialView.vue";
 import StorePopup from "@/views/StoreView.vue";
+import OfertaEspecial from "@/views/OfertaEspecialView.vue";
 
 export default {
   name: "MenuPrincipal",
   components: {
-    StorePopup,
     OfertaEspecial,
+    StorePopup,
     TopBar,
     SideBar
   },
   data() {
     return {
       showStorePopup: false,
-      showBackpackPopup: false,
       showSpecialOfferPopup: false,
       isMobile: window.innerWidth <= 700 // Inicializa según el ancho de la ventana
     };
@@ -65,12 +64,16 @@ export default {
     <!-- Segunda Columna -->
     <section class="arena-column">
       <router-link to="/CreateArenaView" class="CoolButton1">Create Arena</router-link>
-      <router-link to="/ListGames" class="CoolButton1">List Arenas</router-link>
+      <router-link to="/GameView" class="CoolButton1">Join Arena</router-link>
       <router-link to="/ListadoJugadores" class="CoolButton1 SmallButton SmallButton1">Listado de Jugadores</router-link>
       <router-link to="/HistorialJugadores" class="CoolButton1 SmallButton">Historial de Jugadores</router-link>
 
       <img src = "/MainMenuImages/leyenda-juego.png" alt="Leyenda de las teclas de movimiento y ataque" class="map-key-image">
     </section>
+
+    <!-- Tercera Columna -->
+    <section class="backpack-column card">
+      <router-link to="/BackpackView" class="CoolButton2">Backpack</router-link>
       <div class="current-attacks">
         <div class="attack-item">
           <span>Attack 1</span>
@@ -85,10 +88,7 @@ export default {
           <img src="/StorePopupImages/attack-image-4.png" alt="Attack 3">
         </div>
       </div>
-      <!-- Popup Backpack -->
-      <div v-if="showBackpackPopup" class="popup">
-        <backpack-popup @close="showBackpackPopup = false"></backpack-popup>
-      </div>
+    </section>
   </main>
 </template>
 
@@ -112,6 +112,7 @@ export default {
     text-align: center;
     font-size: 2vw;
     margin-bottom: 5%;
+    border: none;
   }
   .SmallButton1 {
     margin-top: 20%;
