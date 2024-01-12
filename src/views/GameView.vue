@@ -2,12 +2,10 @@
 import "../assets/header.css";
 export default {
   name: "GameView",
-
-
   data() {
     return {
       arena: {
-        game_ID: null,
+        game_ID: "",
         size: 0,
         creation_date: "",
         finished: false,
@@ -15,7 +13,7 @@ export default {
         start: false,
         players_games: [
           {
-            game_ID: null,
+            game_ID: "",
             player_ID: "",
             x_game: 0,
             y_game: 0,
@@ -30,7 +28,7 @@ export default {
   },
 
   mounted() {
-    this.game_ID = this.$route.query.game_ID;
+    this.game_ID = localStorage.getItem("game_ID");
     this.getGame();
   },
 
@@ -55,11 +53,10 @@ export default {
             }
           })
           .then((data) => {
-            this.arena = data;
+            this.arena = data[0];
             console.log(data);
-            console.log(this.arena);
-          });
-
+            console.log("1. ESTO ES EL THIS ARENA: " + this.arena);
+          })
     },
 
   }

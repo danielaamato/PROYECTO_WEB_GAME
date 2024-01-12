@@ -31,13 +31,13 @@ export default {
 
         this.postArena();
 
-        this.$router.push({ name: 'GameView', query: { game_ID: this.arena.game_ID } });
+        localStorage.setItem("game_ID", this.arena.game_ID);
 
       }
       },
 
     postArena() {
-      fetch("https://balandrau.salle.url.edu/i3/arenas/", {
+      fetch("https://balandrau.salle.url.edu/i3/arenas", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -51,6 +51,8 @@ export default {
               this.$router.push({name: "GameView"});
             }
             else if (res.status === 403){
+              console.log(localStorage.getItem("player_ID"));
+              console.log(localStorage.getItem("token"));
               alert("You are already in a game!");
             }
             else {
