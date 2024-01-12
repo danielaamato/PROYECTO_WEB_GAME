@@ -54,8 +54,6 @@ export default {
           })
           .then((data) => {
             this.arena = data[0];
-            console.log(data);
-            console.log("1. ESTO ES EL THIS ARENA: " + this.arena);
           })
     },
 
@@ -81,7 +79,7 @@ export default {
   <main class="main-container-game">
     <section class="main-section-game">
       <div class="hp-bar-container">
-        <h1>Player 2</h1>
+        <h1>Player 1</h1>
         <div v-for="index in this.arena.players_games[0].hp" :key="index" class="hp-current-player"></div>
       </div>
 
@@ -92,8 +90,13 @@ export default {
       </div>
 
       <div class="hp-bar-container">
-        <h1>Player 1</h1>
-        <div v-for="index in this.arena.players_games[0].hp" :key="index" class="hp-current-player"></div>
+        <div v-if="!this.arena.players_games[1]">
+          <h1>No player 2 yet</h1>
+        </div>
+        <div v-else>
+          <h1>Player 1</h1>
+          <div v-for="index in this.arena.players_games[0].hp" :key="index" class="hp-current-player"></div>
+        </div>
       </div>
     </section>
   </main>
