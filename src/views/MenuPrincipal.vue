@@ -64,7 +64,7 @@ export default {
     <!-- Segunda Columna -->
     <section class="arena-column">
       <router-link to="/CreateArenaView" class="CoolButton1">Create Arena</router-link>
-      <router-link to="/GameView" class="CoolButton1">Join Arena</router-link>
+      <router-link to="/ListGames" class="CoolButton1">Join Arena</router-link>
       <router-link to="/ListadoJugadores" class="CoolButton1 SmallButton SmallButton1">Listado de Jugadores</router-link>
       <router-link to="/HistorialJugadores" class="CoolButton1 SmallButton">Historial de Jugadores</router-link>
 
