@@ -83,9 +83,10 @@ export default {
       <div class="hp-bar-container">
         <h1>Player 2</h1>
         <div v-for="index in this.arena.HP_max" :key="index" class="map-player"></div>
+        <div v-for="index in this.arena.players_games[0].hp" :key="index" class="map-player-current"></div>
       </div>
 
-      <div class="map-container" :style="{ gridTemplateColumns: `repeat(${this.arena.size}, 1fr)`, gridTemplateRows: `repeat(${this.arena.size}, 1fr)` }">
+      <div class="map-container" :style="{ gridTemplateColumns: `repeat(${this.arena.size}, 1fr)`}">
         <div v-for="row in this.arena.size" :key="row" class="map-row">
           <div v-for="col in this.arena.size" :key="col" class="map-square"></div>
         </div>
@@ -94,6 +95,7 @@ export default {
       <div class="hp-bar-container">
         <h1>Player 1</h1>
         <div v-for="index in this.arena.HP_max" :key="index" class="map-player"></div>
+        <div v-for="index in this.arena.players_games[0].hp" :key="index" class="map-player-current"></div>
       </div>
     </section>
   </main>
@@ -150,6 +152,13 @@ body {
   height: 20px; /* Adjust the height of each square */
   width: 10px; /* Adjust the width of each square */
   background-color: #ff0000; /* Set the background color of each square */
+  border: 2px solid #000; /* Add border for better visibility */
+}
+
+.map-player-current {
+  height: 20px; /* Adjust the height of each square */
+  width: 10px; /* Adjust the width of each square */
+  background-color: #48ff00; /* Set the background color of each square */
   border: 2px solid #000; /* Add border for better visibility */
 }
 
