@@ -71,6 +71,20 @@ export default {
             }
           })
     },
+
+    getMapSquareClass(row, col) {
+      // Check if the current position matches any player's position
+      for (const player of this.arena.players_games) {
+        if (player.x_game === col && player.y_game === row) {
+          // Return a dynamic class based on the player's position
+          return player.game_ID === this.game_ID ? 'map-player-current' : 'map-player';
+        }
+      }
+
+      // Default class if no player is present at the current position
+      return 'map-square';
+    },
+
   }
 };
 </script>
@@ -98,7 +112,8 @@ export default {
 
       <div class="map-container" :style="{ gridTemplateColumns: `repeat(${this.arena.size}, 1fr)`}">
         <div v-for="row in this.arena.size" :key="row" class="map-row">
-          <div v-for="col in this.arena.size" :key="col" class="map-square"></div>
+          <div v-for="col in this.arena.size" :key="col" :class="getMapSquareClass(row, col)">
+          </div>
         </div>
       </div>
 
@@ -144,7 +159,7 @@ body {
 
 .map-container {
   display: grid;
-  gap: 1px;
+  gap: 2px;
   justify-content: center;
 }
 
@@ -186,10 +201,10 @@ body {
 }
 
 .map-player-current {
-  height: 10px; /* Adjust the height of each square */
-  width: 10px; /* Adjust the width of each square */
-  background-color: #48ff00; /* Set the background color of each square */
-  border: 2px solid #000; /* Add border for better visibility */
+  height: 30px;
+  width: 30px;
+  background-color: #205db9;
+  border: 4px solid #000;
 }
 
 #attack1-image,
