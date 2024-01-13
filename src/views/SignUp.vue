@@ -56,7 +56,7 @@ export default {
               localStorage.setItem("token", token);
               localStorage.setItem("player_ID", newPlayer.player_ID);
               localStorage.setItem("tokenBearer", "Bearer " + localStorage.getItem("token"));
-
+              localStorage.setItem("inGame", 'false');
               // Redireccionar a la siguiente página
               this.$router.push({ name: "MenuPrincipal" });
             }

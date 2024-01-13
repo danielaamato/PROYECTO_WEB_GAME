@@ -65,6 +65,7 @@ export default {
             // Check if the game has finished
             if (this.arena.finished) {
               // If the game has finished, clear the interval
+              localStorage.setItem("inGame", 'false');
               clearInterval(this.intervalId);
 
               this.$router.push({ name: "WinLossView" });

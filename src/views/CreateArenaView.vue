@@ -48,7 +48,8 @@ export default {
           .then((res) => {
             // Handle different HTTP response statuses
             if (res.status === 200 || res.status === 201) {
-              console.log("Arena created");
+              console.log("Arena created")
+              localStorage.setItem("inGame", 'true');
               this.$router.push({ name: "GameView" });
             } else if (res.status === 403) {
               alert("You are already in a game!");

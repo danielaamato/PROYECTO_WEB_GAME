@@ -28,7 +28,7 @@ export default {
         localStorage.setItem("token", token);
         localStorage.setItem("player_ID", player.player_ID);
         localStorage.setItem("tokenBearer", "Bearer " + localStorage.getItem("token"));
-
+        localStorage.setItem("inGame", 'false');
         await this.$router.push({ name: "MenuPrincipal" });
       } else {
         // Si hay un error, result.response es el mensaje de error como texto

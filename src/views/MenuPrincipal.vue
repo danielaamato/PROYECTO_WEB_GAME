@@ -18,6 +18,7 @@ export default {
     return {
       showStorePopup: false,
       showSpecialOfferPopup: false,
+      isGameStarted: localStorage.getItem("inGame"),
       isMobile: window.innerWidth <= 700 // Inicializa según el ancho de la ventana
     };
   },
@@ -66,7 +67,9 @@ export default {
     <!-- Segunda Columna -->
     <section class="arena-column">
       <router-link to="/CreateArenaView" class="CoolButton1">Create Arena</router-link>
-      <router-link to="/ListGames" class="CoolButton1">Join Arena</router-link>
+      <!-- Comprueba si el usuario ya ha iniciado una partida -->
+      <router-link v-if = "isGameStarted === 'true'" local to="/GameView" class = "CoolButton1">Current game</router-link>
+      <router-link v-if = "isGameStarted === 'false'" to="/ListGames" class="CoolButton1">Join Arena</router-link>
       <router-link to="/ListadoJugadores" class="CoolButton1 SmallButton SmallButton1">Listado de Jugadores</router-link>
       <router-link to="/HistorialJugadores" class="CoolButton1 SmallButton">Historial de Jugadores</router-link>
 
