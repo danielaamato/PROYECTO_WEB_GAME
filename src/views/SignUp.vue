@@ -67,17 +67,11 @@ export default {
               );
             }
           }
-          else
-          {
-            const errorMessage = await response.text();
-          }
         }
         catch (error)
         {
           console.error(error);
-          alert(
-              "Failed to register because this player ID is already registered. Please try again."
-          );
+          alert(error.message);
         }
       }
     },
@@ -118,8 +112,6 @@ export default {
         return { response: "Error occurred while processing the request." };
       }
     },
-
-
 
     playerIdAndPasswordValid(field) {
       const emailRegex = /^.{1,20}$/;
