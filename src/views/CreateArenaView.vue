@@ -4,18 +4,20 @@ export default {
   name: "CreateArenaView",
 
   data() {
+    // Initial data state for the arena object
     return {
       arena: {
         game_ID: "",
-        size:  0,
+        size: 0,
         HP_max: 0,
       },
     };
   },
 
-
   methods: {
+    // Method to handle arena creation form submission
     createArena() {
+      // Validation checks for input fields
       if (this.arena.size === "" || this.arena.HP_max === "" || this.arena.game_ID === "") {
         alert("Field all fields!");
       } else if (!this.isSizeValid()) {
@@ -25,17 +27,15 @@ export default {
       } else if (!this.isNameValid()) {
         alert("The game ID must have from 1 to 20 characters!");
       } else {
-
+        // Log the arena object and send a POST request to create the arena
         console.log(this.arena);
-
-
         this.postArena();
-
+        // Store the game ID in local storage and navigate to the GameView
         localStorage.setItem("game_ID", this.arena.game_ID);
-
       }
-      },
+    },
 
+    // Method to send a POST request to create an arena
     postArena() {
       fetch("https://balandrau.salle.url.edu/i3/arenas", {
         method: "POST",
@@ -46,41 +46,40 @@ export default {
         body: JSON.stringify(this.arena),
       })
           .then((res) => {
+            // Handle different HTTP response statuses
             if (res.status === 200 || res.status === 201) {
               console.log("Arena created");
-              this.$router.push({name: "GameView"});
-            }
-            else if (res.status === 403){
-              console.log(localStorage.getItem("player_ID"));
-              console.log(localStorage.getItem("token"));
+              this.$router.push({ name: "GameView" });
+            } else if (res.status === 403) {
               alert("You are already in a game!");
-            }
-            else {
-              res.json().then(errorData => {
+            } else {
+              // Log and alert the error if the API call fails
+              res.json().then((errorData) => {
                 console.error("Error while calling the API:", errorData);
                 alert("Error while calling the API: " + errorData.message);
               });
             }
-          })
+          });
     },
 
+    // Method to validate the length of the game ID
     isNameValid() {
       return this.arena.game_ID.length < 21;
     },
 
+    // Method to validate the size of the arena
     isSizeValid() {
       const size = parseInt(this.arena.size);
       return size >= 2 && size <= 10;
     },
 
+    // Method to validate the maximum HP of the arena
     isHPValid() {
       const HP_max = parseInt(this.arena.HP_max);
       return HP_max >= 15;
     },
-
-    },
+  },
 };
-
 </script>
 
 

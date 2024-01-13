@@ -3,6 +3,7 @@ import "../assets/header.css";
 export default {
   name: "GameView",
   data() {
+    // Initial data state for the GameView component
     return {
       arena: {
         game_ID: "",
@@ -27,13 +28,17 @@ export default {
     };
   },
 
+  // Lifecycle hook: called after the component has been mounted
   mounted() {
     this.game_ID = localStorage.getItem("game_ID");
     this.getGame();
+
+    // Set interval to call getGame every 5 seconds
+    this.intervalId = setInterval(this.getGame, 5000);
   },
 
   methods: {
-
+    // Method to fetch the game data from the API
     getGame() {
       fetch("https://balandrau.salle.url.edu/i3/players/arenas/current", {
         method: "GET",
@@ -43,6 +48,7 @@ export default {
         },
       })
           .then((res) => {
+            // Handle different HTTP response statuses
             if (res.status === 200) {
               return res.json();
             } else {
@@ -53,12 +59,19 @@ export default {
             }
           })
           .then((data) => {
+            // Set the retrieved game data to the component's state
             this.arena = data[0];
+
+            // Check if the game has finished
+            if (this.arena.finished) {
+              // If the game has finished, clear the interval
+              clearInterval(this.intervalId);
+
+              this.$router.push({ name: "WinLossView" });
+            }
           })
     },
-
   }
-
 };
 </script>
 
@@ -89,13 +102,13 @@ export default {
         </div>
       </div>
 
-      <div class="hp-bar-container">
-        <div v-if="!this.arena.players_games[1]">
+      <div>
+        <div v-if="!this.arena.players_games[1]" >
           <h1>No player 2 yet</h1>
         </div>
-        <div v-else>
+        <div v-else class="hp-bar-container">
           <h1>Player 1</h1>
-          <div v-for="index in this.arena.players_games[0].hp" :key="index" class="hp-current-player"></div>
+          <div v-for="index in this.arena.players_games[1].hp" :key="index" class="hp-current-player"></div>
         </div>
       </div>
     </section>
