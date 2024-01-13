@@ -3,10 +3,12 @@ import TopBar from "@/components/TopBar.vue";
 import SideBar from "@/components/SideBar.vue";
 import StorePopup from "@/views/StoreView.vue";
 import OfertaEspecial from "@/views/OfertaEspecialView.vue";
+import MovementBlock from "@/components/MovementBlock.vue";
 
 export default {
   name: "MenuPrincipal",
   components: {
+    MovementBlock,
     OfertaEspecial,
     StorePopup,
     TopBar,
@@ -68,7 +70,7 @@ export default {
       <router-link to="/ListadoJugadores" class="CoolButton1 SmallButton SmallButton1">Listado de Jugadores</router-link>
       <router-link to="/HistorialJugadores" class="CoolButton1 SmallButton">Historial de Jugadores</router-link>
 
-      <img src = "/MainMenuImages/leyenda-juego.png" alt="Leyenda de las teclas de movimiento y ataque" class="map-key-image">
+      <MovementBlock></MovementBlock>
     </section>
 
     <!-- Tercera Columna -->

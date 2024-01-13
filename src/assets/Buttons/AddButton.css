@@ -1,0 +1,57 @@
+.add-button {
+    position: relative;
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border: 1px solid #34974d;
+    background-color: #3aa856;
+}
+
+.add-button, .add-button__icon, .add-button__text {
+    transition: all 0.3s;
+}
+
+.add-button .add-button__text {
+    transform: translateX(30px);
+    color: #fff;
+    font-weight: 600;
+}
+
+.add-button .add-button__icon {
+    position: absolute;
+    transform: translateX(109px);
+    height: 100%;
+    width: 39px;
+    background-color: #34974d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.add-button.svg {
+    width: 30px;
+    stroke: #fff;
+}
+
+.add-button:hover {
+    background: #34974d;
+}
+
+.add-button:hover .add-button__text {
+    color: transparent;
+}
+
+.add-button:hover .add-button__icon {
+    width: 148px;
+    transform: translateX(0);
+}
+
+.add-button:active .add-button__icon {
+    background-color: #2e8644;
+}
+
+.add-button:active {
+    border: 1px solid #2e8644;
+}
