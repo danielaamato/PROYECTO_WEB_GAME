@@ -2,6 +2,11 @@
 import "../assets/header.css";
 export default {
   name: "WinLossView",
+
+  mounted() {
+    // If the game has finished, clear the interval
+    localStorage.setItem("inGame", 'false');
+  },
 };
 </script>
 

@@ -43,7 +43,6 @@ export default {
         headers: {
           "Content-Type": "application/json",
           Bearer: localStorage.getItem("token"),
-          id: localStorage.getItem("game_ID"),
         },
       })
           .then((res) => {

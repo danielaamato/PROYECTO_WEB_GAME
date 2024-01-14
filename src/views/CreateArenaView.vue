@@ -1,8 +1,13 @@
 <script>
 import "../assets/header.css";
+import TopBar from "@/components/TopBar.vue";
+import SideBar from "@/components/SideBar.vue";
 export default {
   name: "CreateArenaView",
-
+  components: {
+    TopBar,
+    SideBar,
+  },
   data() {
     // Initial data state for the arena object
     return {
@@ -27,8 +32,6 @@ export default {
       } else if (!this.isNameValid()) {
         alert("The game ID must have from 1 to 20 characters!");
       } else {
-        // Log the arena object and send a POST request to create the arena
-        console.log(this.arena);
         this.postArena();
         // Store the game ID in local storage and navigate to the GameView
         localStorage.setItem("game_ID", this.arena.game_ID);
@@ -48,7 +51,6 @@ export default {
       .then((res) => {
         // Handle different HTTP response statuses
         if (res.status === 200 || res.status === 201) {
-          console.log("Arena created")
           localStorage.setItem("inGame", 'true');
           this.$router.push({ name: "GameView" });
         } else if (res.status === 403) {
