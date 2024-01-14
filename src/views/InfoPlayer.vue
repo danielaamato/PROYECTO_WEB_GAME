@@ -163,8 +163,12 @@ export default
 
     <div class="imgbackg4" alt="Background">
       <!-- Contenido del perfil del jugador -->
+
       <div id="perfil-container">
         <h3 class="perfil-jugador">Perfil del Jugador</h3>
+        <router-link to="/">
+          <button id="logout">Cerrar Sesion</button>
+        </router-link>
         <div id="idperfil">
           <img id="imagen-perfil" v-bind:src="img" alt="Imagen de perfil">
           <h2 class="nombre-perfil">Nombre del Jugador: {{player_ID}}</h2>
@@ -235,7 +239,7 @@ export default
   display: flex;
   flex-direction: column;
   position: relative;
-  top: 3%;
+  top: 1%;
   left: 8%;
   width: 85%;
 }
@@ -246,10 +250,10 @@ export default
   text-align: center;
   background-color: #87CEEB;
   width: 46%;
-  height: 45%;
+  height: 37%;
   border-radius: 3%;
   left: 5%;
-  top: 53%;
+  top: 61%;
   position: absolute;
   font-family: "Calisto MT";
   font-size: 1.2em;
@@ -267,8 +271,8 @@ export default
   text-align: center;
   background-color: #87CEEB;
   right: 4%;
-  top: 53%;
-  height: 45%;
+  top: 61%;
+  height: 37%;
   border-radius: 3%;
   width: 42%;
   font-family: "Calisto MT";
@@ -334,7 +338,7 @@ export default
   margin-top: 20px;
 }
 
-@media only screen and (max-width: 1100px) {
+@media only screen and (max-width: 300px) {
   .imgbackg {
     padding: 10px;
   }
@@ -406,4 +410,19 @@ export default
   flex-wrap: nowrap;
   align-items: center;
 }
+
+#logout {
+  position: absolute;
+  right: 2%;
+  padding: 10px;
+  background-color: #4CAF50;
+  color: white;
+  border: none;
+  top: 1%;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 15%;
+  font-size: 9px;
+}
+
 </style>
