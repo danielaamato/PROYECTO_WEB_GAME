@@ -36,7 +36,7 @@ export default {
     this.getGame();
 
     // Set interval to call getGame every 5 seconds
-    this.intervalId = setInterval(this.getGame, 50000);
+    this.intervalId = setInterval(this.getGame, 5000);
   },
 
   methods: {
@@ -63,6 +63,7 @@ export default {
           .then((data) => {
             // Set the retrieved game data to the component's state
             this.arena = data[0];
+            console.log("Datos recibidos de la API:", data);
 
             // Check if the game has finished
             if (this.arena.finished) {
@@ -76,18 +77,13 @@ export default {
     },
 
     getMapSquareClass(row, col) {
-      // Check if the current position matches any player's position
       for (const player of this.arena.players_games) {
         if (player.x_game === col && player.y_game === row) {
-          // Return a dynamic class based on the player's position
-          return player.game_ID === this.game_ID ? 'map-player-current' : 'map-player';
+          return player.player_ID === localStorage.getItem("player_ID") ? 'map-player-current' : 'map-player-other';
         }
       }
-
-      // Default class if no player is present at the current position
       return 'map-square';
-    },
-
+    }
   }
 };
 </script>
@@ -187,7 +183,13 @@ body {
   align-items: center;
 }
 
-.player1-name, .player2-name {
+.player1-name {
+  color: blue;
+  margin-right: 5%;
+}
+
+.player2-name {
+  color: red;
   margin-right: 5%;
 }
 
@@ -207,20 +209,19 @@ body {
   z-index: 2;
 }
 
-.map-player {
-  height: 20px; /* Adjust the height of each square */
-  width: 10px; /* Adjust the width of each square */
-  background-color: #ff0000; /* Set the background color of each square */
-  border: 2px solid #000; /* Add border for better visibility */
-}
-
 .map-player-current {
   height: 30px;
   width: 30px;
-  background-color: #205db9;
+  background-color: red; /* Color para el jugador 1 */
   border: 4px solid #000;
 }
 
+.map-player-other {
+  height: 30px;
+  width: 30px;
+  background-color: blue; /* Color para el jugador 2 */
+  border: 4px solid #000;
+}
 #attack1-image,
 #attack2-image,
 #attack3-image {
