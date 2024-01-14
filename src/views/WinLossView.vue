@@ -43,7 +43,7 @@ export default {
         </section>
 
         <section class="main-section5-win-loss">
-          <router-link to="/">
+          <router-link to="/MenuPrincipal">
             <button id="continue-button-win-loss" class="continue-button-win-loss">Continue</button>
           </router-link>
         </section>
