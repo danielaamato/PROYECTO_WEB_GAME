@@ -36,7 +36,7 @@ export default {
     this.getGame();
 
     // Set interval to call getGame every 5 seconds
-    this.intervalId = setInterval(this.getGame, 5000);
+    this.intervalId = setInterval(this.getGame, 1000);
   },
 
   methods: {
@@ -52,6 +52,7 @@ export default {
           .then((res) => {
             // Handle different HTTP response statuses
             if (res.status === 200) {
+              localStorage.setItem("inGame", 'true');
               return res.json();
             } else {
               res.json().then(errorData => {
@@ -126,22 +127,11 @@ export default {
         </div>
       </div>
     </section>
+
+    <MovementBlock class = "movement-block"></MovementBlock>
   </main>
 
-  <footer class="skill-bars-game">
-    <section class="attack1-game">
-      <img id="attack1-image" src="public/StorePopupImages/attack-image.png" alt="Attack image">
-    </section>
 
-    <section class="attack2-game">
-      <img id="attack2-image" src="public/StorePopupImages/attack-image.png" alt="Attack image">
-    </section>
-
-    <section class="attack3-game">
-      <img id="attack3-image" src="public/StorePopupImages/attack-image.png" alt="Attack image">
-    </section>
-  </footer>
-  <MovementBlock class = "movement-block"></MovementBlock>
   </body>
 
 
@@ -165,6 +155,7 @@ body {
 }
 
 .movement-block {
+  align-items: center;
   margin-left: 30%;
   margin-right: 30%;
 }

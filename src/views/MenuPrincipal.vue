@@ -25,6 +25,7 @@ export default {
   created() {
     window.addEventListener('resize', this.handleResize);
     this.handleResize(); // Llama al inicio para establecer el estado inicial
+    this.postArena();
   },
   unmounted() {
     window.removeEventListener('resize', this.handleResize);
@@ -32,6 +33,26 @@ export default {
   methods: {
     handleResize() {
       this.isMobile = window.innerWidth <= 700;
+    },
+    postArena() {
+      fetch("https://balandrau.salle.url.edu/i3/arenas", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Bearer: localStorage.getItem("token"),
+        }
+      })
+          .then((res) => {
+            if (res.status === 403) {
+              localStorage.setItem("inGame", 'true');
+            } else {
+              // Log and alert the error if the API call fails
+              res.json().then((errorData) => {
+                console.error("Error while calling the API:", errorData);
+                alert("Error while calling the API: " + errorData.message);
+              });
+            }
+          });
     }
   }
 };
@@ -73,7 +94,7 @@ export default {
       <router-link to="/ListadoJugadores" class="CoolButton1 SmallButton SmallButton1">Listado de Jugadores</router-link>
       <router-link to="/HistorialJugadores" class="CoolButton1 SmallButton">Historial de Jugadores</router-link>
 
-      <MovementBlock></MovementBlock>
+      <MovementBlock class = "movement-block"></MovementBlock>
     </section>
 
     <!-- Tercera Columna -->
@@ -172,6 +193,10 @@ export default {
   .arena-column {
     background-size: cover;
     position: relative;
+  }
+
+  .movement-block {
+    margin-top: 20%;
   }
 
   /* Estilos adicionales para la tercera columna */

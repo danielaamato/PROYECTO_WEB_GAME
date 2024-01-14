@@ -123,7 +123,7 @@ font-family: Asimov, serif;
             <td>{{ player.xp }}</td>
             <td>{{ player.level }}</td>
             <td>{{ player.coins }}</td>
-            <td><img :src="player.img" alt="Imagen del jugador" class="player-image"></td>
+            <!--<td><img :src="player.img" alt="Imagen del jugador" class="player-image"></td>-->
           </tr>
           </tbody>
         </table>

@@ -21,19 +21,16 @@ export default {
         switch (event.key) {
           // Asigna la dirección basada en la tecla presionada
           case 'ArrowUp':
-            console.log("UP");
-            direction = "up";
-            break;
-          case 'ArrowDown':
-            console.log("DOWN");
-            direction = "down";
-            break;
-          case 'ArrowLeft':
-            console.log("LEFT");
             direction = "left";
             break;
-          case 'ArrowRight':
+          case 'ArrowDown':
             direction = "right";
+            break;
+          case 'ArrowLeft':
+            direction = "up";
+            break;
+          case 'ArrowRight':
+            direction = "down";
             console.log(direction);
             break;
         }
@@ -121,10 +118,10 @@ export default {
       <h2>Movimiento</h2>
       <div class="grid-container">
         <!-- Botones de movimiento -->
-        <div class="div1 up-key"><button class="mov-button" @click="move('up')">↑</button></div>
-        <div class="div2 down-key"><button class="mov-button" @click="move('down')">↓</button></div>
-        <div class="div3 left-key"><button class="mov-button" @click="move('left')">←</button></div>
-        <div class="div4 right-key"><button class="mov-button" @click="move('right')">→</button></div>
+        <div class="div1 up-key"><button class="mov-button" @click="move('left')">↑</button></div>
+        <div class="div2 down-key"><button class="mov-button" @click="move('right')">↓</button></div>
+        <div class="div3 left-key"><button class="mov-button" @click="move('up')">←</button></div>
+        <div class="div4 right-key"><button class="mov-button" @click="move('down')">→</button></div>
         <!-- Botones de ataque -->
         <div class="div5 attack-1"><button class="mov-button" @click="attack('Q')">Q</button></div>
         <div class="div6 attack-2"><button class="mov-button" @click="attack('W')">W</button></div>
@@ -141,7 +138,6 @@ export default {
   display: block;
   width: 100%;
   height: 100%;
-  margin-top: 20%;
   margin-right: auto;
   margin-left: auto;
 }

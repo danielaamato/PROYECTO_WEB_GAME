@@ -7,31 +7,32 @@ export default
   name: "SignIn",
   components: {SideBar, TopBar},
 
-  data()
-  {
+  data() {
+    // Estado inicial del componente
     return {
       player_ID: "",
       img: "",
       xp: 0,
       level: 0,
       coins: 0,
+      games_played: 0,
+      games_won: 0,
       attackList: [],
       equippedAttacks: [],
       isMobile: window.innerWidth <= 700 // Inicializa según el ancho de la ventana
     }
   },
   created() {
+    // Añadir listener para el redimensionamiento de la ventana
     window.addEventListener('resize', this.handleResize);
-    this.handleResize(); // Llama al inicio para establecer el estado inicial
+    this.handleResize(); // Establecer el estado inicial basado en el tamaño de la ventana
   },
   unmounted() {
+    // Eliminar listener al desmontar el componente
     window.removeEventListener('resize', this.handleResize);
   },
-
-  mounted()
-  {
-    // Llama a la función getInfoPlayer cuando el componente ha sido montado
-    // If user has not already logged in go to SignIn
+  mounted() {
+    // Métodos para obtener información del jugador y estadísticas
     if (localStorage.getItem("token") == null)
     {
       this.$router.push({ name: "HomeView" });
@@ -39,6 +40,7 @@ export default
     else
     {
       this.getInfoPlayer();
+      this.getStatistics();
     }
   },
 
@@ -122,7 +124,33 @@ export default
     },
     handleResize() {
       this.isMobile = window.innerWidth <= 700;
-    }
+    },
+    getStatistics() {
+      fetch("https://balandrau.salle.url.edu/i3/players/statistics", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Bearer": localStorage.getItem("token"),
+        },
+      })
+          .then((res) => {
+            if (res.status === 200) {
+              return res.json();
+            } else {
+              console.error("Error fetching statistics");
+              return null;
+            }
+          })
+          .then((data) => {
+            if (data && data.length > 0) {
+              this.games_played = data[0].games_played;
+              this.games_won = data[0].games_won;
+            }
+          })
+          .catch((error) => {
+            console.error("Error in getStatistics method:", error);
+          });
+    },
   }
 };
 </script>
@@ -134,6 +162,7 @@ export default
   <SideBar class = "side-bar" v-if="isMobile" :showUserInfo="false "></SideBar>
 
     <div class="imgbackg4" alt="Background">
+      <!-- Contenido del perfil del jugador -->
       <div id="perfil-container">
         <h3 class="perfil-jugador">Perfil del Jugador</h3>
         <div id="idperfil">
@@ -141,10 +170,13 @@ export default
           <h2 class="nombre-perfil">Nombre del Jugador: {{player_ID}}</h2>
         </div>
         <div id="idinfo">
-          <p id="nivel-perfil">Nivel: {{level}}</p>
-          <p id="xp">XP: {{xp}}</p>
-          <p id="monedas">Monedas: {{coins}}</p>
+          <p id="nivel-perfil">Nivel: {{ level }}</p>
+          <p id="xp">XP: {{ xp }}</p>
+          <p id="monedas">Monedas: {{ coins }}</p>
+          <p id="victorias">Victorias: {{ games_won }}</p>
+          <p id="derrotas">Derrotas: {{ games_played - games_won }}</p>
         </div>
+
         <router-link to="/EliminarPlayer">
           <img id="imagen-ajustes" src="../../public/InfoPlayerImages/icono-ajustes.webp" alt="Imagen de ajustes">
         </router-link>
@@ -153,6 +185,7 @@ export default
       <div id="backpack-at"><strong><u style="
         margin-top: 10px;
         margin-bottom: 10px">Ataques Backpack</u></strong>
+        <!-- Sección de ataques en el Backpack -->
         <section class="attackTable">
           <div v-if="attackList.length === 0">
             <p>Sin Ataques en el Backpack</p>
@@ -169,6 +202,7 @@ export default
         <div id="next-attacks"><strong><u style="
         margin-top: 10px;
         margin-bottom: 10px">Ataques Equipados</u></strong>
+          <!-- Sección de ataques equipados -->
           <section class="attackTable">
             <div v-if="equippedAttacks.length === 0">
               <p>Sin Ataques equipados para proximos juegos</p>
@@ -278,12 +312,16 @@ export default
   font-family: Asimov;
 }
 
-.perfil-titulo {
-  font-size: 2em; /* Ajusta el tamaño del título según tus necesidades */
-  text-align: left;
-  font-family: Asimov, serif;
-  color: #FFDB58;
-  margin-left: 5%;
+#victorias {
+  font-size: 1.2em;
+  color: #ffffff;
+  font-family: Asimov;
+}
+
+#derrotas {
+  font-size: 1.2em;
+  color: #ffffff;
+  font-family: Asimov;
 }
 
 .perfil-jugador {
@@ -318,8 +356,6 @@ export default
     border-radius: 5%;
     height: 37%;
   }
-
-
 }
 
 #ataques{
