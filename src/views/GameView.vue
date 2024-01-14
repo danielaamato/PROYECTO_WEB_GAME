@@ -1,7 +1,9 @@
 <script>
 import "../assets/header.css";
+import MovementBlock from "@/components/MovementBlock.vue";
 export default {
   name: "GameView",
+  components: {MovementBlock},
   data() {
     // Initial data state for the GameView component
     return {
@@ -34,7 +36,7 @@ export default {
     this.getGame();
 
     // Set interval to call getGame every 5 seconds
-    this.intervalId = setInterval(this.getGame, 5000);
+    this.intervalId = setInterval(this.getGame, 50000);
   },
 
   methods: {
@@ -105,9 +107,9 @@ export default {
   </header>
 
   <main class="main-container-game">
-    <section class="main-section-game">
+    <section class="main-section-game card">
       <div class="hp-bar-container">
-        <h1>Player 1</h1>
+        <h1 class = "player1-name">{{ arena.players_games[0].player_ID }}</h1>
         <div v-for="index in this.arena.players_games[0].hp" :key="index" class="hp-current-player"></div>
       </div>
 
@@ -123,7 +125,7 @@ export default {
           <h1>No player 2 yet</h1>
         </div>
         <div v-else class="hp-bar-container">
-          <h1>Player 1</h1>
+          <h1 class = "player2-name">{{ arena.players_games[1].player_ID }}</h1>
           <div v-for="index in this.arena.players_games[1].hp" :key="index" class="hp-current-player"></div>
         </div>
       </div>
@@ -143,13 +145,15 @@ export default {
       <img id="attack3-image" src="public/StorePopupImages/attack-image.png" alt="Attack image">
     </section>
   </footer>
-
+  <MovementBlock class = "movement-block"></MovementBlock>
   </body>
 
 
 </template>
 
 <style scoped>
+@import "../assets/Columns/CoolColumn.css";
+
 body {
   background-image: url("public/HomeImages/fondo-de-pagina.png");
   background-repeat: no-repeat;
@@ -164,6 +168,11 @@ body {
   justify-content: center;
 }
 
+.movement-block {
+  margin-left: 30%;
+  margin-right: 30%;
+}
+
 .map-square {
   height: 30px;
   width: 30px;
@@ -176,6 +185,10 @@ body {
   flex-direction: row;
   justify-content: center;
   align-items: center;
+}
+
+.player1-name, .player2-name {
+  margin-right: 5%;
 }
 
 .hp-max-player {
@@ -225,6 +238,8 @@ body {
   padding: 10px;
   background: #4CAF50;
   border: 4px solid #000; /* Add border for better visibility */
+  height: 50%;
+  width: 50%;
 }
 
 .main-container-game {
@@ -251,8 +266,6 @@ body {
 }
 
 @media only screen and (max-width: 600px) {
-
-
   #attack1-image,
   #attack2-image,
   #attack3-image {

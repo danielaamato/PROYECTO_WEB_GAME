@@ -21,23 +21,27 @@ export default {
         switch (event.key) {
           // Asigna la dirección basada en la tecla presionada
           case 'ArrowUp':
+            console.log("UP");
             direction = "up";
             break;
           case 'ArrowDown':
+            console.log("DOWN");
             direction = "down";
             break;
           case 'ArrowLeft':
+            console.log("LEFT");
             direction = "left";
             break;
           case 'ArrowRight':
             direction = "right";
+            console.log(direction);
             break;
         }
 
         // Si se detectó una dirección, realiza el movimiento y el cambio de dirección
         if (direction) {
-          this.movePlayer(direction);
           this.changeDirection(direction);
+          this.movePlayer(direction);
         }
       }
     },
@@ -46,8 +50,8 @@ export default {
     move(direction) {
       // Verifica si el jugador está en el juego antes de mover
       if (localStorage.getItem('inGame') === 'true') {
-        this.movePlayer(direction);
         this.changeDirection(direction);
+        this.movePlayer(direction);
       }
     },
 
@@ -63,15 +67,16 @@ export default {
     // Llamada a la API para mover al jugador
     async movePlayer(direction) {
       try {
-        const response = await fetch('https://balandrau.salle.url.edu/i3/players/arenas/move', {
+        const response = await fetch('https://balandrau.salle.url.edu/i3/arenas/move', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
             Bearer: localStorage.getItem("token")
-          }, body: JSON.stringify({movement: direction})
+          },
+          body: JSON.stringify({movement: direction})
         });
 
-        if (response.ok) {
+        if (response.status === 200) {
           console.log('Movimiento exitoso');
         } else {
           console.error('Error en el movimiento', await response.json());
@@ -84,7 +89,7 @@ export default {
     // Llamada a la API para cambiar la dirección del jugador
     async changeDirection(direction) {
       try {
-        const response = await fetch('https://balandrau.salle.url.edu/i3/players/arenas/direction', {
+        const response = await fetch('https://balandrau.salle.url.edu/i3/arenas/direction', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -93,7 +98,7 @@ export default {
           body: JSON.stringify({direction: direction})
         });
 
-        if (response.ok) {
+        if (response.status === 200) {
           console.log('Cambio de dirección exitoso');
         } else {
           console.error('Error en el cambio de dirección', await response.json());
