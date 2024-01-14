@@ -79,6 +79,7 @@ export default
     },
     chargeProfile(data)
     {
+      //Cargar informacion del perfil
       if(data)
       {
         this.player_ID = data.player_ID;
@@ -96,6 +97,7 @@ export default
 
     chargeAttacks()
     {
+      //Request de ataques
       fetch("https://balandrau.salle.url.edu/i3/players/attacks", {
         method: "GET",
         headers: {
@@ -126,6 +128,7 @@ export default
       this.isMobile = window.innerWidth <= 700;
     },
     getStatistics() {
+      //Get de estadisticas del jugador
       fetch("https://balandrau.salle.url.edu/i3/players/statistics", {
         method: "GET",
         headers: {
@@ -329,7 +332,7 @@ export default
 }
 
 .perfil-jugador {
-  font-size: 2em; /* Ajusta el tamaño del título según tus necesidades */
+  font-size: 2em;
   text-align: left;
   font-family: Asimov, serif;
   color: #FFDB58;

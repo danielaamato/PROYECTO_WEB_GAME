@@ -14,6 +14,7 @@ export default {
   methods: {
     async signUp()
     {
+      //Crear jugador
       const newPlayer = {
         player_ID: this.player_ID,
         password: this.password,
@@ -78,6 +79,7 @@ export default {
 
     async postUser(newPlayer) {
       try {
+        //Post del jugador
         const response = await fetch("https://balandrau.salle.url.edu/i3/players/join", {
           method: "POST",
           headers: {
@@ -113,6 +115,7 @@ export default {
       }
     },
 
+    //Control de error de los campos
     playerIdAndPasswordValid(field) {
       const emailRegex = /^.{1,20}$/;
       return emailRegex.test(field);
