@@ -66,7 +66,7 @@ export default {
             // Manejar diferentes estados de respuesta HTTP
             if (res.status === 200) {
               // Establecer la bandera de juego en curso
-              localStorage.setItem("inGame", 'true');
+              //localStorage.setItem("inGame", 'true');
               return res.json();
             } else {
               // Manejar errores de la API
