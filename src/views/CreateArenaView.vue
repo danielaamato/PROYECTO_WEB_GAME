@@ -4,10 +4,7 @@ import TopBar from "@/components/TopBar.vue";
 import SideBar from "@/components/SideBar.vue";
 export default {
   name: "CreateArenaView",
-  components: {
-    TopBar,
-    SideBar,
-  },
+  components: {SideBar, TopBar},
   data() {
     // Initial data state for the arena object
     return {
@@ -93,12 +90,11 @@ export default {
   </head>
 
   <body>
-    <header class="header-container">
-      <nav>
-        <router-link to="/MenuPrincipal">
-          <img id="game-name" src="public/MainMenuImages/logo.png" alt="Game name image">
-        </router-link>
-      </nav>
+    <header>
+      <!-- Muestra TopBar en pantallas no móviles -->
+      <TopBar v-if="!isMobile"></TopBar>
+      <!-- Muestra SideBar en pantallas móviles -->
+      <SideBar v-if="isMobile"></SideBar>
     </header>
 
     <main class="main-container-create-arena">
