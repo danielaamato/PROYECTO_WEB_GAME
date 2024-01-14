@@ -37,6 +37,30 @@ export default {
     }
   },
   methods: {
+    endGame() {
+      fetch("https://balandrau.salle.url.edu/i3/arenas/" + localStorage.getItem("game_ID") + "/play", {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Bearer: localStorage.getItem("token"),
+          id: localStorage.getItem("game_ID"),
+        },
+      })
+          .then((res) => {
+            // Handle different HTTP response statuses
+            if (res.status === 204) {
+              localStorage.setItem("inGame", 'false');
+              this.$router.push({ name: "WinLossView" });
+              return res.json();
+            } else {
+              res.json().then(errorData => {
+                console.error("Error while calling the API:", errorData);
+                alert("Error while calling the API: " + errorData.message);
+              });
+            }
+          })
+    },
+
     handleOpenShop() {
       this.showStorePopup = true;
       this.isMenuOpen = false;
@@ -108,8 +132,12 @@ export default {
 
       <!-- Navegación del Menú Lateral -->
       <nav>
-        <!-- Botón de Perfil o Quit para pantallas de ordenador -->
-        <router-link :to="isGameView ? '/MenuPrincipal' : '/InfoPlayer'" class="nav-button desktop" v-if="showUserInfo">
+        <router-link
+            :to="isGameView ? '/MenuPrincipal' : '/InfoPlayer'"
+            class="nav-button mobile"
+            v-if="showUserInfo"
+            @click="isGameView ? endGame() : null"
+        >
           {{ isGameView ? 'Salir' : 'Perfil' }}
         </router-link>
         <router-link to="/MenuPrincipal" class = "nav-button mobile" v-if="!showUserInfo">Menu</router-link>
