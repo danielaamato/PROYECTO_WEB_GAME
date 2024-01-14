@@ -18,7 +18,7 @@ export default {
     return {
       showStorePopup: false,
       showSpecialOfferPopup: false,
-      isGameStarted: localStorage.getItem("inGame"),
+      isGameStarted: false,
       isMobile: window.innerWidth <= 700, // Inicializa según el ancho de la ventana
       arena: {  //Creamos un objeto aleatorio de arena para comprobar si el usuario ya esta en una partida
         game_ID: "checkinfoarena",
@@ -27,7 +27,7 @@ export default {
       }
     };
   },
-  beforeMount() {
+  mounted() {
     this.postArena();
   },
   created() {
@@ -53,7 +53,8 @@ export default {
       })
       .then((res) => {
         if (res.status === 403) {
-          localStorage.setItem("inGame", 'true');
+          localStorage.setItem("inGame", 'true')
+          this.isGameStarted = 'true';
         } else {
           // Log and alert the error if the API call fails
           res.json().then((errorData) => {
