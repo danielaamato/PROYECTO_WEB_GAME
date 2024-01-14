@@ -8,6 +8,10 @@ export default {
     showUserInfo: {
       type: Boolean,
       default: true
+    },
+    isGameView: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -104,7 +108,10 @@ export default {
 
       <!-- Navegación del Menú Lateral -->
       <nav>
-        <router-link to="/InfoPlayer" class="nav-button mobile" v-if="showUserInfo">Perfil</router-link>
+        <!-- Botón de Perfil o Quit para pantallas de ordenador -->
+        <router-link :to="isGameView ? '/MenuPrincipal' : '/InfoPlayer'" class="nav-button desktop" v-if="showUserInfo">
+          {{ isGameView ? 'Salir' : 'Perfil' }}
+        </router-link>
         <router-link to="/MenuPrincipal" class = "nav-button mobile" v-if="!showUserInfo">Menu</router-link>
         <button class="nav-button mobile button-store" @click.stop="handleOpenShop">Store</button>
         <!-- Popup Store -->

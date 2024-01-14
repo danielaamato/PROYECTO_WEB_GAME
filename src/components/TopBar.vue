@@ -5,6 +5,10 @@ export default {
     showUserInfo: {
       type: Boolean,
       default: true
+    },
+    isGameView: {
+      type: Boolean,
+      default: false
     }
   },
   data() {
@@ -69,8 +73,10 @@ export default {
       <span class="experience">Nivel: {{ level }}</span>
     </nav>
 
-    <!-- Botón de Perfil para pantallas de ordenador -->
-    <router-link to="/InfoPlayer" class="nav-button desktop" v-if="showUserInfo">Perfil</router-link>
+    <!-- Botón de Perfil o Quit para pantallas de ordenador -->
+    <router-link :to="isGameView ? '/MenuPrincipal' : '/InfoPlayer'" class="nav-button desktop" v-if="showUserInfo">
+      {{ isGameView ? 'Salir' : 'Perfil' }}
+    </router-link>
   </header>
 </template>
 
