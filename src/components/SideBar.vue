@@ -108,8 +108,8 @@ export default {
         <router-link to="/MenuPrincipal" class = "nav-button mobile" v-if="!showUserInfo">Menu</router-link>
         <button class="nav-button mobile button-store" @click.stop="handleOpenShop">Store</button>
         <!-- Popup Store -->
-
         <router-link to="/BackpackView" class="nav-button mobile">Backpack</router-link>
+        <router-link to="/" class = "logout-button" v-if="!showUserInfo">Logout</router-link>
       </nav>
     </aside>
 
@@ -229,6 +229,23 @@ hr {
   padding: 10px 15px; /* Ajusta el relleno según tus preferencias */
   color: white;
   background-color: #2980b9; /* Color de fondo del botón */
+  text-decoration: none;
+  display: block;
+  text-align: center;
+  border: none;
+  border-radius: 5px; /* Bordes redondeados */
+  font-size: 16px; /* Tamaño de la fuente */
+  cursor: pointer;
+  transition: background-color 0.3s ease; /* Transición suave para el hover */
+  margin-right: 5%;
+  margin-left: 5%;
+  margin-top: 5%;
+}
+
+.logout-button{
+  padding: 10px 15px; /* Ajusta el relleno según tus preferencias */
+  color: white;
+  background-color: #b92929; /* Color de fondo del botón */
   text-decoration: none;
   display: block;
   text-align: center;

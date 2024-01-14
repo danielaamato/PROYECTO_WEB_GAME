@@ -71,6 +71,7 @@ export default {
 
     <!-- Botón de Perfil para pantallas de ordenador -->
     <router-link to="/InfoPlayer" class="nav-button desktop" v-if="showUserInfo">Perfil</router-link>
+    <router-link to="/" class="logout-button" v-if="!showUserInfo">Logout</router-link>
   </header>
 </template>
 
@@ -125,6 +126,19 @@ export default {
 
   .nav-button.desktop {
     background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+  }
+
+  .logout-button {
+    background: red;
     color: white;
     border: none;
     padding: 10px 20px;
