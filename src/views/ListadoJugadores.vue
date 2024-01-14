@@ -36,6 +36,7 @@ export default {
     },
 
     getPlayersList() {
+      //Request de todos los jugadores
       fetch("https://balandrau.salle.url.edu/i3/players/", {
         method: "GET",
         headers: {
@@ -76,9 +77,9 @@ export default {
     },
     searchPlayer()
     {
+      //Busqueda de jugador
       const busqueda = this.jugadorBuscado.toLowerCase();
       this.jugadoresFiltrados = this.playersList.filter((player) => player.player_ID.toLowerCase().includes(busqueda));
-      console.log(this.jugadoresFiltrados);
     },
     redirectToHistorial(playerId)
     {
@@ -123,7 +124,7 @@ font-family: Asimov, serif;
             <td>{{ player.xp }}</td>
             <td>{{ player.level }}</td>
             <td>{{ player.coins }}</td>
-            <td><img :src="player.img" alt="Imagen del jugador" class="player-image"></td>
+            <!--<td><img :src="player.img" alt="Imagen del jugador" class="player-image"></td>-->
           </tr>
           </tbody>
         </table>

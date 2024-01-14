@@ -4,6 +4,7 @@ export default {
 
   data()
   {
+    //Info player
     return {
       player_ID: "",
       password: "",
@@ -13,6 +14,7 @@ export default {
   methods: {
     async login()
     {
+      //Login del jugador
       const player =
           {
             player_ID: this.player_ID,
@@ -28,7 +30,7 @@ export default {
         localStorage.setItem("token", token);
         localStorage.setItem("player_ID", player.player_ID);
         localStorage.setItem("tokenBearer", "Bearer " + localStorage.getItem("token"));
-
+        localStorage.setItem("inGame", 'false');
         await this.$router.push({ name: "MenuPrincipal" });
       } else {
         // Si hay un error, result.response es el mensaje de error como texto
@@ -40,6 +42,7 @@ export default {
     async postUser(player) {
       try
       {
+        //Post del user
         const response = await fetch
         (
             "https://balandrau.salle.url.edu/i3/players/join",
