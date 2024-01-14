@@ -2,11 +2,16 @@
 import "../assets/header.css";
 import TopBar from "@/components/TopBar.vue";
 import SideBar from "@/components/SideBar.vue";
+
 export default {
+  // Nombre del componente
   name: "CreateArenaView",
-  components: {SideBar, TopBar},
+
+  // Componentes hijos utilizados en el componente principal
+  components: { SideBar, TopBar },
+
+  // Estado de datos inicial para el objeto arena
   data() {
-    // Initial data state for the arena object
     return {
       arena: {
         game_ID: "",
@@ -17,9 +22,9 @@ export default {
   },
 
   methods: {
-    // Method to handle arena creation form submission
+    // Método para manejar la presentación del formulario de creación de arena
     createArena() {
-      // Validation checks for input fields
+      // Validación de campos de entrada
       if (this.arena.size === "" || this.arena.HP_max === "" || this.arena.game_ID === "") {
         alert("Field all fields!");
       } else if (!this.isSizeValid()) {
@@ -29,13 +34,13 @@ export default {
       } else if (!this.isNameValid()) {
         alert("The game ID must have from 1 to 20 characters!");
       } else {
+        // Enviar la creación de la arena y almacenar el ID del juego en el almacenamiento local
         this.postArena();
-        // Store the game ID in local storage and navigate to the GameView
         localStorage.setItem("game_ID", this.arena.game_ID);
       }
     },
 
-    // Method to send a POST request to create an arena
+    // Método para enviar una solicitud POST para crear una arena
     postArena() {
       fetch("https://balandrau.salle.url.edu/i3/arenas", {
         method: "POST",
@@ -45,35 +50,35 @@ export default {
         },
         body: JSON.stringify(this.arena),
       })
-      .then((res) => {
-        // Handle different HTTP response statuses
-        if (res.status === 200 || res.status === 201) {
-          localStorage.setItem("inGame", 'true');
-          this.$router.push({ name: "GameView" });
-        } else if (res.status === 403) {
-          alert("You are already in a game!");
-        } else {
-          // Log and alert the error if the API call fails
-          res.json().then((errorData) => {
-            console.error("Error while calling the API:", errorData);
-            alert("Error while calling the API: " + errorData.message);
+          .then((res) => {
+            // Manejar diferentes estados de respuesta HTTP
+            if (res.status === 200 || res.status === 201) {
+              localStorage.setItem("inGame", 'true');
+              this.$router.push({ name: "GameView" });
+            } else if (res.status === 403) {
+              alert("You are already in a game!");
+            } else {
+              // Registrar y alertar el error si la llamada a la API falla
+              res.json().then((errorData) => {
+                console.error("Error while calling the API:", errorData);
+                alert("Error while calling the API: " + errorData.message);
+              });
+            }
           });
-        }
-      });
     },
 
-    // Method to validate the length of the game ID
+    // Método para validar la longitud del ID del juego
     isNameValid() {
       return this.arena.game_ID.length < 21;
     },
 
-    // Method to validate the size of the arena
+    // Método para validar el tamaño de la arena
     isSizeValid() {
       const size = parseInt(this.arena.size);
       return size >= 2 && size <= 10;
     },
 
-    // Method to validate the maximum HP of the arena
+    // Método para validar el HP máximo de la arena
     isHPValid() {
       const HP_max = parseInt(this.arena.HP_max);
       return HP_max >= 15;
@@ -82,33 +87,38 @@ export default {
 };
 </script>
 
-
 <template>
-
   <head>
+    <!-- Configuración del título de la página -->
     <title>Create Arena</title>
   </head>
 
   <body>
-    <header>
-      <!-- Muestra TopBar en pantallas no móviles -->
-      <TopBar v-if="!isMobile"></TopBar>
-      <!-- Muestra SideBar en pantallas móviles -->
-      <SideBar v-if="isMobile"></SideBar>
-    </header>
+  <header>
+    <!-- Muestra TopBar en pantallas no móviles -->
+    <TopBar v-if="!isMobile"></TopBar>
+    <!-- Muestra SideBar en pantallas móviles -->
+    <SideBar v-if="isMobile"></SideBar>
+  </header>
 
-    <main class="main-container-create-arena">
-      <section class="main-space-create-arena"></section>
-        <form class="arena-section-create-arena" @submit.prevent="createArena()">
-          <input v-model="this.arena.game_ID" type="text" id="arena-id" placeholder="Game Name" class="arena-input-create-arena">
-          <input v-model="this.arena.size" type="number" id="arena-size" placeholder="Size" class="arena-input-create-arena">
-          <input v-model="this.arena.HP_max" type="number" id="arena-hp" placeholder="HP" class="arena-input-create-arena">
-          <button type="submit" id="create-arena-button" class="start-button-create-arena">Start</button>
-        </form>
-    </main>
+  <main class="main-container-create-arena">
+    <section class="main-space-create-arena"></section>
+    <form class="arena-section-create-arena" @submit.prevent="createArena()">
+      <!-- Entrada para el nombre del juego -->
+      <input v-model="this.arena.game_ID" type="text" id="arena-id" placeholder="Game Name" class="arena-input-create-arena">
+
+      <!-- Entrada para el tamaño de la arena -->
+      <input v-model="this.arena.size" type="number" id="arena-size" placeholder="Size" class="arena-input-create-arena">
+
+      <!-- Entrada para el HP máximo de la arena -->
+      <input v-model="this.arena.HP_max" type="number" id="arena-hp" placeholder="HP" class="arena-input-create-arena">
+
+      <!-- Botón para iniciar la arena -->
+      <button type="submit" id="create-arena-button" class="start-button-create-arena">Start</button>
+    </form>
+  </main>
 
   </body>
-
 </template>
 
 <style scoped>
