@@ -25,7 +25,7 @@ export default
   created() {
     // Añadir listener para el redimensionamiento de la ventana
     window.addEventListener('resize', this.handleResize);
-    this.handleResize(); // Establecer el estado inicial basado en el tamaño de la ventana
+    this.handleResize(); // Llama al inicio para establecer el estado inicial
   },
   unmounted() {
     // Eliminar listener al desmontar el componente
@@ -79,7 +79,6 @@ export default
     },
     chargeProfile(data)
     {
-      //Cargar informacion del perfil
       if(data)
       {
         this.player_ID = data.player_ID;
@@ -169,9 +168,6 @@ export default
 
       <div id="perfil-container">
         <h3 class="perfil-jugador">Perfil del Jugador</h3>
-        <router-link to="/">
-          <button id="logout">Cerrar Sesion</button>
-        </router-link>
         <div id="idperfil">
           <img id="imagen-perfil" v-bind:src="img" alt="Imagen de perfil">
           <h2 class="nombre-perfil">Nombre del Jugador: {{player_ID}}</h2>
@@ -183,7 +179,6 @@ export default
           <p id="victorias">Victorias: {{ games_won }}</p>
           <p id="derrotas">Derrotas: {{ games_played - games_won }}</p>
         </div>
-
         <router-link to="/EliminarPlayer">
           <img id="imagen-ajustes" src="../../public/InfoPlayerImages/icono-ajustes.webp" alt="Imagen de ajustes">
         </router-link>
@@ -192,7 +187,6 @@ export default
       <div id="backpack-at"><strong><u style="
         margin-top: 10px;
         margin-bottom: 10px">Ataques Backpack</u></strong>
-        <!-- Sección de ataques en el Backpack -->
         <section class="attackTable">
           <div v-if="attackList.length === 0">
             <p>Sin Ataques en el Backpack</p>
@@ -209,7 +203,6 @@ export default
         <div id="next-attacks"><strong><u style="
         margin-top: 10px;
         margin-bottom: 10px">Ataques Equipados</u></strong>
-          <!-- Sección de ataques equipados -->
           <section class="attackTable">
             <div v-if="equippedAttacks.length === 0">
               <p>Sin Ataques equipados para proximos juegos</p>
@@ -242,7 +235,7 @@ export default
   display: flex;
   flex-direction: column;
   position: relative;
-  top: 1%;
+  top: 3%;
   left: 8%;
   width: 85%;
 }
@@ -253,10 +246,10 @@ export default
   text-align: center;
   background-color: #87CEEB;
   width: 46%;
-  height: 37%;
+  height: 45%;
   border-radius: 3%;
   left: 5%;
-  top: 61%;
+  top: 53%;
   position: absolute;
   font-family: "Calisto MT";
   font-size: 1.2em;
@@ -274,8 +267,8 @@ export default
   text-align: center;
   background-color: #87CEEB;
   right: 4%;
-  top: 61%;
-  height: 37%;
+  top: 53%;
+  height: 45%;
   border-radius: 3%;
   width: 42%;
   font-family: "Calisto MT";
@@ -319,20 +312,16 @@ export default
   font-family: Asimov;
 }
 
-#victorias {
-  font-size: 1.2em;
-  color: #ffffff;
-  font-family: Asimov;
-}
-
-#derrotas {
-  font-size: 1.2em;
-  color: #ffffff;
-  font-family: Asimov;
+.perfil-titulo {
+  font-size: 2em; /* Ajusta el tamaño del título según tus necesidades */
+  text-align: left;
+  font-family: Asimov, serif;
+  color: #FFDB58;
+  margin-left: 5%;
 }
 
 .perfil-jugador {
-  font-size: 2em;
+  font-size: 2em; /* Ajusta el tamaño del título según tus necesidades */
   text-align: left;
   font-family: Asimov, serif;
   color: #FFDB58;
@@ -341,7 +330,7 @@ export default
   margin-top: 20px;
 }
 
-@media only screen and (max-width: 300px) {
+@media only screen and (max-width: 1100px) {
   .imgbackg {
     padding: 10px;
   }
@@ -363,6 +352,8 @@ export default
     border-radius: 5%;
     height: 37%;
   }
+
+
 }
 
 #ataques{
@@ -413,19 +404,4 @@ export default
   flex-wrap: nowrap;
   align-items: center;
 }
-
-#logout {
-  position: absolute;
-  right: 2%;
-  padding: 10px;
-  background-color: #4CAF50;
-  color: white;
-  border: none;
-  top: 1%;
-  border-radius: 5px;
-  cursor: pointer;
-  width: 15%;
-  font-size: 9px;
-}
-
 </style>

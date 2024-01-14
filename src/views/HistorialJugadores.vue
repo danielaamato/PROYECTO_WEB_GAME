@@ -1,11 +1,16 @@
 <script>
 import "../assets/main.css";
+import TopBar from "@/components/TopBar.vue";
+import SideBar from "@/components/SideBar.vue";
 
 export default {
   name: "HistorialJugadores",
+  components: {SideBar, TopBar},
 
   data() {
     return {
+      playerID: localStorage.getItem("player_ID"),
+      isMobile: window.innerWidth <= 700, // Inicializa según el ancho de la ventana
       games_played: 0,
       games_won: 0,
       gamesHistorial: [],
@@ -70,9 +75,11 @@ export default {
             this.games_won = data.games_won;
             this.games_played = data.games_played;
           });
+    },
+    handleResize() {
+      this.isMobile = window.innerWidth <= 700;
     }
   },
-
   computed: {
     // Calcula el porcentaje de juegos ganados
     winPercentage()
@@ -83,21 +90,26 @@ export default {
 
   created()
   {
+    window.addEventListener('resize', this.handleResize);
+    this.handleResize(); // Llama al inicio para establecer el estado inicial
     this.getPlayerStats();
     this.getPlayerHistorial();
   },
+  unmounted() {
+    window.removeEventListener('resize', this.handleResize);
+  }
 };
 </script>
 
 <template>
+  <!-- Muestra TopBar en pantallas no móviles -->
+  <TopBar v-if="!isMobile"></TopBar>
+  <!-- Muestra SideBar en pantallas móviles -->
+  <SideBar v-if="isMobile"></SideBar>
 
   <div class="imgbackg" alt="Background">
-  <router-link to="/MenuPrincipal" class="game-title">Battle Arena</router-link>
-  <h2 id="historialTitle">Historial de {{$route.query.playerId}}
-    </h2>
-    <router-link :to="{ name: 'ListadoJugadores' }">
-      <button id="buttonBackToList">Volver al Listado</button>
-    </router-link>
+  <h2 id="historialTitle">Historial de {{this.playerID}}</h2>
+
 
   <section class="historialPlayers">
     <table class="tableHistoring">
@@ -105,26 +117,24 @@ export default {
         <th>Juegos Finalizados</th>
         <th>Porcentaje de Juegos Ganados</th>
       </tr>
-      <tr>
-        <tr v-if="gamesHistorial.length === 0">
-          <td colspan="5">No ha participado en ningun juego</td>
-        </tr>
-        <tr v-for="game in gamesHistorial" :key="game.game_ID" class="player-historial-container">
-          <td>Game ID: {{ game.game_ID }}</td>
-          <td>Game Size: {{ game.size }}</td>
-          <td>Game Creation Date: {{ game.creation_date }}</td>
-          <td>Max HP: {{game.HP_max}}</td>
-          <td>
-            <ul>
-              <li v-for="playerGame in game.players_games" :key="playerGame.player_ID">
-                Player ID: {{ playerGame.player_ID }}, Game ID: {{ playerGame.game_ID }},
-                Winner: {{ playerGame.winner }}, XP Won: {{ playerGame.xp_win}}, Coins Won: {{ playerGame.coins_win}}
-              </li>
-            </ul>
-          </td>
-        </tr>
-        <td>{{ winPercentage.toFixed(2) }}%</td>
+      <tr v-if="gamesHistorial.length === 0">
+        <td colspan="5">No ha participado en ningun juego</td>
       </tr>
+      <tr v-for="game in gamesHistorial" :key="game.game_ID" class="player-historial-container">
+        <td>Game ID: {{ game.game_ID }}</td>
+        <td>Game Size: {{ game.size }}</td>
+        <td>Game Creation Date: {{ game.creation_date }}</td>
+        <td>Max HP: {{game.HP_max}}</td>
+        <td>
+          <ul>
+            <li v-for="playerGame in game.players_games" :key="playerGame.player_ID">
+              Player ID: {{ playerGame.player_ID }}, Game ID: {{ playerGame.game_ID }},
+              Winner: {{ playerGame.winner }}, XP Won: {{ playerGame.xp_win}}, Coins Won: {{ playerGame.coins_win}}
+            </li>
+          </ul>
+        </td>
+      </tr>
+      <td>{{ winPercentage.toFixed(2) }}%</td>
     </table>
   </section>
   </div>

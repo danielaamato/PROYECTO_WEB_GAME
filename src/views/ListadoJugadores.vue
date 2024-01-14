@@ -1,7 +1,10 @@
 <script>
 import "../assets/main.css";
+import TopBar from "@/components/TopBar.vue";
+import SideBar from "@/components/SideBar.vue";
 export default {
   name: "ListadoJugadores",
+  components: {SideBar, TopBar},
 
   data()
   {
@@ -10,6 +13,7 @@ export default {
       jugadorBuscado: "",
       jugadoresFiltrados: [],
       isMobileView: window.innerWidth <= 503,
+      isMobile: window.innerWidth <= 700 // Inicializa según el ancho de la ventana
     }
   },
 
@@ -27,6 +31,13 @@ export default {
 
     // Escuchar cambios en el tamaño de la ventana para actualizar isMobileView
     window.addEventListener("resize", this.handleWindowSizeChange);
+  },
+  created() {
+    window.addEventListener('resize', this.handleResize);
+    this.handleResize(); // Llama al inicio para establecer el estado inicial
+  },
+  unmounted() {
+    window.removeEventListener('resize', this.handleResize);
   },
 
   methods: {
@@ -80,16 +91,24 @@ export default {
       //Busqueda de jugador
       const busqueda = this.jugadorBuscado.toLowerCase();
       this.jugadoresFiltrados = this.playersList.filter((player) => player.player_ID.toLowerCase().includes(busqueda));
+      console.log(this.jugadoresFiltrados);
     },
     redirectToHistorial(playerId)
     {
       this.$router.push({ name: 'HistorialJugadores', query: { playerId: playerId } });
     },
+    handleResize() {
+      this.isMobile = window.innerWidth <= 700;
+    }
   }
 };
 </script>
 
 <template>
+  <!-- Muestra TopBar en pantallas no móviles -->
+  <TopBar v-if="!isMobile"></TopBar>
+  <!-- Muestra SideBar en pantallas móviles -->
+  <SideBar v-if="isMobile"></SideBar>
 
   <div>
     <router-link to="/MenuPrincipal" class="game-title">Battle Arena</router-link>
@@ -124,6 +143,7 @@ font-family: Asimov, serif;
             <td>{{ player.xp }}</td>
             <td>{{ player.level }}</td>
             <td>{{ player.coins }}</td>
+            <!-- Se comenta el mostrar la imagen ya que ay gente que ha introducido mal las urls -->
             <!--<td><img :src="player.img" alt="Imagen del jugador" class="player-image"></td>-->
           </tr>
           </tbody>
