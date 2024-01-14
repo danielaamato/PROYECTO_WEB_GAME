@@ -43,7 +43,8 @@ export default {
           .then((res) => {
             // Handle different HTTP response statuses
             if (res.status === 204) {
-              localStorage.setItem("inGame", 'false');
+              console.log("Game ended");
+              //localStorage.setItem("inGame", 'false');
               this.$router.push({ name: "WinLossView" });
               return res.json();
             } else {
