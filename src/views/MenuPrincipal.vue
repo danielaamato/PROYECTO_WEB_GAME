@@ -18,14 +18,21 @@ export default {
     return {
       showStorePopup: false,
       showSpecialOfferPopup: false,
-      isGameStarted: localStorage.getItem("inGame"),
-      isMobile: window.innerWidth <= 700 // Inicializa según el ancho de la ventana
+      isGameStarted: false,
+      isMobile: window.innerWidth <= 700, // Inicializa según el ancho de la ventana
+      arena: {  //Creamos un objeto aleatorio de arena para comprobar si el usuario ya esta en una partida
+        game_ID: "checkinfoarena",
+        size: 4,
+        HP_max: 15,
+      }
     };
+  },
+  mounted() {
+    this.postArena();
   },
   created() {
     window.addEventListener('resize', this.handleResize);
     this.handleResize(); // Llama al inicio para establecer el estado inicial
-    this.postArena();
   },
   unmounted() {
     window.removeEventListener('resize', this.handleResize);
@@ -34,25 +41,27 @@ export default {
     handleResize() {
       this.isMobile = window.innerWidth <= 700;
     },
+    // Comprueba si da el error 403 dando a entender que esta en una partida
     postArena() {
       fetch("https://balandrau.salle.url.edu/i3/arenas", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Bearer: localStorage.getItem("token"),
-        }
+        },
+        body: JSON.stringify(this.arena)
       })
-          .then((res) => {
-            if (res.status === 403) {
-              localStorage.setItem("inGame", 'true');
-            } else {
-              // Log and alert the error if the API call fails
-              res.json().then((errorData) => {
-                console.error("Error while calling the API:", errorData);
-                alert("Error while calling the API: " + errorData.message);
-              });
-            }
+      .then((res) => {
+        if (res.status === 403) {
+          localStorage.setItem("inGame", 'true')
+          this.isGameStarted = 'true';
+        } else {
+          // Log and alert the error if the API call fails
+          res.json().then((errorData) => {
+            alert("Error while calling the API: " + errorData.message + " " + localStorage.getItem("token"));
           });
+        }
+      });
     }
   }
 };
