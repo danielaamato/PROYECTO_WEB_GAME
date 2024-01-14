@@ -51,6 +51,9 @@ export default {
     // Establecer intervalo para llamar a getGame cada 5 segundos
     this.intervalId = setInterval(this.getGame, 5000);
   },
+  unmounted() {
+    clearInterval(this.intervalId);
+  },
 
   methods: {
     // Método para obtener los datos del juego desde la API
@@ -78,13 +81,16 @@ export default {
           })
           .then((data) => {
             // Establecer los datos del juego recuperados en el estado del componente
-            this.arena = data[0];
+            if (data && data[0]) {
+              // Establecer los datos del juego recuperados en el estado del componente
+              this.arena = data[0];
 
-            // Verificar si el juego ha terminado
-            if (this.arena.finished) {
-              // Detener el intervalo y redirigir a la vista de victoria/derrota
-              clearInterval(this.intervalId);
-              this.$router.push({ name: "WinLossView" });
+              // Verificar si el juego ha terminado
+              if (this.arena.finished) {
+                // Detener el intervalo y redirigir a la vista de victoria/derrota
+                clearInterval(this.intervalId);
+                this.$router.push({name: "WinLossView"});
+              }
             }
           })
     },

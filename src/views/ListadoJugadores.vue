@@ -111,12 +111,11 @@ export default {
   <SideBar v-if="isMobile"></SideBar>
 
   <div>
-    <router-link to="/MenuPrincipal" class="game-title">Battle Arena</router-link>
     <h2 style="
       margin-top: 20px;
       margin-bottom: 20px;
       margin-left: 30px;
-font-family: Asimov, serif;
+      font-family: Asimov, serif;
         ">Listado de Jugadores</h2>
 
   <section class="listadoPlayers">

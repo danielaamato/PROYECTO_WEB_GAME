@@ -135,23 +135,20 @@ export default
           "Bearer": localStorage.getItem("token"),
         },
       })
-          .then((res) => {
-            if (res.status === 200) {
-              return res.json();
-            } else {
-              console.error("Error fetching statistics");
-              return null;
-            }
-          })
-          .then((data) => {
-            if (data && data.length > 0) {
-              this.games_played = data[0].games_played;
-              this.games_won = data[0].games_won;
-            }
-          })
-          .catch((error) => {
-            console.error("Error in getStatistics method:", error);
-          });
+      .then((res) => {
+        if (res.status === 200) {
+          return res.json();
+        } else {
+          console.error("Error fetching statistics");
+          return null;
+        }
+      })
+      .then((data) => {
+        if (data && data.length > 0) {
+          this.games_played = data[0].games_played;
+          this.games_won = data[0].games_won;
+        }
+      });
     },
   }
 };

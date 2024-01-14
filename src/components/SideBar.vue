@@ -52,9 +52,8 @@ export default {
               this.$router.push({ name: "WinLossView" });
               return res.json();
             } else {
-              res.json().then(errorData => {
-                console.error("Error while calling the API:", errorData);
-                alert("Error while calling the API: " + errorData.message);
+              res.json().then(() => {
+                alert("Error while calling the API!");
               });
             }
           })
@@ -86,14 +85,13 @@ export default {
           Bearer: localStorage.getItem("token"),
         }
       })
-        .then(response => response.json())
-        .then(data => {
-          this.player_ID = data.player_ID;
-          this.img = data.img;
-          this.level = data.level;
-          this.coins = data.coins;
-        })
-        .catch(error => console.error("Error:", error));
+      .then(response => response.json())
+      .then(data => {
+        this.player_ID = data.player_ID;
+        this.img = data.img;
+        this.level = data.level;
+        this.coins = data.coins;
+      })
     }
   }
 };

@@ -40,20 +40,19 @@ export default {
           Bearer: localStorage.getItem("token"),
         },
       })
-          .then((res) => {
-            // Handle different HTTP response statuses
-            if (res.status === 204) {
-              console.log("Game ended");
-              //localStorage.setItem("inGame", 'false');
-              this.$router.push({ name: "WinLossView" });
-              return res.json();
-            } else {
-              res.json().then(errorData => {
-                console.error("Error while calling the API:", errorData);
-                alert("Error while calling the API: " + errorData.message);
-              });
-            }
-          })
+      .then((res) => {
+        // Handle different HTTP response statuses
+        if (res.status === 204) {
+          console.log("Game ended");
+          localStorage.setItem("inGame", 'false');
+          this.$router.push({ name: "WinLossView" });
+          return res.json();
+        } else {
+          res.json().then(() => {
+            alert("Error while calling the API!");
+          });
+        }
+      })
     },
 
     getInfoPlayer() {
@@ -75,7 +74,6 @@ export default {
           localStorage.setItem("level", data.level);
           localStorage.setItem("coins", data.coins);
         })
-        .catch(error => console.error("Error:", error));
     }
   }
 };
@@ -107,7 +105,6 @@ export default {
       {{ isGameView ? 'Salir' : 'Perfil' }}
     </router-link>
     <!-- Botón de Perfil para pantallas de ordenador -->
-    <router-link to="/InfoPlayer" class="nav-button desktop" v-if="showUserInfo">Perfil</router-link>
     <router-link to="/" class="logout-button" v-if="!showUserInfo">Logout</router-link>
   </header>
 </template>

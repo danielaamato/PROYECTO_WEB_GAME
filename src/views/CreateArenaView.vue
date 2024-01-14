@@ -18,6 +18,7 @@ export default {
         size: 0,
         HP_max: 0,
       },
+      isMobile: window.innerWidth <= 700
     };
   },
 
@@ -36,7 +37,6 @@ export default {
       } else {
         // Enviar la creación de la arena y almacenar el ID del juego en el almacenamiento local
         this.postArena();
-        localStorage.setItem("game_ID", this.arena.game_ID);
       }
     },
 
@@ -54,13 +54,13 @@ export default {
             // Manejar diferentes estados de respuesta HTTP
             if (res.status === 200 || res.status === 201) {
               localStorage.setItem("inGame", 'true');
+              localStorage.setItem("game_ID", this.arena.game_ID);
               this.$router.push({ name: "GameView" });
             } else if (res.status === 403) {
               alert("You are already in a game!");
             } else {
               // Registrar y alertar el error si la llamada a la API falla
               res.json().then((errorData) => {
-                console.error("Error while calling the API:", errorData);
                 alert("Error while calling the API: " + errorData.message);
               });
             }

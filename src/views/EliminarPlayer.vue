@@ -34,7 +34,7 @@ export default {
       <p id="deleteplayer">¿Desea eliminar a este jugador?</p>
 
       <!-- Use router-link for the checkmark image with click event -->
-      <router-link to="HomeView" id="imagen-check" @click="deletePlayer">
+      <router-link to="/" id="imagen-check" @click="deletePlayer">
         <img src="public/InfoPlayerImages/checkmark.png" alt="Checkmark Image" id="imgCheck"/>
       </router-link>
 

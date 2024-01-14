@@ -19,16 +19,14 @@ export default {
       showStorePopup: false,
       showSpecialOfferPopup: false,
       isGameStarted: localStorage.getItem("inGame"),
-      isMobile: window.innerWidth <= 700, // Inicializa según el ancho de la ventana
-      arena: {  //Creamos un objeto aleatorio de arena para comprobar si el usuario ya esta en una partida
-        game_ID: "checkinfoarena",
-        size: 4,
-        HP_max: 15,
+      isMobile: window.innerWidth <= 700, // Inicializa según el ancho de la ventanaarena: {
+      arena: {
+        finished: false,
       }
     };
   },
   mounted() {
-    this.postArena();
+    this.getIfIsInArena();
   },
   created() {
     window.addEventListener('resize', this.handleResize);
@@ -42,29 +40,25 @@ export default {
       this.isMobile = window.innerWidth <= 700;
     },
     // Comprueba si da el error 403 dando a entender que esta en una partida
-    postArena() {
-      fetch("https://balandrau.salle.url.edu/i3/arenas", {
-        method: "POST",
+    getIfIsInArena() {
+      fetch("https://balandrau.salle.url.edu/i3/players/arenas/current", {
+        method: "GET",
         headers: {
           "Content-Type": "application/json",
           Bearer: localStorage.getItem("token"),
         },
-        body: JSON.stringify(this.arena)
       })
-      .then((res) => {
-        if (res.status === 403) {
-          //localStorage.setItem("inGame", 'true')
-          //this.isGameStarted = 'true';
-          //if (localStorage.getItem("inGame") === 'true') {
-            //this.isGameStarted = 'true';
-          //}
-        } else {
-          // Log and alert the error if the API call fails
-          res.json().then((errorData) => {
-            alert("Error while calling the API: " + errorData.message + " " + localStorage.getItem("token"));
-          });
+      .then((data) => {
+        // Establecer los datos del juego recuperados en el estado del componente
+        if (data && data[0]) {
+          // Establecer los datos del juego recuperados en el estado del componente
+          this.arena = data[0];
+          // Verificar si el juego ha terminado
+          if (!this.arena.finished) {
+            this.isGameStarted = 'false';
+          }
         }
-      });
+      })
     }
   }
 };
