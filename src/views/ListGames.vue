@@ -1,10 +1,12 @@
 <script>
+// Importing necessary stylesheets
 import "../assets/main.css";
 import "../assets/header.css";
 export default {
   name: "ListGames",
 
   data() {
+    // Initial data state for the ListGames component
     return {
       gamesList: [],
       gameBuscado: "",
@@ -13,8 +15,9 @@ export default {
     }
   },
 
+  // Lifecycle hook: called after the component has been mounted
   mounted() {
-    // If user has not already logged in go to SignIn
+    // If user has not already logged in go to SignIn, else get the list of arenas
     if (localStorage.getItem("token") == null) {
       this.$router.push({ name: "HomeView" });
     }
@@ -22,16 +25,17 @@ export default {
       this.getArenasList();
     }
 
-    // Escuchar cambios en el tamaño de la ventana para actualizar isMobileView
+    // Listen for changes in the window size to update isMobileView
     window.addEventListener("resize", this.handleWindowSizeChange);
   },
 
   methods: {
-    // Método para manejar cambios en el tamaño de la ventana
+    // Method to handle changes in the window size
     handleWindowSizeChange() {
       this.isMobileView = window.innerWidth <= 503;
     },
 
+    // Method to fetch the list of arenas from the API
     getArenasList() {
       fetch("https://balandrau.salle.url.edu/i3/arenas/", {
         method: "GET",
@@ -40,22 +44,25 @@ export default {
           Bearer: localStorage.getItem("token"),
         },
       })
-          // Check if response was correct
+          // Check if the response was correct
           .then((res) => {
             if (res.status === 200) {
               return res.json();
             }
             else {
+              // Redirect to HomeView if there's an error
               this.$router.push({name: "HomeView"});
               alert("Error while calling the API");
               return null;
             }
           })
           .then((data) => {
+            // Load the table with the retrieved data
             this.chargeTable(data)
           });
     },
 
+    // Method to populate the table with arena data
     chargeTable(data) {
       if (data) {
         this.gamesList = data;
@@ -66,13 +73,14 @@ export default {
       }
     },
 
-
+    // Method to filter games based on search criteria
     searchGame() {
       const busqueda = this.gameBuscado.toLowerCase();
       this.gamesFiltrados = this.gamesList.filter((game) => game.game_ID.toLowerCase().includes(busqueda));
       console.log(this.gamesFiltrados);
     },
 
+    // Method to join an arena and navigate to the GameView
     joinArena(game) {
       if (game.start === false && game.finished === false) {
         this.postEnterGame(game);
@@ -80,9 +88,9 @@ export default {
       } else {
         alert("The game has already started or finished!");
       }
-
     },
 
+    // Method to send a POST request to join an arena
     postEnterGame(game) {
       fetch("https://balandrau.salle.url.edu/i3/arenas/" + game.game_ID + "/play", {
         method: "POST",
@@ -101,6 +109,7 @@ export default {
               alert("You are already in a game!");
             }
             else {
+              // Log and alert the error if the API call fails
               res.json().then(errorData => {
                 console.error("Error while calling the API:", errorData);
                 alert("Error while calling the API: " + errorData.message);
@@ -108,7 +117,6 @@ export default {
             }
           })
     },
-
   }
 };
 </script>

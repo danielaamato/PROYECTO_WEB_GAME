@@ -19,6 +19,7 @@ export default {
   },
 
   methods:{
+    //Request del historial del jugador
     getPlayerHistorial()
     {
       fetch("https://balandrau.salle.url.edu/i3/players/" + this.$route.query.playerId + "/games/finished", {
@@ -44,10 +45,9 @@ export default {
           .then((data) =>
           {
             this.gamesHistorial = data;
-            console.log(this.gamesHistorial);
           });
     },
-
+  //Request de estadisticas del jugador
     getPlayerStats()
     {
       fetch("https://balandrau.salle.url.edu/i3/players/" + this.$route.query.playerId + "/statistics", {
@@ -186,12 +186,12 @@ export default {
 .tableHistoring th,
 .tableHistoring td {
   padding: 4px;
-  border: 1px solid #000; /* Añade borde a las celdas de la tabla */
+  border: 1px solid #000;
   text-align: center;
 }
 
 .tableHistoring th {
-  background-color: lightblue; /* Color de fondo para la fila de encabezado */
+  background-color: lightblue;
 }
 
 #historialTitle

@@ -47,6 +47,7 @@ export default {
     },
 
     getPlayersList() {
+      //Request de todos los jugadores
       fetch("https://balandrau.salle.url.edu/i3/players/", {
         method: "GET",
         headers: {
@@ -87,6 +88,7 @@ export default {
     },
     searchPlayer()
     {
+      //Busqueda de jugador
       const busqueda = this.jugadorBuscado.toLowerCase();
       this.jugadoresFiltrados = this.playersList.filter((player) => player.player_ID.toLowerCase().includes(busqueda));
       console.log(this.jugadoresFiltrados);
@@ -109,12 +111,14 @@ export default {
   <SideBar v-if="isMobile"></SideBar>
 
   <div>
+    <router-link to="/MenuPrincipal" class="game-title">Battle Arena</router-link>
     <h2 style="
       margin-top: 20px;
       margin-bottom: 20px;
       margin-left: 30px;
-      font-family: Asimov, serif;
+font-family: Asimov, serif;
         ">Listado de Jugadores</h2>
+
   <section class="listadoPlayers">
     <input type="text" v-model="jugadorBuscado" @input="searchPlayer" placeholder="Buscar Jugador...">
     <div class="tableContainer">

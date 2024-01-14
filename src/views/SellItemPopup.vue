@@ -34,9 +34,8 @@ export default {
               throw new Error(`Error en la solicitud: Estado ${response.status}`);
             }
           })
-          .catch(error => {
-            console.error("Error al crear el ataque:", error);
-            alert("Error al vender el ataque. Ver consola para más detalles.");
+          .catch(()=> {
+            alert("Error al vender el ataque.");
           });
     }
   }

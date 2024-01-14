@@ -2,9 +2,10 @@
 import TopBar from "@/components/TopBar.vue";
 import SideBar from "@/components/SideBar.vue";
 
-export default {
+export default
+{
   name: "SignIn",
-  components: { SideBar, TopBar },
+  components: {SideBar, TopBar},
 
   data() {
     // Estado inicial del componente
@@ -14,65 +15,88 @@ export default {
       xp: 0,
       level: 0,
       coins: 0,
+      games_played: 0,
+      games_won: 0,
       attackList: [],
       equippedAttacks: [],
-      isMobile: window.innerWidth <= 700 // Determina si la vista es móvil
-    };
+      isMobile: window.innerWidth <= 700 // Inicializa según el ancho de la ventana
+    }
   },
-
   created() {
-    // Event listeners para el redimensionamiento de la ventana
+    // Añadir listener para el redimensionamiento de la ventana
     window.addEventListener('resize', this.handleResize);
-    this.handleResize(); // Establece el estado inicial de 'isMobile'
+    this.handleResize(); // Llama al inicio para establecer el estado inicial
   },
-
   unmounted() {
-    // Limpieza: eliminar event listener al desmontar
+    // Eliminar listener al desmontar el componente
     window.removeEventListener('resize', this.handleResize);
   },
-
   mounted() {
-    // Comprobación de autenticación y obtención de datos del jugador
-    if (!localStorage.getItem("token")) {
+    // Métodos para obtener información del jugador y estadísticas
+    if (localStorage.getItem("token") == null)
+    {
       this.$router.push({ name: "HomeView" });
-    } else {
+    }
+    else
+    {
       this.getInfoPlayer();
+      this.getStatistics();
     }
   },
 
   methods: {
-    // Obtener información del jugador
-    getInfoPlayer() {
-      let playerID = localStorage.getItem("player_ID");
+    getInfoPlayer()
+    {
+      //Get player ID
+      let playerID = null;
+      playerID = localStorage.getItem("player_ID");
 
-      fetch(`https://balandrau.salle.url.edu/i3/players/${playerID}`, {
+      fetch("https://balandrau.salle.url.edu/i3/players/" + playerID, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
           Bearer: localStorage.getItem("token"),
         },
       })
-          .then(res => res.status === 200 ? res.json() : Promise.reject('Error'))
-          .then(this.chargeProfile)
-          .catch(() => {
-            this.$router.push({ name: "HomeView" });
-            alert("Error while calling the API");
+          // Check if response was correct
+          .then((res) =>
+          {
+            if (res.status === 200)
+            {
+              return res.json();
+            }
+            else
+            {
+              this.$router.push({name: "HomeView"});
+              alert("Error while calling the API");
+              return null;
+            }
+          })
+          .then((data) =>
+          {
+            this.chargeProfile(data)
           });
     },
-
-    // Cargar perfil del jugador
-    chargeProfile(data) {
-      if (data) {
-        Object.assign(this, data);
+    chargeProfile(data)
+    {
+      if(data)
+      {
+        this.player_ID = data.player_ID;
+        this.img = data.img;
+        this.coins = data.coins;
+        this.xp = data.xp;
+        this.level = data.level;
         this.chargeAttacks();
-      } else {
+      }
+      else
+      {
         console.error("Data is undefined or has unexpected structure.");
       }
     },
 
-    // Cargar ataques del jugador
     chargeAttacks()
     {
+      //Request de ataques
       fetch("https://balandrau.salle.url.edu/i3/players/attacks", {
         method: "GET",
         headers: {
@@ -99,83 +123,100 @@ export default {
             this.equippedAttacks = data.filter((ataque) => ataque.equipped);
           });
     },
-    // Manejar redimensionamiento de la ventana
     handleResize() {
       this.isMobile = window.innerWidth <= 700;
-    }
+    },
+    getStatistics() {
+      //Get de estadisticas del jugador
+      fetch("https://balandrau.salle.url.edu/i3/players/statistics", {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          "Bearer": localStorage.getItem("token"),
+        },
+      })
+          .then((res) => {
+            if (res.status === 200) {
+              return res.json();
+            } else {
+              console.error("Error fetching statistics");
+              return null;
+            }
+          })
+          .then((data) => {
+            if (data && data.length > 0) {
+              this.games_played = data[0].games_played;
+              this.games_won = data[0].games_won;
+            }
+          })
+          .catch((error) => {
+            console.error("Error in getStatistics method:", error);
+          });
+    },
   }
 };
 </script>
 
-
 <template>
-  <!-- Encabezado: Muestra TopBar o SideBar según el tipo de dispositivo -->
-  <header>
-    <!-- TopBar para dispositivos no móviles -->
-    <TopBar class="top-bar" v-if="!isMobile" :showUserInfo="false"></TopBar>
-    <!-- SideBar para dispositivos móviles -->
-    <SideBar class="side-bar" v-if="isMobile" :showUserInfo="false"></SideBar>
-  </header>
+  <!-- Muestra TopBar en pantallas no móviles -->
+  <TopBar class = "top-bar" v-if="!isMobile" :showUserInfo="false "></TopBar>
+  <!-- Muestra SideBar en pantallas móviles -->
+  <SideBar class = "side-bar" v-if="isMobile" :showUserInfo="false "></SideBar>
 
-  <!-- Contenido principal -->
-  <main>
-    <!-- Sección del Perfil del Jugador -->
-    <section class="imgbackg4" aria-label="Background">
-      <article id="perfil-container">
+    <div class="imgbackg4" alt="Background">
+      <!-- Contenido del perfil del jugador -->
+
+      <div id="perfil-container">
         <h3 class="perfil-jugador">Perfil del Jugador</h3>
         <div id="idperfil">
-          <img id="imagen-perfil" v-bind:src="img" alt="Imagen de perfil del jugador">
-          <h2 class="nombre-perfil">Nombre del Jugador: {{ player_ID }}</h2>
+          <img id="imagen-perfil" v-bind:src="img" alt="Imagen de perfil">
+          <h2 class="nombre-perfil">Nombre del Jugador: {{player_ID}}</h2>
         </div>
         <div id="idinfo">
           <p id="nivel-perfil">Nivel: {{ level }}</p>
           <p id="xp">XP: {{ xp }}</p>
           <p id="monedas">Monedas: {{ coins }}</p>
+          <p id="victorias">Victorias: {{ games_won }}</p>
+          <p id="derrotas">Derrotas: {{ games_played - games_won }}</p>
         </div>
         <router-link to="/EliminarPlayer">
-          <img id="imagen-ajustes" src="../../public/InfoPlayerImages/icono-ajustes.webp" alt="Configuración del jugador">
+          <img id="imagen-ajustes" src="../../public/InfoPlayerImages/icono-ajustes.webp" alt="Imagen de ajustes">
         </router-link>
-      </article>
+      </div>
 
-      <!-- Sección de Ataques en la Mochila -->
-      <section id="backpack-at">
-        <h4>Ataques Backpack</h4>
-        <div class="attackTable">
-          <!-- Mensaje si no hay ataques equipados -->
-          <div v-if="equippedAttacks.length === 0">
-            <p>Sin Ataques equipados para próximos juegos</p>
+      <div id="backpack-at"><strong><u style="
+        margin-top: 10px;
+        margin-bottom: 10px">Ataques Backpack</u></strong>
+        <section class="attackTable">
+          <div v-if="attackList.length === 0">
+            <p>Sin Ataques en el Backpack</p>
           </div>
-          <!-- Lista de ataques equipados -->
-          <div v-for="ataque in equippedAttacks" :key="ataque.attack_ID" class="attack-container">
+          <div v-for="ataque in attackList" :key="ataque.attack_ID" class="attack-container">
             <p><strong>Nombre:</strong> {{ ataque.attack_ID }}</p>
             <p><strong>Posiciones:</strong> {{ ataque.positions }}</p>
             <p><strong>Fuerza:</strong> {{ ataque.power }}</p>
             <p><strong>¿Equipado?:</strong> {{ ataque.equipped ? 'Si' : 'No' }}</p>
             <p><strong>¿En oferta?:</strong> {{ ataque.on_sale ? 'Si' : 'No' }}</p>
           </div>
+        </section>
+      </div>
+        <div id="next-attacks"><strong><u style="
+        margin-top: 10px;
+        margin-bottom: 10px">Ataques Equipados</u></strong>
+          <section class="attackTable">
+            <div v-if="equippedAttacks.length === 0">
+              <p>Sin Ataques equipados para proximos juegos</p>
+            </div>
+            <div v-for="ataque in equippedAttacks" :key="ataque.attack_ID" class="attack-container">
+              <p><strong>Nombre:</strong> {{ ataque.attack_ID }}</p>
+              <p><strong>Posiciones:</strong> {{ ataque.positions }}</p>
+              <p><strong>Fuerza:</strong> {{ ataque.power }}</p>
+              <p><strong>¿Equipado?:</strong> {{ ataque.equipped ? 'Si' : 'No' }}</p>
+              <p><strong>¿En oferta?:</strong> {{ ataque.on_sale ? 'Si' : 'No' }}</p>
+            </div>
+          </section>
         </div>
-      </section>
-
-      <!-- Sección de Ataques Equipados -->
-      <section id="next-attacks">
-        <h4>Ataques Equipados</h4>
-        <div class="attackTable">
-          <!-- Mensaje si no hay ataques equipados -->
-          <div v-if="equippedAttacks.length === 0">
-            <p>Sin Ataques equipados para próximos juegos</p>
-          </div>
-          <!-- Lista de ataques equipados -->
-          <div v-for="ataque in equippedAttacks" :key="ataque.attack_ID" class="attack-container">
-            <p><strong>Nombre:</strong> {{ ataque.attack_ID }}</p>
-            <p><strong>Posiciones:</strong> {{ ataque.positions }}</p>
-            <p><strong>Fuerza:</strong> {{ ataque.power }}</p>
-            <p><strong>¿Equipado?:</strong> {{ ataque.equipped ? 'Si' : 'No' }}</p>
-            <p><strong>¿En oferta?:</strong> {{ ataque.on_sale ? 'Si' : 'No' }}</p>
-          </div>
-        </div>
-      </section>
-    </section>
-  </main>
+      </div>
 </template>
 
 <style scoped>
@@ -230,10 +271,9 @@ export default {
   height: 45%;
   border-radius: 3%;
   width: 42%;
-  font-family: "Calisto MT",serif;
+  font-family: "Calisto MT";
   font-size: 1.2em;
   position: absolute;
-  overflow-y: auto;
 }
 
 #imagen-perfil {

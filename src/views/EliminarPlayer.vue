@@ -5,7 +5,7 @@ export default {
   methods: {
     deletePlayer()
     {
-
+      //Eliminar jugador
       fetch("https://balandrau.salle.url.edu/i3/players", {
         method: "DELETE",
         headers: {

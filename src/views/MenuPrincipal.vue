@@ -3,10 +3,12 @@ import TopBar from "@/components/TopBar.vue";
 import SideBar from "@/components/SideBar.vue";
 import StorePopup from "@/views/StoreView.vue";
 import OfertaEspecial from "@/views/OfertaEspecialView.vue";
+import MovementBlock from "@/components/MovementBlock.vue";
 
 export default {
   name: "MenuPrincipal",
   components: {
+    MovementBlock,
     OfertaEspecial,
     StorePopup,
     TopBar,
@@ -16,8 +18,17 @@ export default {
     return {
       showStorePopup: false,
       showSpecialOfferPopup: false,
-      isMobile: window.innerWidth <= 700 // Inicializa según el ancho de la ventana
+      isGameStarted: false,
+      isMobile: window.innerWidth <= 700, // Inicializa según el ancho de la ventana
+      arena: {  //Creamos un objeto aleatorio de arena para comprobar si el usuario ya esta en una partida
+        game_ID: "checkinfoarena",
+        size: 4,
+        HP_max: 15,
+      }
     };
+  },
+  mounted() {
+    this.postArena();
   },
   created() {
     window.addEventListener('resize', this.handleResize);
@@ -29,6 +40,28 @@ export default {
   methods: {
     handleResize() {
       this.isMobile = window.innerWidth <= 700;
+    },
+    // Comprueba si da el error 403 dando a entender que esta en una partida
+    postArena() {
+      fetch("https://balandrau.salle.url.edu/i3/arenas", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Bearer: localStorage.getItem("token"),
+        },
+        body: JSON.stringify(this.arena)
+      })
+      .then((res) => {
+        if (res.status === 403) {
+          localStorage.setItem("inGame", 'true')
+          this.isGameStarted = 'true';
+        } else {
+          // Log and alert the error if the API call fails
+          res.json().then((errorData) => {
+            alert("Error while calling the API: " + errorData.message + " " + localStorage.getItem("token"));
+          });
+        }
+      });
     }
   }
 };
@@ -64,11 +97,13 @@ export default {
     <!-- Segunda Columna -->
     <section class="arena-column">
       <router-link to="/CreateArenaView" class="CoolButton1">Create Arena</router-link>
-      <router-link to="/ListGames" class="CoolButton1">Join Arena</router-link>
+      <!-- Comprueba si el usuario ya ha iniciado una partida -->
+      <router-link v-if = "isGameStarted === 'true'" local to="/GameView" class = "CoolButton1">Current game</router-link>
+      <router-link v-if = "isGameStarted === 'false'" to="/ListGames" class="CoolButton1">Join Arena</router-link>
       <router-link to="/ListadoJugadores" class="CoolButton1 SmallButton SmallButton1">Listado de Jugadores</router-link>
       <router-link to="/HistorialJugadores" class="CoolButton1 SmallButton">Historial de Jugadores</router-link>
 
-      <img src = "/MainMenuImages/leyenda-juego.png" alt="Leyenda de las teclas de movimiento y ataque" class="map-key-image">
+      <MovementBlock class = "movement-block"></MovementBlock>
     </section>
 
     <!-- Tercera Columna -->
@@ -154,19 +189,14 @@ export default {
     cursor: pointer;
   }
 
-  .map-key-image {
-    width: 80%;
-    display: block;
-    margin-top: 10%;
-    margin-right: auto;
-    margin-left: auto;
-
-  }
-
   /* Estilos adicionales para la segunda columna */
   .arena-column {
     background-size: cover;
     position: relative;
+  }
+
+  .movement-block {
+    margin-top: 20%;
   }
 
   /* Estilos adicionales para la tercera columna */

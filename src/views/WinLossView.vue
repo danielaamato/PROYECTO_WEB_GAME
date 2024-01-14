@@ -2,6 +2,11 @@
 import "../assets/header.css";
 export default {
   name: "WinLossView",
+
+  mounted() {
+    // If the game has finished, clear the interval
+    localStorage.setItem("inGame", 'false');
+  },
 };
 </script>
 
@@ -43,7 +48,7 @@ export default {
         </section>
 
         <section class="main-section5-win-loss">
-          <router-link to="/">
+          <router-link to="/MenuPrincipal">
             <button id="continue-button-win-loss" class="continue-button-win-loss">Continue</button>
           </router-link>
         </section>

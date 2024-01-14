@@ -14,6 +14,7 @@ export default {
   methods: {
     async signUp()
     {
+      //Crear jugador
       const newPlayer = {
         player_ID: this.player_ID,
         password: this.password,
@@ -56,7 +57,7 @@ export default {
               localStorage.setItem("token", token);
               localStorage.setItem("player_ID", newPlayer.player_ID);
               localStorage.setItem("tokenBearer", "Bearer " + localStorage.getItem("token"));
-
+              localStorage.setItem("inGame", 'false');
               // Redireccionar a la siguiente página
               this.$router.push({ name: "MenuPrincipal" });
             }
@@ -67,23 +68,18 @@ export default {
               );
             }
           }
-          else
-          {
-            const errorMessage = await response.text();
-          }
         }
         catch (error)
         {
           console.error(error);
-          alert(
-              "Failed to register because this player ID is already registered. Please try again."
-          );
+          alert(error.message);
         }
       }
     },
 
     async postUser(newPlayer) {
       try {
+        //Post del jugador
         const response = await fetch("https://balandrau.salle.url.edu/i3/players/join", {
           method: "POST",
           headers: {
@@ -119,8 +115,7 @@ export default {
       }
     },
 
-
-
+    //Control de error de los campos
     playerIdAndPasswordValid(field) {
       const emailRegex = /^.{1,20}$/;
       return emailRegex.test(field);
