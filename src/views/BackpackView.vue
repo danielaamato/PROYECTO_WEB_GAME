@@ -108,8 +108,7 @@ export default {
               throw new Error('Error al cambiar el estado de equipamiento');
             }
           })
-          .catch(error => {
-            console.error("Error:", error);
+          .catch(() => {
             alert("Error al cambiar el estado de equipamiento.");
           });
     },
@@ -128,7 +127,7 @@ export default {
     },
     handleCloseCreateAttack() {
       this.showCreateItemPopup = false;
-      this.forceRender();
+      this.getAttacksList();
     },
     forceRender() {
       this.forceRenderKey++;

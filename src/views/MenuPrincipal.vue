@@ -189,15 +189,6 @@ export default {
     cursor: pointer;
   }
 
-  .map-key-image {
-    width: 80%;
-    display: block;
-    margin-top: 10%;
-    margin-right: auto;
-    margin-left: auto;
-
-  }
-
   /* Estilos adicionales para la segunda columna */
   .arena-column {
     background-size: cover;
